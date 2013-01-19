@@ -1,0 +1,88 @@
+$noise-bg: none;
+$img-border: inline-image('dotted-border.png');
+
+// Main Link Colors
+$link-color: $solar-blue !default;
+$link-color-hover: $solar-cyan !default;
+$link-color-visited: $solar-violet !default;
+$link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
+
+// Main Section Colors
+$main-bg: $base3 !default;
+$page-bg: $base3 !default;
+$article-border: #eeeeee !default;
+
+//$header-bg: $base02 !default;
+$header-bg: $main-bg !default;
+$header-border: lighten($header-bg, 15) !default;
+$title-color: $solar-red !default;
+$subtitle-color: $base0 !default;
+
+$text-color: $base00 !default;
+$text-color-light: $base1 !default;
+$type-border: #ddd !default;
+
+/* Navigation */
+//$nav-bg: $base03 !default;
+$nav-bg: $base02 !default;
+$nav-bg-front: $nav-bg !default;
+$nav-bg-back: $nav-bg !default;
+$nav-color: $base2 !default;
+$nav-color-hover:  $solar-blue !default;
+$nav-placeholder: desaturate(darken($nav-bg, 10), 15) !default;
+$nav-border: $base2 !default;
+$nav-border-top: $solar-cyan !default;
+$nav-border-bottom: $base2 !default;
+$nav-border-left: $base03 !default;
+$nav-border-right: lighten($nav-border-left, 7) !default;
+
+/* Sidebar colors */
+$sidebar-bg: $base2 !default;
+$sidebar-link-color: $link-color !default;
+$sidebar-link-color-hover: $link-color-hover !default;
+$sidebar-link-color-active: $link-color-active !default;
+$sidebar-color: $text-color;
+$sidebar-border: $base2 !default;
+$sidebar-border-hover: $sidebar-bg !default;
+$sidebar-link-color-subdued: lighten($sidebar-color, 20) !default;
+$sidebar-link-color-subdued-hover: $sidebar-link-color-hover !default;
+$twitter-status-link: lighten($sidebar-link-color-subdued, 15) !default;
+
+$footer-color: $text-color !default;
+$footer-bg: $base2 !default;
+$footer-bg-front: $base2 !default;
+$footer-bg-back: $base2 !default;
+$footer-color: $text-color !default;
+$footer-color-hover: darken($footer-color, 10) !default;
+$footer-border-top: lighten($footer-bg, 15) !default;
+$footer-border-bottom: darken($footer-bg, 15) !default;
+$footer-link-color: $base01 !default;
+$footer-link-color-hover: $solar-blue !default;
+$page-border-bottom: darken($footer-bg, 5) !default;
+
+
+/* Core theme application */
+
+a {
+  @include link-colors($link-color, $hover: $link-color-hover, $focus: $link-color-hover, $visited: $link-color-visited, $active: $link-color-active);
+}
+aside.sidebar a {
+  @include link-colors($sidebar-link-color, $hover: $sidebar-link-color-hover, $focus: $sidebar-link-color-hover, $active: $sidebar-link-color-active);
+}
+a {
+  @include transition(color .3s);
+}
+
+html {
+  background: $page-bg;
+}
+body {
+  > div {
+    background: $sidebar-bg $noise-bg;
+    border-bottom: 1px solid $page-border-bottom;
+    > div {
+      background: $main-bg $noise-bg;
+      border-right: 1px solid $sidebar-border;
+    }
+  }
+}

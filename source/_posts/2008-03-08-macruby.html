@@ -1,0 +1,44 @@
+---
+layout: post
+title: "MacRuby"
+date: 2008-03-08
+comments: false
+categories:
+ - ruby
+ - MacRuby
+ - cocoa
+ - Mac OS X
+---
+
+<div class='post'>
+<div style="text-align: justify;">Some days ago I found the MacRuby project and it seems it will bring a lot of new things to ruby+cocoa programming. And as I've been reading and writing some RubyCocoa apps in the last months I want to share the joy it gave me.
+</div><div><div style="text-align: justify;">
+</div><div> </div><div> </div><div style="text-align: justify;">First of all, it will use the new YARV interpreter that was released with the 1.9 version of ruby last christmas which is faster than the so called MRV(the "M" is for Matz), also, it doesn't use the ruby garbage collector, but the cocoa one. This allows the programs to not stop while the garbage collector is running cause the cocoa garbage collector runs in another thread.</div><div style="text-align: justify;">
+</div><div> </div><div> </div><div style="text-align: justify;">Speaking of threads, another feature of the new ruby 1.9 is that it allows users to use POSIX threads(cool!). </div><div style="text-align: justify;">
+</div><div style="text-align: justify;">Another cool feature are named parameters are also useful when calling methods, the message style when calling an object's "method" of Objective-C looks like: </div>
+{% codeblock lang:objc %}
+NSAlert *alert = [NSAlert alertWithMessageText: @"What?",
+defaultButton: @"OK",
+alternateButton: @"Cancel",
+otherButton: nil,
+informativeTextWithFormat: @"I am an alert!"];
+{% endcodeblock %}
+</pre>
+<div><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">And the MacRuby counterpart:</span></span></div>
+{% codeblock lang:ruby %}
+alert = NSAlert.alertWithMessageText("What?",
+defaultButton: "OK",
+alternateButton: "Cancel",
+otherButton: nil,
+informativeTextWithFormat: "I am an alert!")
+{% endcodeblock %}
+<div><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">Isn't that sexy?? No more big method names:</span></span></div><div><span class="Apple-style-span"  style="font-family:'times new roman';">
+</span></div>
+<pre class="prettyprint">
+alertWithMessageText_defaultButton_alternateButton_otherButton_informativeTextWithFormat
+</pre>
+<div style="text-align: justify;"><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">The last beautiful thing I am going to comment about are ruby hashes inheriting from NSDictionary. That's cool because you can pass a ruby hash to methods that need an NSDictionary instead of constructing one in the cocoa way.</span></span></div><div style="text-align: justify;"><span class="Apple-style-span"  style="font-size:medium;">
+</span></div><div style="text-align: justify;"><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">The bad things: MacRuby is under development, it needs Leopard and only runs on Intel Macs. But looks promising.</span></span></div><div><span class="Apple-style-span"  style="font-family:'courier new';">
+</span></div><div>
+</div><div>
+</div></div></div>
