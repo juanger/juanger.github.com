@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: zsh | Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/blog/categories/zsh/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T14:25:46-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA['Command done' notification with zsh and growl]]></title>
+    <link href="http://blog.juanger.com/blog/2013/06/command-done-notification-with-zsh-and-growl/"/>
+    <updated>2013-06-02T13:07:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2013/06/command-done-notification-with-zsh-and-growl</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/notification.png" width="400" height="350" title="image" alt="images"></p>
+
+<p>The little banner in bottom of the screen in this image shows what I see when a command has finished (for peace of mind, only for the ones that have been running for at least 5 seconds).</p>
+
+<p>Most of the time I find myself running commands that take 1-5 minutes to complete and you know, I am not going to just stare at the screen waiting for it to finish! Then my mind starts wandering in other things that may be productive but also take my focus out of the problem I'm solving at that moment.</p>
+
+<p>You know what I'm talking about, you start looking at your emails, other tickets, problems in <a href="http://www.spoj.com/">SPOJ</a>, your score(and possibly taking revenge) at <a href="http://fightcodegame.com/">Fight Code</a> or my favorite: <a href="http://getprismatic.com">Prismatic</a> (no, no one looks at his facebook while working, right?).</p>
+
+<p>So, tired of finding out that the command I ran <strike>one hour ago</strike> has now finished and realizing that I have no clue what I was doing when I pushed that to my personal To-Do stack (because lists are so <a href="http://en.wikipedia.org/wiki/FIFO">FIFO</a>, ugh!), I added <a href="https://github.com/juanger/oh-my-zsh/blob/master/custom/notifications.zsh">this little script</a> to my zsh configuration.</p>
+
+<p>And I can customize the style of the growl notification when it fails:</p>
+
+<p><img class="center" src="/images/notification-fail.png" width="500" height="350" title="image" alt="images"></p>
+
+<p>Ain't it cool?</p>
+]]></content>
+  </entry>
+  
+</feed>

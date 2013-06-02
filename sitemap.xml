@@ -65,15 +65,21 @@
         <lastmod>2013-06-02T12:52:31-07:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://blog.juanger.com/blog/2013/06/command-done-notification-with-zsh-and-growl/
+        </loc>
+        <lastmod>2013-06-02T14:25:46-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.juanger.com/about/</loc>
         <lastmod>2013-06-02T12:52:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.juanger.com/blog/archives/</loc>
-        <lastmod>2013-06-02T12:52:31-07:00</lastmod>
+        <lastmod>2013-06-02T14:25:46-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.juanger.com/</loc>
-        <lastmod>2013-06-02T12:52:31-07:00</lastmod>
+        <lastmod>2013-06-02T14:25:46-07:00</lastmod>
     </url>
 </urlset>
