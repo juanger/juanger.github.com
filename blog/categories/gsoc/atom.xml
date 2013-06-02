@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gsoc | Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/blog/categories/gsoc/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T12:55:13-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Accepted into GSoC!]]></title>
+    <link href="http://blog.juanger.com/blog/2009/04/accepted-into-gsoc/"/>
+    <updated>2009-04-24T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2009/04/accepted-into-gsoc</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+
+ <p>This year my luck changed (well, maybe what changed was that my application was better than last year’s :)) and I’ve been accepted to work for the MacPorts project. I wanted to collaborate with MacPorts since some time ago and this is a very good chance to begin helping.</p>
+<p>I’ll be implementing the Cocoa <span class='caps'>GUI</span> of MacPorts using the framework developed by Randall Wood and George Armah. Before sending my proposal, I began coding a sample application (<a href='http://juanger.googlepages.com/Porton-app.zip'>Porton.app</a>, it only works on intel-Leopard) and I’d love to hear or read any comment and suggestion to improve the <span class='caps'>GUI</span> and thus, I’ll do some releases for testing purposes for the community as the app gets implemented.</p>
+<p>To all the accepted students: Congrats and good luck in your projects!!</p>
+<p>To everyone that was rejected: :( I know how you feel, last year I wasn’t accepted and what bugged me the most was that who was selected didn’t made a good work in the project that I applied for and as I focused in my school courses, I didn’t help either. All I can say now is that I’ll do my best so that if you applied for the same project as me, you won’t feel as I felt last year and that I’ll do my best to help the MacPorts community.</p>
+
+</div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

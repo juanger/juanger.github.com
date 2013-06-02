@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: FreeBSD | Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/blog/categories/freebsd/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T12:55:13-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[FreeBSD startup script with ruby]]></title>
+    <link href="http://blog.juanger.com/blog/2008/05/freebsd-startup-script-with-ruby/"/>
+    <updated>2008-05-26T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/05/freebsd-startup-script-with-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+Since some days ago I've been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:
+
+ <blockquote>Put your .sh script at /usr/local/etc/rc.d</blockquote>
+
+And since I like ruby, I began to code my script with it and the problems came:
+
+<blockquote>env: ruby: No such file or directory</blockquote>
+<blockquote>custom_require.rb:27: command not found: mongrel_rails</blockquote>
+
+First, here is my final code that was inspired by <a href="http://snippets.dzone.com/posts/show/2594">Tim Morgan's</a>:
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#!/usr/local/bin/ruby</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;PATH&quot;</span><span class="o">]</span> <span class="o">+=</span> <span class="s2">&quot;:/usr/local/bin&quot;</span>
+</span><span class='line'><span class="n">app_dir</span> <span class="o">=</span> <span class="s1">&#39;/usr/local/www&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">apps</span> <span class="o">=</span> <span class="o">[</span>
+</span><span class='line'>  <span class="n">scielo_index</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;ScieloIndex&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;index.scielo.unam.mx/current&#39;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:config</span> <span class="o">=&gt;</span> <span class="s2">&quot;config/mongrel_cluster.yml&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:cluster</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">redmine</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Redmine&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;dev.scielo.unam.mx/Redmine&#39;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:config</span> <span class="o">=&gt;</span> <span class="s2">&quot;config/mongrel_8000.yml&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:pid</span> <span class="o">=&gt;</span> <span class="s2">&quot;log/mongrel.pid&quot;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="n">apps</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span> <span class="n">app_dir</span><span class="p">,</span> <span class="n">app</span><span class="o">[</span><span class="ss">:path</span><span class="o">]</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Stopping </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">app</span><span class="o">[</span><span class="ss">:cluster</span><span class="o">]</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails cluster::stop -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails stop -c </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb"> -P </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:pid</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="n">apps</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span> <span class="n">app_dir</span><span class="p">,</span> <span class="n">app</span><span class="o">[</span><span class="ss">:path</span><span class="o">]</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Starting </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">app</span><span class="o">[</span><span class="ss">:cluster</span><span class="o">]</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails cluster::start -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails start -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">unless</span> <span class="o">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Usage: mongrel {start|stop|restart}&quot;</span>
+</span><span class='line'>    <span class="nb">exit</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+The key part is the ENV["PATH"] setup, that line is needed as FreeBSD's PATH at startup is "/sbin:/bin:/usr/sbin:/usr/bin" and this also leads us to change the interpreter path from something like "#!/usr/bin/env ruby" to "#!/usr/local/bin/ruby", i.e. its full path.
+
+That's all, now our ruby script really runs at startup time without complaining.</div>
+
+]]></content>
+  </entry>
+  
+</feed>

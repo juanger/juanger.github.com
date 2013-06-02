@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T12:55:13-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSS3 styled buttons with compass]]></title>
+    <link href="http://blog.juanger.com/blog/2012/06/html5-and-css3-buttons/"/>
+    <updated>2012-06-20T11:42:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2012/06/html5-and-css3-buttons</id>
+    <content type="html"><![CDATA[<p><link rel="stylesheet" type="text/css" href="http://blog.juanger.com/stylesheets/css_buttons.css"></p>
+
+<p><strong>These input tags were styled entirely with css.</strong></p>
+
+<p><label class="text">
+  <span>Text Field:</span><input type="text" class="btn-grey" value="Edit me"/>
+</label>
+<input type="submit" class="btn-grey" value="Button"/>
+<input type="submit" class="btn-grey" value="Button" disabled="disabled"/>
+<label class="checkbox">
+  <input type="checkbox" class="btn-grey" checked/><span>Checkbox</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio" value="radio_1" class="btn-grey" checked/><span>Option 1</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio" value="radio_2" class="btn-grey"/><span>Option 2</span>
+</label>
+<label class="select">
+  <span>Select:</span>
+  <select class="btn-grey">
+  <option value="volvo">Option 1</option>
+  <option value="saab">Option 2</option>
+  <option value="mercedes">Option 3</option>
+  <option value="audi">Option 4</option>
+  </select>
+</label></p>
+
+<h4>Why?</h4>
+
+<p>Just because. Consider this piece of code as leisure programming.</p>
+
+<h4>What is the problem with images?</h4>
+
+<p>Well, metainformation can be tracked in a very efficient way with a version control system, it can be generated programatically, your html code is cleaner and you don&#8217;t have to send another asset to your clients.</p>
+
+<p>CSS can be generated with compass making the source code much more manageable and you can even create animations and effects that were once only doable with Flash.</p>
+
+<h4>Code</h4>
+
+<p>The code may look huge because I had to do some tricks to get it working, like hiding the browser&#8217;s original input images and replacing them with pseudo-elements and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css because of how the browser displays it and because if you try to hide the original, then you can&#8217;t see the selected option.</p>
+
+<p>The interesting part of the code is when I create the before and after pseudo-elements and style them to create the buttons. If you use the code remember to follow the structure of the html (input next to span, both inside the label).</p>
+
+<p>If you want to add more themes, you can do so by creating a new button style with the mixin and change each input type style as you need like this ones:</p>
+
+<p><label class="text">
+  <span>Text Field:</span><input type="text" class="btn-grey" value="Edit me"/>
+</label>
+<input type="submit" class="btn-grey" value="Button"/>
+<input type="submit" class="btn-grey" value="Button" disabled="disabled"/>
+<label class="checkbox">
+  <input type="checkbox" class="btn-grey" checked/><span>Checkbox</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio-grey" value="radio_1" class="btn-grey" checked/><span>Option 1</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio-grey" value="radio_2" class="btn-grey"/><span>Option 2</span>
+</label>
+<label class="select">
+  <span>Select:</span>
+  <select class="btn-grey">
+  <option value="volvo">Option 1</option>
+  <option value="saab">Option 2</option>
+  <option value="mercedes">Option 3</option>
+  <option value="audi">Option 4</option>
+  </select>
+</label></p>
+
+<p><label class="text">
+  <span>Text Field:</span><input type="text" class="btn-black" value="Edit me"/>
+</label>
+<input type="submit" class="btn-black" value="Button"/>
+<input type="submit" class="btn-black" value="Button" disabled="disabled"/>
+<label class="checkbox">
+  <input type="checkbox" class="btn-black" checked/><span>Checkbox</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio-black" value="radio_1" class="btn-black" checked/><span>Option 1</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio-black" value="radio_2" class="btn-black"/><span>Option 2</span>
+</label>
+<label class="select">
+  <span>Select:</span>
+  <select class="btn-black">
+  <option value="volvo">Option 1</option>
+  <option value="saab">Option 2</option>
+  <option value="mercedes">Option 3</option>
+  <option value="audi">Option 4</option>
+  </select>
+</label></p>
+
+<p><label class="text">
+  <span>Text Field:</span><input type="text" class="btn-blue" value="Edit me"/>
+</label>
+<input type="submit" class="btn-blue" value="Button"/>
+<input type="submit" class="btn-blue" value="Button" disabled="disabled"/>
+<label class="checkbox">
+  <input type="checkbox" class="btn-blue" checked/><span>Checkbox</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio-blue" value="radio_1" class="btn-blue" checked/><span>Option 1</span>
+</label>
+<label class="radio">
+  <input type="radio" name="radio-blue" value="radio_2" class="btn-blue"/><span>Option 2</span>
+</label>
+<label class="select">
+  <span>Select:</span>
+  <select class="btn-blue">
+  <option value="volvo">Option 1</option>
+  <option value="saab">Option 2</option>
+  <option value="mercedes">Option 3</option>
+  <option value="audi">Option 4</option>
+  </select>
+</label></p>
+
+<div><script src='https://gist.github.com/4582253.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HFS+ and Unicode madness]]></title>
+    <link href="http://blog.juanger.com/blog/2010/04/this-is-old-post-that-i-wrote-some/"/>
+    <updated>2010-04-25T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2010/04/this-is-old-post-that-i-wrote-some</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div xmlns='http://www.w3.org/1999/xhtml'><p><strong>This is an old post that I wrote some while ago, but never published it. It is here just for historical|nostalgic|unburdening reasons. Original post begins here:</strong></p><p>Annoying scenario:</p><p>A file with unicode characters in its filename: Pétalo.java</p><br />
+<script src="http://gist.github.com/489706.js?file=gistfile1.txt"></script><br />
+<br />
+<span id='fullpost'>  <p>Why? That’s easy, because Mac OS X java wants everything with MacRoman encoding (<span class='caps'>WTF</span>??). Then I tried with the -encoding flag and tab-autocompletion for the filename:</p><br />
+<script src="http://gist.github.com/489709.js?file=gistfile1.txt"></script><br />
+<br />
+<p>That is not good. When using autocompletion the filename is represented in <span class='caps'>NFD</span> or Normalization Form Canonical Decomposition (é =&gt; 65 cc81) but the class name in the file uses <span class='caps'>NFC</span> or Normalization Form Canonical Composition (é =&gt; c3a9). What a mess! Do you see the difference?:</p><script src="http://gist.github.com/489712.js?file=gistfile1.txt"></script><br />
+<p>You can’t see the difference until you see the actual bytes of the string, and that’s why Apple tries to protect us by storing everything in the Filesystem with the same representation: <span class='caps'>NFD</span>. The first echo was done with autocompletion while the latter was typed directly with the keyboard. So if I compile the java sourcecode by fully typing the filename, it succeeds.</p><h3>¿What about version control?</h3><p>Then, this leads to a major problem. When someone in the world (including you and me) creates a file, he types its name with the keyboard, which as I have showed, it gives <span class='caps'>NFC</span> in Mac OS X. But with <span class='caps'>HFS</span>, the file is stored using <span class='caps'>NFD</span> and if you clone a git repo created in another OS you’ll see that you have untracked files without modifying anything!!</p><h3><span class='caps'>UFS</span> to the rescue (kind of…)</h3><p>Maybe you could say “well, just use another filesystem”, and I’ve done that, but it seems that Apple uses it’s decomposition algorithms everywhere.</p><p>First I tried <span class='caps'>ZFS</span> as I thought “That FS should work correctly in <span class='caps'>OSX</span>, they can’t spoil it”. But I installed the read-write implementation from MacOS Forge and it did the same stupid conversion (<span class='caps'>UPDATE</span>: <span class='caps'>ZFS</span> is discontinued in MacOS Forge :( ).</p><p><span class='caps'>FAT</span> is a no-no since it only accepts <span class='caps'>ASCII</span> characters for the filename and I don’t want to start a remote server nor a Virtual Machine every time I have to work with those files. This should work with my beloved OS!! And in fact, I have successfully made everything I’ve needed to work in Mac OS, until now :(.</p><p>So I needed to try <span class='caps'>UFS</span>, I looked at DiskUtility, but it doesn’t support <span class='caps'>UFS</span> and newfs fails to format my external <span class='caps'>USB</span> disk.</p><p>But since I used hdiutil to create Pallet’s dmg, I thought of havin a <span class='caps'>UFS</span> diskimage and guess what, you can!! This is the magic command:</p><script src="http://gist.github.com/489715.js?file=gistfile1.txt"></script><br />
+<p>Now I can mount my dmg, compile and use git!!</p><p>But still there are two little problems:</p><ul><li>Snow Leopard doesn’t support <span class='caps'>UFS</span>. I can’t even mount my <span class='caps'>UFS</span> disk image :(</li>
+<li>Every app that uses Cocoa to open files can’t read files with <span class='caps'>NFC</span> filenames. This means “forget about TextMate”. Noooooooo!!</li>
+</ul><h3>Update</h3><p>Now I’ve updated to Snow Leopard and is very disappointing and sad that I have to use a virtual machine to do my job.</p><p>The good thing is that I can work with TextMate via ssh and MacFusion.</p><p>Bad things: MacOS X can solve my problem, I can’t open files with <span class='caps'>NFC</span> names in TextMate (but emacs.app still loves me) and although it seems there are some people working with File Systems at Apple I think this won’t be solved anytime soon.</p></span> </div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[One week till Midterm evaluation!]]></title>
+    <link href="http://blog.juanger.com/blog/2009/07/one-week-till-midterm-evaluation/"/>
+    <updated>2009-07-01T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2009/07/one-week-till-midterm-evaluation</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>I&#8217;ve been very busy in the last month and I haven&#8217;t had the time to post here.</p> 
+
+<p>I love to learn new things and sometimes that&#8217;s the reason I don&#8217;t have enough time. I&#8217;m learning Cocoa, Objective-C and Tcl (just a little) and If if you think that&#8217;s enough, read this: I can now watch the WWDC sessions videos and learn even more!</p>
+
+<p>I should have been there and know all that by now, but the US Embassy in Mexico denied me a visa :( (beleive be! I&#8217;m not a &#8220;MOJADO&#8221;!! :) )</p>
+
+<p>So, for anyone wondering how does the MacPorts GUI application I&#8217;m working on looks like now here it is a little screenshot (click it to see it bigger):</p>
+
+<a href="http://content.screencast.com/users/juanger/folders/Jing/media/c35f7ed9-876d-4acb-ab87-7c1b8f958ab2/00000001.png"><img class="embeddedObject" src="http://content.screencast.com/users/juanger/folders/Jing/media/c35f7ed9-876d-4acb-ab87-7c1b8f958ab2/00000001.png" width="300" border="0" /></a>
+
+
+<p>There&#8217;s still a lot of work to be done (including some major changes in how the MacPorts framework sends notifications) but I hope to be releasing a usable app after the midterm week. I also made a weekly list of tasks and published here: <a href="http://juanger.heroku.com/gsoc-09">Tasks</a></p>
+
+
+<p>Till then!</p></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Accepted into GSoC!]]></title>
+    <link href="http://blog.juanger.com/blog/2009/04/accepted-into-gsoc/"/>
+    <updated>2009-04-24T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2009/04/accepted-into-gsoc</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div xmlns='http://www.w3.org/1999/xhtml'>
+
+ <p>This year my luck changed (well, maybe what changed was that my application was better than last year’s :)) and I’ve been accepted to work for the MacPorts project. I wanted to collaborate with MacPorts since some time ago and this is a very good chance to begin helping.</p>
+<p>I’ll be implementing the Cocoa <span class='caps'>GUI</span> of MacPorts using the framework developed by Randall Wood and George Armah. Before sending my proposal, I began coding a sample application (<a href='http://juanger.googlepages.com/Porton-app.zip'>Porton.app</a>, it only works on intel-Leopard) and I’d love to hear or read any comment and suggestion to improve the <span class='caps'>GUI</span> and thus, I’ll do some releases for testing purposes for the community as the app gets implemented.</p>
+<p>To all the accepted students: Congrats and good luck in your projects!!</p>
+<p>To everyone that was rejected: :( I know how you feel, last year I wasn’t accepted and what bugged me the most was that who was selected didn’t made a good work in the project that I applied for and as I focused in my school courses, I didn’t help either. All I can say now is that I’ll do my best so that if you applied for the same project as me, you won’t feel as I felt last year and that I’ll do my best to help the MacPorts community.</p>
+
+</div></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blogger Bundle for TextMate]]></title>
+    <link href="http://blog.juanger.com/blog/2009/01/blogger-bundle-for-textmate_13/"/>
+    <updated>2009-01-13T00:00:00-08:00</updated>
+    <id>http://blog.juanger.com/blog/2009/01/blogger-bundle-for-textmate_13</id>
+    <content type="html"><![CDATA[<div class='post'>
+
+    <div xmlns='http://www.w3.org/1999/xhtml'>
+<p>Yes, that’s right, I’ve been working in getting TextMate to love Blogger. Some time ago I realized that the Blogger <span class='caps'>API</span> is no longer compatible with the TextMate’s blogging bundle and I really wanted it to work.</p>
+<p>It’s still in a very incomplete state, but at least I can post to my blog from my favourite text editing program, preview my post and add categories to it.</p>
+<p>Now I can have a “blogged from TextMate” badge in blogger!!</p>
+<p>You can download the bundle from github: <a href='http://github.com/juanger/blogger.tmbundle'>blogger.tmbundle</a>.</p>
+<p>The extended post also works (if you have the hack for it):</p>
+<span id='fullpost'>
+ <h3>Setup</h3>
+<ul>
+	<li>Make sure you have the GData, hpricot and RedCloth gems</li>
+	<li>You must set the GDATA_USER variable in TextMate:Preferences:Advanced:Shell Variables</li>
+	<li>Open a Post file from Blogger template</li>
+	<li>Use the publish command, select your blog and type any categories you want in the &#8220;Categories &#8220;token field.</li>
+</ul>
+<p>The template is identical to the ones in the blogging bundle. All you have to do is write the title, the contents and call the Publish command, your password can be saved in the keychain and you’ll be able to see your post after publish it.</p>
+<p>I’m waiting for comments, suggestions, errors you encounter and why not, collaboration :)</p>
+<p>Happy blogging and new year.</p>
+ </span>
+    </div>
+  </div>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Screencast with RubyCocoa]]></title>
+    <link href="http://blog.juanger.com/blog/2008/11/screencast-with-rubycocoa/"/>
+    <updated>2008-11-12T00:00:00-08:00</updated>
+    <id>http://blog.juanger.com/blog/2008/11/screencast-with-rubycocoa</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>I know I promised a screencast about Lucecita, but that will be in the Holydays, now I post a little code that captures the screen and creates a video.</p><p>The not so good thing is that the frame rate isn&#8217;t controlled by my code and it is very slow, but maybe with MacRuby and some threads we could make that code very fast and even parallelize the capturing and the creation of the movie (the other option is to use Objective-C) but MacRuby is under development and it doesn&#8217;t have all the things we need.</p><p>What do you think? Can we improve it with a ruby/cocoa hack?</p><p>Leave any idea or comment, the code is in the full post:</p><span id="fullpost">  <br />
+<br />
+<script src="http://gist.github.com/489722.js"> </script><br />
+<br />
+</span></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ADC Student Member]]></title>
+    <link href="http://blog.juanger.com/blog/2008/11/adc-student-member/"/>
+    <updated>2008-11-10T00:00:00-08:00</updated>
+    <id>http://blog.juanger.com/blog/2008/11/adc-student-member</id>
+    <content type="html"><![CDATA[<div class='post'>
+I should have a new laptop now but awful things happen, specially in economy. Projects get cancelled and in contrast to the Mexican Peso a lot of things gain value, making me poorer and poorer(as I live in Mexico). But not everything is a bad new.
+
+Last week, my ADC Orientation Kit arrived, I bought it three weeks ago at the Apple Online Store Mexico but the bad thing is that I haven&#8217;t received any response to all my e-mails in which I ask for directions to use my hardware discount.
+
+The good and cool things are:
+<ul>
+<li>I have a new Leopard copy and it is said that they will send me some more and any major update (Snow Leopard???)</li>
+<li>The package is really like the one that was pictured at the online store (big and black). I expected only a brown box with things, but it&#8217;s Apple&#8230;</li>
+<li>I can apply for the WWDC scholarship program :)</li>
+<li>I have a new t-shirt (black with the legend: icode). Again, it&#8217;s Apple&#8230;</li>
+<li>I <strike>supposedly</strike> have a discount at the Apple Online Store</li>
+</ul>
+
+The other thing that they send is the Monthly Developer DVD but it&#8217;s not the big reason to get the membership, anything inside the DVD is downloadable from ADC site. 
+
+Now the only remaining thing is to know how the Hardware Discount works in Mexico and peacefully wait for the Mexican Peso to gain some value&#8230;</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lucecita 2.0]]></title>
+    <link href="http://blog.juanger.com/blog/2008/10/lucecita-20/"/>
+    <updated>2008-10-26T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/10/lucecita-20</id>
+    <content type="html"><![CDATA[<div class='post'>
+I&#8217;ve been very busy this months and I haven&#8217;t prepared the screencast, but here is a little present, the new version of Lucecita:
+
+<a href="http://www.flickr.com/photos/juanger/2976552527/" title="Lucecita.app 2.0 by Juanger, on Flickr"><img src="http://farm4.static.flickr.com/3235/2976552527_8a9defd15f_o.png" width="221" height="334" alt="Lucecita.app 2.0" /></a>
+
+All the source code is hosted in github at <a href="http://github.com/juanger/lucecita">http://github.com/juanger/lucecita</a> and the DMG is here: <a href="http://github.com/juanger/lucecita/tree/master%2FLucecita.dmg?raw=true">Lucecita.dmg</a>
+
+It&#8217;s a universal binary and only works in Leopard.
+
+Enjoy it!!</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lucecita: RubyCocoa example]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/lucecita-rubycocoa-example/"/>
+    <updated>2008-07-25T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/lucecita-rubycocoa-example</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><span style="font-weight:bold;">UPDATE:</span> Version 2.0 of Lucecita is out. <a href="http://blog.juanger.com/2008/10/lucecita-20.html">Lucecita 2.0</a></p>
+
+<p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called &#8220;Lucecita&#8221;. For the impatient: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a>.</p>
+
+<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s1600-h/LucecitaInAction.png"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s400/LucecitaInAction.png" border="0" alt=""id="BLOGGER_PHOTO_ID_5227186858005960322" /></a>
+
+<span id="fullpost">
+
+<h3>DarkWindow.rb</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">OSX</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">DarkWindow</span> <span class="o">&lt;</span> <span class="no">NSWindow</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initWithContentRect_styleMask_backing_defer</span><span class="p">(</span><span class="n">contentRect</span><span class="p">,</span> <span class="n">aStyle</span><span class="p">,</span> <span class="n">bufferingType</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="n">super_initWithContentRect_styleMask_backing_defer</span><span class="p">(</span><span class="no">NSScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span>
+</span><span class='line'>                  <span class="no">NSBorderlessWindowMask</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">bufferingType</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">flag</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">result</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setBackgroundColor</span><span class="p">(</span><span class="no">NSColor</span><span class="o">.</span><span class="n">clearColor</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setOpaque</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setIgnoresMouseEvents</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="no">NSScreenSaverWindowLevel</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setCollectionBehavior</span><span class="p">(</span><span class="no">NSWindowCollectionBehaviorCanJoinAllSpaces</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">result</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3>LightView.rb</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">OSX</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">LuzView</span> <span class="o">&lt;</span>  <span class="no">OSX</span><span class="o">::</span><span class="no">NSView</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:rect</span><span class="p">,</span> <span class="ss">:radius</span><span class="p">,</span> <span class="ss">:transparency</span><span class="p">,</span> <span class="ss">:enabled</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@radius</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span class='line'>    <span class="vi">@transparency</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</span><span class='line'>    <span class="vi">@enabled</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initWithFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">drawRect</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@enabled</span>
+</span><span class='line'>    <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">setCompositingOperation</span> <span class="no">NSCompositeSourceOut</span>
+</span><span class='line'>    <span class="n">context</span> <span class="o">=</span> <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">graphicsPort</span>
+</span><span class='line'>    <span class="vi">@center</span> <span class="o">=</span> <span class="no">NSEvent</span><span class="o">.</span><span class="n">mouseLocation</span>
+</span><span class='line'>    <span class="no">CGContextSetRGBFillColor</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="vi">@transparency</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextFillRect</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">drawLight</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">drawLight</span>
+</span><span class='line'>    <span class="n">context</span> <span class="o">=</span> <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">graphicsPort</span>
+</span><span class='line'>    <span class="no">NSColor</span><span class="o">.</span><span class="n">colorWithCalibratedRed_green_blue_alpha</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">set</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">CGContextSetGrayStrokeColor</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextSetLineWidth</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@rect</span> <span class="o">=</span> <span class="no">NSRect</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@center</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="vi">@radius</span><span class="p">,</span> <span class="vi">@center</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="vi">@radius</span><span class="p">,</span> <span class="vi">@radius</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="vi">@radius</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextAddEllipseInRect</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="vi">@rect</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextDrawPath</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="no">KCGPathFill</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3>LightController.rb</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">LuzController</span> <span class="o">&lt;</span> <span class="no">OSX</span><span class="o">::</span><span class="no">NSObject</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_outlets</span> <span class="ss">:luz_view</span>
+</span><span class='line'>  <span class="n">ib_outlets</span> <span class="ss">:menu</span><span class="p">,</span> <span class="ss">:size</span><span class="p">,</span> <span class="ss">:size_lbl</span><span class="p">,</span> <span class="ss">:alpha</span><span class="p">,</span> <span class="ss">:alpha_lbl</span><span class="p">,</span> <span class="ss">:enabled</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">awakeFromNib</span>
+</span><span class='line'>    <span class="n">activateStatusMenu</span><span class="p">()</span>
+</span><span class='line'>    <span class="vi">@callback</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">r</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="no">KCGEventOtherMouseDown</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>        <span class="no">CGEventGetFlags</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&amp;</span> <span class="no">KCGEventFlagMaskControl</span> <span class="o">==</span> <span class="no">KCGEventFlagMaskControl</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">toggle</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span>
+</span><span class='line'>        <span class="vi">@luz_view</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="no">CGEventGetLocation</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplayInRect</span> <span class="no">NSInsetRect</span><span class="p">(</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">e</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">start_tapping</span><span class="p">()</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:change_alpha</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">transparency</span> <span class="o">=</span> <span class="vi">@alpha</span><span class="o">.</span><span class="n">floatValue</span>
+</span><span class='line'>    <span class="vi">@alpha_lbl</span><span class="o">.</span><span class="n">setStringValue</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="p">(</span><span class="vi">@alpha</span><span class="o">.</span><span class="n">floatValue</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span><span class="si">}</span><span class="s2">%&quot;</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:change_size</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="vi">@size</span><span class="o">.</span><span class="n">floatValue</span>
+</span><span class='line'>    <span class="vi">@size_lbl</span><span class="o">.</span><span class="n">setStringValue</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="p">(</span><span class="vi">@size</span><span class="o">.</span><span class="n">intValue</span><span class="p">)</span><span class="si">}</span><span class="s2">px&quot;</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:toggle</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="o">!</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span>
+</span><span class='line'>    <span class="vi">@enabled</span><span class="o">.</span><span class="n">setState</span><span class="p">(</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span> <span class="p">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">activateStatusMenu</span><span class="p">()</span>
+</span><span class='line'>      <span class="n">statusItem</span> <span class="o">=</span> <span class="no">NSStatusBar</span><span class="o">.</span><span class="n">systemStatusBar</span><span class="o">.</span><span class="n">statusItemWithLength</span><span class="p">(</span><span class="no">NSVariableStatusItemLength</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">retain</span>
+</span><span class='line'>      <span class="n">icon</span> <span class="o">=</span> <span class="no">NSImage</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithContentsOfFile</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">NSBundle</span><span class="o">.</span><span class="n">mainBundle</span><span class="o">.</span><span class="n">resourcePath</span><span class="si">}</span><span class="s2">/Lucecita.png&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setImage</span> <span class="n">icon</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setHighlightMode</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setMenu</span> <span class="vi">@menu</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">start_tapping</span>
+</span><span class='line'>    <span class="n">eventMask</span> <span class="o">=</span> <span class="mi">167772384</span> <span class="c1"># Magic Number: LeftMouseDragged MouseMoved RightMouseDragged OtherMouseDragged OtherMouseDown</span>
+</span><span class='line'>    <span class="n">eventTap</span> <span class="o">=</span> <span class="no">CGEventTapCreate</span><span class="p">(</span><span class="no">KCGSessionEventTap</span><span class="p">,</span> <span class="no">KCGHeadInsertEventTap</span><span class="p">,</span>
+</span><span class='line'>                                <span class="mi">0</span><span class="p">,</span> <span class="n">eventMask</span><span class="p">,</span> <span class="vi">@callback</span><span class="p">,</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">eventSrc</span> <span class="o">=</span> <span class="no">CFMachPortCreateRunLoopSource</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">eventTap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRelease</span><span class="p">(</span><span class="n">eventTap</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRunLoopAddSource</span><span class="p">(</span><span class="no">CFRunLoopGetCurrent</span><span class="p">(),</span>  <span class="n">eventSrc</span><span class="p">,</span> <span class="no">KCFRunLoopCommonModes</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRelease</span><span class="p">(</span><span class="n">eventSrc</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">applicationShouldTerminate</span>
+</span><span class='line'>    <span class="no">CFRunLoopRemoveSource</span><span class="p">(</span><span class="no">CFRunLoopGetCurrent</span><span class="p">(),</span> <span class="n">mEventSrc</span><span class="p">,</span> <span class="no">KCFRunLoopCommonModes</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>And the application is here: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a></p>
+
+<p>You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.</p>
+
+<p>I am preparing a screencast to show yo how I coded it but that will be later, until then you can see inside the app package and check  the ruby code.</p>
+
+</span></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[New features in RoRGate 3.0 beta]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/new-features-in-rorgate-30-beta/"/>
+    <updated>2008-07-15T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/new-features-in-rorgate-30-beta</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div>These are three new features in RoRGate 3.0:</div><div>
+</div><div>Pictures as icons:</div><div style="text-align: center;">
+</div><div style="text-align: center;">
+</div><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2F2008-07-15%2FRoRgate-0.3b.png?raw=true"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 500px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2F2008-07-15%2FRoRgate-0.3b.png?raw=true" border="0" alt="" /></a><div style="text-align: center;">Now you can use png and jpeg files as icons</div><div style="text-align: center;">
+</div><div style="text-align: left;">Web Inspector:</div><div style="text-align: left;">
+</div><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 500px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2F2008-07-15%2FInspector.png?raw=true" border="0" alt="" /><div><div style="text-align: center;">The WebKit inspector can be accessed through a contextual menu.</div><div>
+</div><div>Preferences:</div></div><div style="text-align: center;"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/_WeoTLD0cYR0/SHyI6ktdN2I/AAAAAAAAABs/5vgsElW1JyQ/s400/Preferences.png" border="0" alt="" id="BLOGGER_PHOTO_ID_5223200207711057762" /></div><div style="text-align: center;">Now you can change the name, port and icon of an existing app.</div></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Server Output in RoRGate]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/server-output-in-rorgate/"/>
+    <updated>2008-07-10T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/server-output-in-rorgate</id>
+    <content type="html"><![CDATA[<div class='post'>
+I&#8217;ve added a developer menu to the resulting apps in RoRGate, if you download the 0.3 beta version you will see the change:
+
+<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-0.3b.png?raw=true"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-0.3b.png?raw=true" alt="" border="0" /></a>
+With that, you as developer can use it to see your app in action, see the server output and edit it in TextMate.
+
+The only thing is that the server output works strange with 2.x rails apps, I don&#8217;t know why, but only the error output is displayed in such rails apps. I use the NSTask class with an NSPipe for both the standart output and error but with rails 2.x it behaves strangely.
+
+<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FServerOut.png?raw=true"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FServerOut.png?raw=true" alt="" border="0" /></a>
+Also I&#8217;ve embedded RubyCococa, but I can&#8217;t make it work in both Leopard and Tiger because of libffi.dylib. Leopard&#8217;s RubyCocoa has it installed in /usr/lib and I don&#8217;t know where it is in Tiger. Maybe the solution is to create a Tiger version and a Leopard version, but I&#8217;m very lazy and I&#8217;d rather have only one.
+
+Lastly, I need a new laptop (many of my friends will agree) and because of that, I&#8217;ve added a donations pledgie badge for RoRGate and some ads here in my blog. I&#8217;m a student and I own an iBook G3 which has been giving me a lot of trouble lately, so as I&#8217;m most of the time at school (school&#8217;s computers ain&#8217;t good either) deploying to or developing for a lot of platforms I need a new one, one in which running a single unit test doesn&#8217;t seem to last forever and I hope some of you(friends or not) could help me. My-new-laptop blogthon :) has begun.</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RoRGate]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/rorgate/"/>
+    <updated>2008-07-04T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/rorgate</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>A few days ago, <a href="http://blog.jasoncrystal.com/?p=7">Jason Crystal wrote in his blog</a> a way to package rails applications in a Mac OS X one and I commented that I&#8217;ve been developing an application called RoRGate to automate that with another process.</p><p><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-v0.2.png?raw=true"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 497px; height: 236px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-v0.2.png?raw=true" alt="" border="0" /></a></p><p>I&#8217;ll be posting more news about it as I improve my implementation. Today I added the posibility to manage multiple windows in a Gate(the resulting OS X app). Also, the RoRGate-dev.dmg will be the unsable version with all the latest changes, so if want to try the newest features you&#8217;ll have to download it and not the versioned one.</p><p>The DMGs will be hosted (by now) in:</p><p></p><p><a href="http://code.google.com/p/rorgate/">http://code.google.com/p/rorgate/</a></p><p>The source code in:</p><p><a href="http://github.com/juanger/rorgate/tree/master">http://github.com/juanger/rorgate/tree/master</a></p><p>I&#8217;d appreciate if you can send me any errors or comments to improve it.</p></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FreeBSD startup script with ruby]]></title>
+    <link href="http://blog.juanger.com/blog/2008/05/freebsd-startup-script-with-ruby/"/>
+    <updated>2008-05-26T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/05/freebsd-startup-script-with-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+Since some days ago I&#8217;ve been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:
+
+ <blockquote>Put your .sh script at /usr/local/etc/rc.d</blockquote>
+
+And since I like ruby, I began to code my script with it and the problems came:
+
+<blockquote>env: ruby: No such file or directory</blockquote>
+<blockquote>custom_require.rb:27: command not found: mongrel_rails</blockquote>
+
+First, here is my final code that was inspired by <a href="http://snippets.dzone.com/posts/show/2594">Tim Morgan&#8217;s</a>:
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#!/usr/local/bin/ruby</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;PATH&quot;</span><span class="o">]</span> <span class="o">+=</span> <span class="s2">&quot;:/usr/local/bin&quot;</span>
+</span><span class='line'><span class="n">app_dir</span> <span class="o">=</span> <span class="s1">&#39;/usr/local/www&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">apps</span> <span class="o">=</span> <span class="o">[</span>
+</span><span class='line'>  <span class="n">scielo_index</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;ScieloIndex&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;index.scielo.unam.mx/current&#39;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:config</span> <span class="o">=&gt;</span> <span class="s2">&quot;config/mongrel_cluster.yml&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:cluster</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">redmine</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Redmine&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;dev.scielo.unam.mx/Redmine&#39;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:config</span> <span class="o">=&gt;</span> <span class="s2">&quot;config/mongrel_8000.yml&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:pid</span> <span class="o">=&gt;</span> <span class="s2">&quot;log/mongrel.pid&quot;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="n">apps</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span> <span class="n">app_dir</span><span class="p">,</span> <span class="n">app</span><span class="o">[</span><span class="ss">:path</span><span class="o">]</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Stopping </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">app</span><span class="o">[</span><span class="ss">:cluster</span><span class="o">]</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails cluster::stop -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails stop -c </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb"> -P </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:pid</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="n">apps</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span> <span class="n">app_dir</span><span class="p">,</span> <span class="n">app</span><span class="o">[</span><span class="ss">:path</span><span class="o">]</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Starting </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">app</span><span class="o">[</span><span class="ss">:cluster</span><span class="o">]</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails cluster::start -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails start -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">unless</span> <span class="o">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Usage: mongrel {start|stop|restart}&quot;</span>
+</span><span class='line'>    <span class="nb">exit</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+The key part is the ENV[&#8220;PATH&#8221;] setup, that line is needed as FreeBSD&#8217;s PATH at startup is &#8220;/sbin:/bin:/usr/sbin:/usr/bin&#8221; and this also leads us to change the interpreter path from something like &#8220;#!/usr/bin/env ruby&#8221; to &#8220;#!/usr/local/bin/ruby&#8221;, i.e. its full path.
+
+That&#8217;s all, now our ruby script really runs at startup time without complaining.</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[TextMate, SSH and github]]></title>
+    <link href="http://blog.juanger.com/blog/2008/05/textmate-ssh-and-github/"/>
+    <updated>2008-05-20T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/05/textmate-ssh-and-github</id>
+    <content type="html"><![CDATA[<div class='post'>
+<a href="http://macromates.com/">TextMate</a> is a flexible Mac OS X text editor, it has everything i need, but some days ago I found that it can&#8217;t prompt me for my password when needed(like when I want to push my changes to github) and that&#8217;s not cool.
+
+Fortunately, github uses ssh keys and with <a href="http://www.sshkeychain.org/">SSHKeychain</a> installed you can forget about passwords and it helps TextMate to pull and push to github(or any other server) without pubkey authentication errors. Now that&#8217;s cool.</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RTranscoder: jpeg to mpeg]]></title>
+    <link href="http://blog.juanger.com/blog/2008/05/rtranscoder-jpeg-to-mpeg/"/>
+    <updated>2008-05-15T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/05/rtranscoder-jpeg-to-mpeg</id>
+    <content type="html"><![CDATA[<div class='post'>
+Some days ago I made some tests using mencoder to create a mpeg4 video with some jpeg images.
+
+Then I tried to use RTranscoder to achieve the same result with ruby but it&#8217;s kind of tricky to get it running correctly, because you can get an &#8220;error parsing command line&#8221; error if you don&#8217;t give RTranscoder the correct information.
+
+After a lot of attempts, my code got like this:
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="no">MEncoder</span><span class="o">.</span><span class="n">encode</span> <span class="k">do</span> <span class="o">|</span><span class="n">mencoder</span><span class="o">|</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s2">&quot;mf://*.jpg&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">mf</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="mi">25</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">mf</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;jpg&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output_video_codec</span> <span class="o">=</span> <span class="ss">:lavc</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">vcodec</span> <span class="o">=</span> <span class="s2">&quot;mpeg4&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">mbd</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">trell</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output_audio_codec</span> <span class="o">=</span> <span class="s1">&#39;copy&#39;</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;output.avi&#39;</span>
+</span><span class='line'> <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+As you can see, instead of doing something like mencoder.mf = &#8220;fps=25:type=jpg&#8221; (my error) you have to do it with mencoder.mf.fps and mencoder.mf.type respectively, the same with lavc and everytime you need to pass an argument with suboptions separated by &#8220;:&#8221;.
+
+Here is the page of <a href="http://rtranscoder.rubyforge.org/">Rtranscoder</a>.</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacRuby]]></title>
+    <link href="http://blog.juanger.com/blog/2008/03/macruby/"/>
+    <updated>2008-03-08T00:00:00-08:00</updated>
+    <id>http://blog.juanger.com/blog/2008/03/macruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: justify;">Some days ago I found the MacRuby project and it seems it will bring a lot of new things to ruby+cocoa programming. And as I&#8217;ve been reading and writing some RubyCocoa apps in the last months I want to share the joy it gave me.
+</div><div><div style="text-align: justify;">
+</div><div> </div><div> </div><div style="text-align: justify;">First of all, it will use the new YARV interpreter that was released with the 1.9 version of ruby last christmas which is faster than the so called MRV(the &#8220;M&#8221; is for Matz), also, it doesn&#8217;t use the ruby garbage collector, but the cocoa one. This allows the programs to not stop while the garbage collector is running cause the cocoa garbage collector runs in another thread.</div><div style="text-align: justify;">
+</div><div> </div><div> </div><div style="text-align: justify;">Speaking of threads, another feature of the new ruby 1.9 is that it allows users to use POSIX threads(cool!). </div><div style="text-align: justify;">
+</div><div style="text-align: justify;">Another cool feature are named parameters are also useful when calling methods, the message style when calling an object&#8217;s &#8220;method&#8221; of Objective-C looks like: </div>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSAlert</span> <span class="o">*</span><span class="n">alert</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSAlert</span> <span class="nl">alertWithMessageText:</span> <span class="s">@&quot;What?&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="nl">defaultButton:</span> <span class="s">@&quot;OK&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="nl">alternateButton:</span> <span class="s">@&quot;Cancel&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="nl">otherButton:</span> <span class="nb">nil</span><span class="p">,</span>
+</span><span class='line'><span class="nl">informativeTextWithFormat:</span> <span class="s">@&quot;I am an alert!&quot;</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+</pre>
+<div><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">And the MacRuby counterpart:</span></span></div>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">alert</span> <span class="o">=</span> <span class="no">NSAlert</span><span class="o">.</span><span class="n">alertWithMessageText</span><span class="p">(</span><span class="s2">&quot;What?&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="n">defaultButton</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="n">alternateButton</span><span class="p">:</span> <span class="s2">&quot;Cancel&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="n">otherButton</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>
+</span><span class='line'><span class="n">informativeTextWithFormat</span><span class="p">:</span> <span class="s2">&quot;I am an alert!&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+<div><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">Isn&#8217;t that sexy?? No more big method names:</span></span></div><div><span class="Apple-style-span"  style="font-family:'times new roman';">
+</span></div>
+<pre class="prettyprint">
+alertWithMessageText_defaultButton_alternateButton_otherButton_informativeTextWithFormat
+</pre>
+<div style="text-align: justify;"><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">The last beautiful thing I am going to comment about are ruby hashes inheriting from NSDictionary. That&#8217;s cool because you can pass a ruby hash to methods that need an NSDictionary instead of constructing one in the cocoa way.</span></span></div><div style="text-align: justify;"><span class="Apple-style-span"  style="font-size:medium;">
+</span></div><div style="text-align: justify;"><span class="Apple-style-span"  style="font-family:'times new roman';"><span class="Apple-style-span"  style="font-size:medium;">The bad things: MacRuby is under development, it needs Leopard and only runs on Intel Macs. But looks promising.</span></span></div><div><span class="Apple-style-span"  style="font-family:'courier new';">
+</span></div><div>
+</div><div>
+</div></div></div>
+]]></content>
+  </entry>
+  
+</feed>

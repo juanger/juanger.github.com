@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: code | Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/blog/categories/code/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T12:55:13-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Screencast with RubyCocoa]]></title>
+    <link href="http://blog.juanger.com/blog/2008/11/screencast-with-rubycocoa/"/>
+    <updated>2008-11-12T00:00:00-08:00</updated>
+    <id>http://blog.juanger.com/blog/2008/11/screencast-with-rubycocoa</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>I know I promised a screencast about Lucecita, but that will be in the Holydays, now I post a little code that captures the screen and creates a video.</p><p>The not so good thing is that the frame rate isn't controlled by my code and it is very slow, but maybe with MacRuby and some threads we could make that code very fast and even parallelize the capturing and the creation of the movie (the other option is to use Objective-C) but MacRuby is under development and it doesn't have all the things we need.</p><p>What do you think? Can we improve it with a ruby/cocoa hack?</p><p>Leave any idea or comment, the code is in the full post:</p><span id="fullpost">  <br />
+<br />
+<script src="http://gist.github.com/489722.js"> </script><br />
+<br />
+</span></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lucecita: RubyCocoa example]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/lucecita-rubycocoa-example/"/>
+    <updated>2008-07-25T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/lucecita-rubycocoa-example</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><span style="font-weight:bold;">UPDATE:</span> Version 2.0 of Lucecita is out. <a href="http://blog.juanger.com/2008/10/lucecita-20.html">Lucecita 2.0</a></p>
+
+<p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a>.</p>
+
+<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s1600-h/LucecitaInAction.png"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s400/LucecitaInAction.png" border="0" alt=""id="BLOGGER_PHOTO_ID_5227186858005960322" /></a>
+
+<span id="fullpost">
+
+<h3>DarkWindow.rb</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">OSX</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">DarkWindow</span> <span class="o">&lt;</span> <span class="no">NSWindow</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initWithContentRect_styleMask_backing_defer</span><span class="p">(</span><span class="n">contentRect</span><span class="p">,</span> <span class="n">aStyle</span><span class="p">,</span> <span class="n">bufferingType</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="n">super_initWithContentRect_styleMask_backing_defer</span><span class="p">(</span><span class="no">NSScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span>
+</span><span class='line'>                  <span class="no">NSBorderlessWindowMask</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">bufferingType</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">flag</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">result</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setBackgroundColor</span><span class="p">(</span><span class="no">NSColor</span><span class="o">.</span><span class="n">clearColor</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setOpaque</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setIgnoresMouseEvents</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="no">NSScreenSaverWindowLevel</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setCollectionBehavior</span><span class="p">(</span><span class="no">NSWindowCollectionBehaviorCanJoinAllSpaces</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">result</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3>LightView.rb</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">OSX</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">LuzView</span> <span class="o">&lt;</span>  <span class="no">OSX</span><span class="o">::</span><span class="no">NSView</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:rect</span><span class="p">,</span> <span class="ss">:radius</span><span class="p">,</span> <span class="ss">:transparency</span><span class="p">,</span> <span class="ss">:enabled</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@radius</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span class='line'>    <span class="vi">@transparency</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</span><span class='line'>    <span class="vi">@enabled</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initWithFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">drawRect</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@enabled</span>
+</span><span class='line'>    <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">setCompositingOperation</span> <span class="no">NSCompositeSourceOut</span>
+</span><span class='line'>    <span class="n">context</span> <span class="o">=</span> <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">graphicsPort</span>
+</span><span class='line'>    <span class="vi">@center</span> <span class="o">=</span> <span class="no">NSEvent</span><span class="o">.</span><span class="n">mouseLocation</span>
+</span><span class='line'>    <span class="no">CGContextSetRGBFillColor</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="vi">@transparency</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextFillRect</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">drawLight</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">drawLight</span>
+</span><span class='line'>    <span class="n">context</span> <span class="o">=</span> <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">graphicsPort</span>
+</span><span class='line'>    <span class="no">NSColor</span><span class="o">.</span><span class="n">colorWithCalibratedRed_green_blue_alpha</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">set</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">CGContextSetGrayStrokeColor</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextSetLineWidth</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@rect</span> <span class="o">=</span> <span class="no">NSRect</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@center</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="vi">@radius</span><span class="p">,</span> <span class="vi">@center</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="vi">@radius</span><span class="p">,</span> <span class="vi">@radius</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="vi">@radius</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextAddEllipseInRect</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="vi">@rect</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextDrawPath</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="no">KCGPathFill</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3>LightController.rb</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">LuzController</span> <span class="o">&lt;</span> <span class="no">OSX</span><span class="o">::</span><span class="no">NSObject</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_outlets</span> <span class="ss">:luz_view</span>
+</span><span class='line'>  <span class="n">ib_outlets</span> <span class="ss">:menu</span><span class="p">,</span> <span class="ss">:size</span><span class="p">,</span> <span class="ss">:size_lbl</span><span class="p">,</span> <span class="ss">:alpha</span><span class="p">,</span> <span class="ss">:alpha_lbl</span><span class="p">,</span> <span class="ss">:enabled</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">awakeFromNib</span>
+</span><span class='line'>    <span class="n">activateStatusMenu</span><span class="p">()</span>
+</span><span class='line'>    <span class="vi">@callback</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">r</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="no">KCGEventOtherMouseDown</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>        <span class="no">CGEventGetFlags</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&amp;</span> <span class="no">KCGEventFlagMaskControl</span> <span class="o">==</span> <span class="no">KCGEventFlagMaskControl</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">toggle</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span>
+</span><span class='line'>        <span class="vi">@luz_view</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="no">CGEventGetLocation</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplayInRect</span> <span class="no">NSInsetRect</span><span class="p">(</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">e</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">start_tapping</span><span class="p">()</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:change_alpha</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">transparency</span> <span class="o">=</span> <span class="vi">@alpha</span><span class="o">.</span><span class="n">floatValue</span>
+</span><span class='line'>    <span class="vi">@alpha_lbl</span><span class="o">.</span><span class="n">setStringValue</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="p">(</span><span class="vi">@alpha</span><span class="o">.</span><span class="n">floatValue</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span><span class="si">}</span><span class="s2">%&quot;</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:change_size</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="vi">@size</span><span class="o">.</span><span class="n">floatValue</span>
+</span><span class='line'>    <span class="vi">@size_lbl</span><span class="o">.</span><span class="n">setStringValue</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="p">(</span><span class="vi">@size</span><span class="o">.</span><span class="n">intValue</span><span class="p">)</span><span class="si">}</span><span class="s2">px&quot;</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:toggle</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="o">!</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span>
+</span><span class='line'>    <span class="vi">@enabled</span><span class="o">.</span><span class="n">setState</span><span class="p">(</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span> <span class="p">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">activateStatusMenu</span><span class="p">()</span>
+</span><span class='line'>      <span class="n">statusItem</span> <span class="o">=</span> <span class="no">NSStatusBar</span><span class="o">.</span><span class="n">systemStatusBar</span><span class="o">.</span><span class="n">statusItemWithLength</span><span class="p">(</span><span class="no">NSVariableStatusItemLength</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">retain</span>
+</span><span class='line'>      <span class="n">icon</span> <span class="o">=</span> <span class="no">NSImage</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithContentsOfFile</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">NSBundle</span><span class="o">.</span><span class="n">mainBundle</span><span class="o">.</span><span class="n">resourcePath</span><span class="si">}</span><span class="s2">/Lucecita.png&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setImage</span> <span class="n">icon</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setHighlightMode</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setMenu</span> <span class="vi">@menu</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">start_tapping</span>
+</span><span class='line'>    <span class="n">eventMask</span> <span class="o">=</span> <span class="mi">167772384</span> <span class="c1"># Magic Number: LeftMouseDragged MouseMoved RightMouseDragged OtherMouseDragged OtherMouseDown</span>
+</span><span class='line'>    <span class="n">eventTap</span> <span class="o">=</span> <span class="no">CGEventTapCreate</span><span class="p">(</span><span class="no">KCGSessionEventTap</span><span class="p">,</span> <span class="no">KCGHeadInsertEventTap</span><span class="p">,</span>
+</span><span class='line'>                                <span class="mi">0</span><span class="p">,</span> <span class="n">eventMask</span><span class="p">,</span> <span class="vi">@callback</span><span class="p">,</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">eventSrc</span> <span class="o">=</span> <span class="no">CFMachPortCreateRunLoopSource</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">eventTap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRelease</span><span class="p">(</span><span class="n">eventTap</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRunLoopAddSource</span><span class="p">(</span><span class="no">CFRunLoopGetCurrent</span><span class="p">(),</span>  <span class="n">eventSrc</span><span class="p">,</span> <span class="no">KCFRunLoopCommonModes</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRelease</span><span class="p">(</span><span class="n">eventSrc</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">applicationShouldTerminate</span>
+</span><span class='line'>    <span class="no">CFRunLoopRemoveSource</span><span class="p">(</span><span class="no">CFRunLoopGetCurrent</span><span class="p">(),</span> <span class="n">mEventSrc</span><span class="p">,</span> <span class="no">KCFRunLoopCommonModes</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>And the application is here: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a></p>
+
+<p>You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.</p>
+
+<p>I am preparing a screencast to show yo how I coded it but that will be later, until then you can see inside the app package and check  the ruby code.</p>
+
+</span></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FreeBSD startup script with ruby]]></title>
+    <link href="http://blog.juanger.com/blog/2008/05/freebsd-startup-script-with-ruby/"/>
+    <updated>2008-05-26T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/05/freebsd-startup-script-with-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+Since some days ago I've been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:
+
+ <blockquote>Put your .sh script at /usr/local/etc/rc.d</blockquote>
+
+And since I like ruby, I began to code my script with it and the problems came:
+
+<blockquote>env: ruby: No such file or directory</blockquote>
+<blockquote>custom_require.rb:27: command not found: mongrel_rails</blockquote>
+
+First, here is my final code that was inspired by <a href="http://snippets.dzone.com/posts/show/2594">Tim Morgan's</a>:
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#!/usr/local/bin/ruby</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;PATH&quot;</span><span class="o">]</span> <span class="o">+=</span> <span class="s2">&quot;:/usr/local/bin&quot;</span>
+</span><span class='line'><span class="n">app_dir</span> <span class="o">=</span> <span class="s1">&#39;/usr/local/www&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">apps</span> <span class="o">=</span> <span class="o">[</span>
+</span><span class='line'>  <span class="n">scielo_index</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;ScieloIndex&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;index.scielo.unam.mx/current&#39;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:config</span> <span class="o">=&gt;</span> <span class="s2">&quot;config/mongrel_cluster.yml&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="ss">:cluster</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">redmine</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Redmine&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;dev.scielo.unam.mx/Redmine&#39;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:config</span> <span class="o">=&gt;</span> <span class="s2">&quot;config/mongrel_8000.yml&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="ss">:pid</span> <span class="o">=&gt;</span> <span class="s2">&quot;log/mongrel.pid&quot;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="n">apps</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span> <span class="n">app_dir</span><span class="p">,</span> <span class="n">app</span><span class="o">[</span><span class="ss">:path</span><span class="o">]</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Stopping </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">app</span><span class="o">[</span><span class="ss">:cluster</span><span class="o">]</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails cluster::stop -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails stop -c </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb"> -P </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:pid</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="n">apps</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span> <span class="n">app_dir</span><span class="p">,</span> <span class="n">app</span><span class="o">[</span><span class="ss">:path</span><span class="o">]</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Starting </span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">app</span><span class="o">[</span><span class="ss">:cluster</span><span class="o">]</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails cluster::start -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="sb">`mongrel_rails start -C </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="n">app</span><span class="o">[</span><span class="ss">:config</span><span class="o">]</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">unless</span> <span class="o">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;restart&#39;</span><span class="o">].</span><span class="n">include?</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Usage: mongrel {start|stop|restart}&quot;</span>
+</span><span class='line'>    <span class="nb">exit</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+The key part is the ENV["PATH"] setup, that line is needed as FreeBSD's PATH at startup is "/sbin:/bin:/usr/sbin:/usr/bin" and this also leads us to change the interpreter path from something like "#!/usr/bin/env ruby" to "#!/usr/local/bin/ruby", i.e. its full path.
+
+That's all, now our ruby script really runs at startup time without complaining.</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RTranscoder: jpeg to mpeg]]></title>
+    <link href="http://blog.juanger.com/blog/2008/05/rtranscoder-jpeg-to-mpeg/"/>
+    <updated>2008-05-15T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/05/rtranscoder-jpeg-to-mpeg</id>
+    <content type="html"><![CDATA[<div class='post'>
+Some days ago I made some tests using mencoder to create a mpeg4 video with some jpeg images.
+
+Then I tried to use RTranscoder to achieve the same result with ruby but it's kind of tricky to get it running correctly, because you can get an "error parsing command line" error if you don't give RTranscoder the correct information.
+
+After a lot of attempts, my code got like this:
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="no">MEncoder</span><span class="o">.</span><span class="n">encode</span> <span class="k">do</span> <span class="o">|</span><span class="n">mencoder</span><span class="o">|</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s2">&quot;mf://*.jpg&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">mf</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="mi">25</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">mf</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;jpg&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output_video_codec</span> <span class="o">=</span> <span class="ss">:lavc</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">vcodec</span> <span class="o">=</span> <span class="s2">&quot;mpeg4&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">mbd</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">trell</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output_audio_codec</span> <span class="o">=</span> <span class="s1">&#39;copy&#39;</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;output.avi&#39;</span>
+</span><span class='line'> <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+As you can see, instead of doing something like mencoder.mf = "fps=25:type=jpg" (my error) you have to do it with mencoder.mf.fps and mencoder.mf.type respectively, the same with lavc and everytime you need to pass an argument with suboptions separated by ":".
+
+Here is the page of <a href="http://rtranscoder.rubyforge.org/">Rtranscoder</a>.</div>
+
+]]></content>
+  </entry>
+  
+</feed>

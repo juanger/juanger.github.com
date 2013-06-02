@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>RTranscoder: jpeg to mpeg - Ruby Xocolatl</title>
+  <meta name="author" content="Juan Castaneda">
+
+  
+  <meta name="description" content="Some days ago I made some tests using mencoder to create a mpeg4 video with some jpeg images. Then I tried to use RTranscoder to achieve the same &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.juanger.com/blog/2008/05/rtranscoder-jpeg-to-mpeg/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="false" rel="alternate" title="Ruby Xocolatl" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+  if (window.location.host.split(":")[0] != 'localhost' && window.location.host != "blog.dev") {
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3608240-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  }
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Ruby Xocolatl</a></h1>
+  
+    <h2>Ruby, Cocoa, Mac OS X and things of my not so exciting life.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.juanger.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">RTranscoder: Jpeg to Mpeg</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-15T00:00:00-07:00" pubdate data-updated="true">May 15<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+Some days ago I made some tests using mencoder to create a mpeg4 video with some jpeg images.
+
+Then I tried to use RTranscoder to achieve the same result with ruby but it&#8217;s kind of tricky to get it running correctly, because you can get an &#8220;error parsing command line&#8221; error if you don&#8217;t give RTranscoder the correct information.
+
+After a lot of attempts, my code got like this:
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="no">MEncoder</span><span class="o">.</span><span class="n">encode</span> <span class="k">do</span> <span class="o">|</span><span class="n">mencoder</span><span class="o">|</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s2">&quot;mf://*.jpg&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">mf</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="mi">25</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">mf</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;jpg&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output_video_codec</span> <span class="o">=</span> <span class="ss">:lavc</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">vcodec</span> <span class="o">=</span> <span class="s2">&quot;mpeg4&quot;</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">mbd</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">lavc</span><span class="o">.</span><span class="n">trell</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output_audio_codec</span> <span class="o">=</span> <span class="s1">&#39;copy&#39;</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">mencoder</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;output.avi&#39;</span>
+</span><span class='line'> <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+As you can see, instead of doing something like mencoder.mf = &#8220;fps=25:type=jpg&#8221; (my error) you have to do it with mencoder.mf.fps and mencoder.mf.type respectively, the same with lavc and everytime you need to pass an argument with suboptions separated by &#8220;:&#8221;.
+
+Here is the page of <a href="http://rtranscoder.rubyforge.org/">Rtranscoder</a>.</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Juan Castaneda</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-15T00:00:00-07:00" pubdate data-updated="true">May 15<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.juanger.com/blog/2008/05/rtranscoder-jpeg-to-mpeg/" data-via="juanger_" data-counturl="http://blog.juanger.com/blog/2008/05/rtranscoder-jpeg-to-mpeg/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/03/macruby/" title="Previous Post: MacRuby">&laquo; MacRuby</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/05/textmate-ssh-and-github/" title="Next Post: TextMate, SSH and github">TextMate, SSH and github &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Juan Castaneda -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: screencast | Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/blog/categories/screencast/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T12:55:13-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Screencast with RubyCocoa]]></title>
+    <link href="http://blog.juanger.com/blog/2008/11/screencast-with-rubycocoa/"/>
+    <updated>2008-11-12T00:00:00-08:00</updated>
+    <id>http://blog.juanger.com/blog/2008/11/screencast-with-rubycocoa</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>I know I promised a screencast about Lucecita, but that will be in the Holydays, now I post a little code that captures the screen and creates a video.</p><p>The not so good thing is that the frame rate isn't controlled by my code and it is very slow, but maybe with MacRuby and some threads we could make that code very fast and even parallelize the capturing and the creation of the movie (the other option is to use Objective-C) but MacRuby is under development and it doesn't have all the things we need.</p><p>What do you think? Can we improve it with a ruby/cocoa hack?</p><p>Leave any idea or comment, the code is in the full post:</p><span id="fullpost">  <br />
+<br />
+<script src="http://gist.github.com/489722.js"> </script><br />
+<br />
+</span></div>
+
+]]></content>
+  </entry>
+  
+</feed>

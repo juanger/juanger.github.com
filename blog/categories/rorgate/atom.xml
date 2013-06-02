@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: RoRGate | Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/blog/categories/rorgate/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T12:55:13-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[New features in RoRGate 3.0 beta]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/new-features-in-rorgate-30-beta/"/>
+    <updated>2008-07-15T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/new-features-in-rorgate-30-beta</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div>These are three new features in RoRGate 3.0:</div><div>
+</div><div>Pictures as icons:</div><div style="text-align: center;">
+</div><div style="text-align: center;">
+</div><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2F2008-07-15%2FRoRgate-0.3b.png?raw=true"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 500px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2F2008-07-15%2FRoRgate-0.3b.png?raw=true" border="0" alt="" /></a><div style="text-align: center;">Now you can use png and jpeg files as icons</div><div style="text-align: center;">
+</div><div style="text-align: left;">Web Inspector:</div><div style="text-align: left;">
+</div><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;width: 500px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2F2008-07-15%2FInspector.png?raw=true" border="0" alt="" /><div><div style="text-align: center;">The WebKit inspector can be accessed through a contextual menu.</div><div>
+</div><div>Preferences:</div></div><div style="text-align: center;"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/_WeoTLD0cYR0/SHyI6ktdN2I/AAAAAAAAABs/5vgsElW1JyQ/s400/Preferences.png" border="0" alt="" id="BLOGGER_PHOTO_ID_5223200207711057762" /></div><div style="text-align: center;">Now you can change the name, port and icon of an existing app.</div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Server Output in RoRGate]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/server-output-in-rorgate/"/>
+    <updated>2008-07-10T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/server-output-in-rorgate</id>
+    <content type="html"><![CDATA[<div class='post'>
+I've added a developer menu to the resulting apps in RoRGate, if you download the 0.3 beta version you will see the change:
+
+<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-0.3b.png?raw=true"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-0.3b.png?raw=true" alt="" border="0" /></a>
+With that, you as developer can use it to see your app in action, see the server output and edit it in TextMate.
+
+The only thing is that the server output works strange with 2.x rails apps, I don't know why, but only the error output is displayed in such rails apps. I use the NSTask class with an NSPipe for both the standart output and error but with rails 2.x it behaves strangely.
+
+<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FServerOut.png?raw=true"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FServerOut.png?raw=true" alt="" border="0" /></a>
+Also I've embedded RubyCococa, but I can't make it work in both Leopard and Tiger because of libffi.dylib. Leopard's RubyCocoa has it installed in /usr/lib and I don't know where it is in Tiger. Maybe the solution is to create a Tiger version and a Leopard version, but I'm very lazy and I'd rather have only one.
+
+Lastly, I need a new laptop (many of my friends will agree) and because of that, I've added a donations pledgie badge for RoRGate and some ads here in my blog. I'm a student and I own an iBook G3 which has been giving me a lot of trouble lately, so as I'm most of the time at school (school's computers ain't good either) deploying to or developing for a lot of platforms I need a new one, one in which running a single unit test doesn't seem to last forever and I hope some of you(friends or not) could help me. My-new-laptop blogthon :) has begun.</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RoRGate]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/rorgate/"/>
+    <updated>2008-07-04T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/rorgate</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>A few days ago, <a href="http://blog.jasoncrystal.com/?p=7">Jason Crystal wrote in his blog</a> a way to package rails applications in a Mac OS X one and I commented that I've been developing an application called RoRGate to automate that with another process.</p><p><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-v0.2.png?raw=true"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 497px; height: 236px;" src="http://github.com/juanger/rorgate/tree/master%2Fmeta%2Fimages%2FRoRGate-v0.2.png?raw=true" alt="" border="0" /></a></p><p>I'll be posting more news about it as I improve my implementation. Today I added the posibility to manage multiple windows in a Gate(the resulting OS X app). Also, the RoRGate-dev.dmg will be the unsable version with all the latest changes, so if want to try the newest features you'll have to download it and not the versioned one.</p><p>The DMGs will be hosted (by now) in:</p><p></p><p><a href="http://code.google.com/p/rorgate/">http://code.google.com/p/rorgate/</a></p><p>The source code in:</p><p><a href="http://github.com/juanger/rorgate/tree/master">http://github.com/juanger/rorgate/tree/master</a></p><p>I'd appreciate if you can send me any errors or comments to improve it.</p></div>
+
+]]></content>
+  </entry>
+  
+</feed>

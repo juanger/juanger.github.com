@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Lucecita | Ruby Xocolatl]]></title>
+  <link href="http://blog.juanger.com/blog/categories/lucecita/atom.xml" rel="self"/>
+  <link href="http://blog.juanger.com/"/>
+  <updated>2013-06-02T12:55:13-07:00</updated>
+  <id>http://blog.juanger.com/</id>
+  <author>
+    <name><![CDATA[Juan Castaneda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lucecita 2.0]]></title>
+    <link href="http://blog.juanger.com/blog/2008/10/lucecita-20/"/>
+    <updated>2008-10-26T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/10/lucecita-20</id>
+    <content type="html"><![CDATA[<div class='post'>
+I've been very busy this months and I haven't prepared the screencast, but here is a little present, the new version of Lucecita:
+
+<a href="http://www.flickr.com/photos/juanger/2976552527/" title="Lucecita.app 2.0 by Juanger, on Flickr"><img src="http://farm4.static.flickr.com/3235/2976552527_8a9defd15f_o.png" width="221" height="334" alt="Lucecita.app 2.0" /></a>
+
+All the source code is hosted in github at <a href="http://github.com/juanger/lucecita">http://github.com/juanger/lucecita</a> and the DMG is here: <a href="http://github.com/juanger/lucecita/tree/master%2FLucecita.dmg?raw=true">Lucecita.dmg</a>
+
+It's a universal binary and only works in Leopard.
+
+Enjoy it!!</div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lucecita: RubyCocoa example]]></title>
+    <link href="http://blog.juanger.com/blog/2008/07/lucecita-rubycocoa-example/"/>
+    <updated>2008-07-25T00:00:00-07:00</updated>
+    <id>http://blog.juanger.com/blog/2008/07/lucecita-rubycocoa-example</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><span style="font-weight:bold;">UPDATE:</span> Version 2.0 of Lucecita is out. <a href="http://blog.juanger.com/2008/10/lucecita-20.html">Lucecita 2.0</a></p>
+
+<p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a>.</p>
+
+<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s1600-h/LucecitaInAction.png"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s400/LucecitaInAction.png" border="0" alt=""id="BLOGGER_PHOTO_ID_5227186858005960322" /></a>
+
+<span id="fullpost">
+
+<h3>DarkWindow.rb</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">OSX</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">DarkWindow</span> <span class="o">&lt;</span> <span class="no">NSWindow</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initWithContentRect_styleMask_backing_defer</span><span class="p">(</span><span class="n">contentRect</span><span class="p">,</span> <span class="n">aStyle</span><span class="p">,</span> <span class="n">bufferingType</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="n">super_initWithContentRect_styleMask_backing_defer</span><span class="p">(</span><span class="no">NSScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span>
+</span><span class='line'>                  <span class="no">NSBorderlessWindowMask</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">bufferingType</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">flag</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">result</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setBackgroundColor</span><span class="p">(</span><span class="no">NSColor</span><span class="o">.</span><span class="n">clearColor</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setOpaque</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setIgnoresMouseEvents</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="no">NSScreenSaverWindowLevel</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span><span class="o">.</span><span class="n">setCollectionBehavior</span><span class="p">(</span><span class="no">NSWindowCollectionBehaviorCanJoinAllSpaces</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">result</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3>LightView.rb</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">OSX</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">LuzView</span> <span class="o">&lt;</span>  <span class="no">OSX</span><span class="o">::</span><span class="no">NSView</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:rect</span><span class="p">,</span> <span class="ss">:radius</span><span class="p">,</span> <span class="ss">:transparency</span><span class="p">,</span> <span class="ss">:enabled</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@radius</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span class='line'>    <span class="vi">@transparency</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</span><span class='line'>    <span class="vi">@enabled</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initWithFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">drawRect</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@enabled</span>
+</span><span class='line'>    <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">setCompositingOperation</span> <span class="no">NSCompositeSourceOut</span>
+</span><span class='line'>    <span class="n">context</span> <span class="o">=</span> <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">graphicsPort</span>
+</span><span class='line'>    <span class="vi">@center</span> <span class="o">=</span> <span class="no">NSEvent</span><span class="o">.</span><span class="n">mouseLocation</span>
+</span><span class='line'>    <span class="no">CGContextSetRGBFillColor</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="vi">@transparency</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextFillRect</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">drawLight</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">drawLight</span>
+</span><span class='line'>    <span class="n">context</span> <span class="o">=</span> <span class="no">NSGraphicsContext</span><span class="o">.</span><span class="n">currentContext</span><span class="o">.</span><span class="n">graphicsPort</span>
+</span><span class='line'>    <span class="no">NSColor</span><span class="o">.</span><span class="n">colorWithCalibratedRed_green_blue_alpha</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">set</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">CGContextSetGrayStrokeColor</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextSetLineWidth</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@rect</span> <span class="o">=</span> <span class="no">NSRect</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@center</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="vi">@radius</span><span class="p">,</span> <span class="vi">@center</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="vi">@radius</span><span class="p">,</span> <span class="vi">@radius</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="vi">@radius</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextAddEllipseInRect</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="vi">@rect</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CGContextDrawPath</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="no">KCGPathFill</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3>LightController.rb</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;osx/cocoa&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">LuzController</span> <span class="o">&lt;</span> <span class="no">OSX</span><span class="o">::</span><span class="no">NSObject</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_outlets</span> <span class="ss">:luz_view</span>
+</span><span class='line'>  <span class="n">ib_outlets</span> <span class="ss">:menu</span><span class="p">,</span> <span class="ss">:size</span><span class="p">,</span> <span class="ss">:size_lbl</span><span class="p">,</span> <span class="ss">:alpha</span><span class="p">,</span> <span class="ss">:alpha_lbl</span><span class="p">,</span> <span class="ss">:enabled</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">awakeFromNib</span>
+</span><span class='line'>    <span class="n">activateStatusMenu</span><span class="p">()</span>
+</span><span class='line'>    <span class="vi">@callback</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">r</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="no">KCGEventOtherMouseDown</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>        <span class="no">CGEventGetFlags</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&amp;</span> <span class="no">KCGEventFlagMaskControl</span> <span class="o">==</span> <span class="no">KCGEventFlagMaskControl</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">toggle</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span>
+</span><span class='line'>        <span class="vi">@luz_view</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="no">CGEventGetLocation</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplayInRect</span> <span class="no">NSInsetRect</span><span class="p">(</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">e</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">start_tapping</span><span class="p">()</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:change_alpha</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">transparency</span> <span class="o">=</span> <span class="vi">@alpha</span><span class="o">.</span><span class="n">floatValue</span>
+</span><span class='line'>    <span class="vi">@alpha_lbl</span><span class="o">.</span><span class="n">setStringValue</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="p">(</span><span class="vi">@alpha</span><span class="o">.</span><span class="n">floatValue</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span><span class="si">}</span><span class="s2">%&quot;</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:change_size</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="vi">@size</span><span class="o">.</span><span class="n">floatValue</span>
+</span><span class='line'>    <span class="vi">@size_lbl</span><span class="o">.</span><span class="n">setStringValue</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="p">(</span><span class="vi">@size</span><span class="o">.</span><span class="n">intValue</span><span class="p">)</span><span class="si">}</span><span class="s2">px&quot;</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ib_action</span> <span class="ss">:toggle</span> <span class="k">do</span> <span class="o">|</span><span class="n">sender</span><span class="o">|</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="o">!</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span>
+</span><span class='line'>    <span class="vi">@enabled</span><span class="o">.</span><span class="n">setState</span><span class="p">(</span><span class="vi">@luz_view</span><span class="o">.</span><span class="n">enabled</span> <span class="p">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@luz_view</span><span class="o">.</span><span class="n">setNeedsDisplay</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">activateStatusMenu</span><span class="p">()</span>
+</span><span class='line'>      <span class="n">statusItem</span> <span class="o">=</span> <span class="no">NSStatusBar</span><span class="o">.</span><span class="n">systemStatusBar</span><span class="o">.</span><span class="n">statusItemWithLength</span><span class="p">(</span><span class="no">NSVariableStatusItemLength</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">retain</span>
+</span><span class='line'>      <span class="n">icon</span> <span class="o">=</span> <span class="no">NSImage</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithContentsOfFile</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">NSBundle</span><span class="o">.</span><span class="n">mainBundle</span><span class="o">.</span><span class="n">resourcePath</span><span class="si">}</span><span class="s2">/Lucecita.png&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setImage</span> <span class="n">icon</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setHighlightMode</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="n">statusItem</span><span class="o">.</span><span class="n">setMenu</span> <span class="vi">@menu</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">start_tapping</span>
+</span><span class='line'>    <span class="n">eventMask</span> <span class="o">=</span> <span class="mi">167772384</span> <span class="c1"># Magic Number: LeftMouseDragged MouseMoved RightMouseDragged OtherMouseDragged OtherMouseDown</span>
+</span><span class='line'>    <span class="n">eventTap</span> <span class="o">=</span> <span class="no">CGEventTapCreate</span><span class="p">(</span><span class="no">KCGSessionEventTap</span><span class="p">,</span> <span class="no">KCGHeadInsertEventTap</span><span class="p">,</span>
+</span><span class='line'>                                <span class="mi">0</span><span class="p">,</span> <span class="n">eventMask</span><span class="p">,</span> <span class="vi">@callback</span><span class="p">,</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">eventSrc</span> <span class="o">=</span> <span class="no">CFMachPortCreateRunLoopSource</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">eventTap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRelease</span><span class="p">(</span><span class="n">eventTap</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRunLoopAddSource</span><span class="p">(</span><span class="no">CFRunLoopGetCurrent</span><span class="p">(),</span>  <span class="n">eventSrc</span><span class="p">,</span> <span class="no">KCFRunLoopCommonModes</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CFRelease</span><span class="p">(</span><span class="n">eventSrc</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">applicationShouldTerminate</span>
+</span><span class='line'>    <span class="no">CFRunLoopRemoveSource</span><span class="p">(</span><span class="no">CFRunLoopGetCurrent</span><span class="p">(),</span> <span class="n">mEventSrc</span><span class="p">,</span> <span class="no">KCFRunLoopCommonModes</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>And the application is here: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a></p>
+
+<p>You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.</p>
+
+<p>I am preparing a screencast to show yo how I coded it but that will be later, until then you can see inside the app package and check  the ruby code.</p>
+
+</span></div>
+
+]]></content>
+  </entry>
+  
+</feed>
