@@ -7,7 +7,9 @@ categories: html5 sass compass css3
 colors: ["grey", "black", "blue"]
 ---
 
-__This input tags were styled entirely with css.__
+<link rel="stylesheet" type="text/css" href="/stylesheets/css_buttons.css">
+
+__These input tags were styled entirely with css.__
 
 <label class="text">
   <span>Text Field:</span><input type="text" class="btn-grey" value="Edit me"/>
@@ -36,7 +38,7 @@ __This input tags were styled entirely with css.__
 
 #### Why?
 
-Just because. Consider this code leisure programming.
+Just because. Consider this piece of code as leisure programming.
 
 #### What is the problem with images?
 
@@ -46,7 +48,7 @@ CSS can be generated with compass making the source code much more manageable an
 
 #### Code
 
-The code is huge, because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.
+The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.
 
 The interesting part of the code is when I create the before and after pseudo-elements and style them to create the buttons. If you use the code remember to follow the structure of the html (input next to span, both inside the label).
 
