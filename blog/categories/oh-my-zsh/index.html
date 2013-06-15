@@ -106,66 +106,35 @@
 
 <aside class="sidebar">
   
+    <section>
+  <h1>More about me</h1>
+  <br/>
+  <div class="social">
     
-<section>
-  <h1>About Me</h1>
-  <div id="twitter-profile" style="margin-top:0.5em;">
-    <p>
-      <strong>Juan Castaneda</strong> 
-      (<a href="http://twitter.com/juanger_">@juanger_</a>)
-    </p>
-    <p></p>
+    <a class="github" href="https://github.com/juanger" title="GitHub">GitHub</a>
+    
+    
+    
+    <a class="twitter" href="http://twitter.com/juanger_" title="Twitter">Twitter</a>
+    
+    
+    <a class="google" href="https://plus.google.com/102066722522074311415?rel=author" title="Google+">Google+</a>
+    
+    
+    <a class="linkedin" href="http://www.linkedin.com/in/juanger">LinkedIn</a>
+    
+    
+    
+    <a class="delicious" href="http://delicious.com/juanger" title="Delicious">Delicious</a>
+    
+    
+    <a class="_500px" href="http://www.500px.com/juanger" title="500px">500px</a>
+    
+    
   </div>
-  <script type="text/javascript">
-    $.domReady(function(){
-        var container = $('#twitter-profile'),
-            user = "juanger_";
-        
-        function parseTwLinks(s) {
-          var twUrl = "http://www.twitter.com/"
-          s = s.replace(/ (@([\w]+))/g, function(match, p1, p2) {
-              return " <a href='"+twUrl+p2+"'>"+p1+"</a>"
-          }).replace(/ (#([\w]+))/g, function(match, p1, p2) {
-              return " <a href='"+twUrl+"#!/search?q=%23"+p2+"'>"+p1+"</a>"
-          })
-          return s
-        }
-
-        $.ajax({
-            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
-          , type: 'jsonp'
-          , error: function (err) { $('#twitter-profile').addClass('error');  }
-          , success: function(data) {
-              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong> (<a href="http://twitter.com/'+user+'">@'+user+'</a>)<br/>'+data.location+'</p><p>'+parseTwLinks(data.description)+'</p>');
-            }
-        })
-      });
-  </script>
 </section>
-
-<div class="social">
-  
-  <a class="github" href="https://github.com/juanger" title="GitHub">GitHub</a>
-  
-  
-  
-  <a class="twitter" href="http://twitter.com/juanger_" title="Twitter">Twitter</a>
-  
-  
-  
-  <a class="linkedin" href="http://www.linkedin.com/in/juanger">LinkedIn</a>
-  
-  
-  
-  <a class="delicious" href="http://delicious.com/juanger" title="Delicious">Delicious</a>
-  
-  
-  <a class="_500px" href="http://www.500px.com/juanger" title="500px">500px</a>
-  
-  
-</div>
 <section>
-  <h1>Coderwall</h1>
+  <h1>Coderwall badges</h1>
   <ul id="cw_badges">
     <li class="loading">Status updating...</li>
   </ul>
@@ -242,7 +211,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Juan Castaneda -
+  Copyright &copy; 2013 - <a rel="author" href="https://plus.google.com/102066722522074311415">Juan Castaneda</a> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
