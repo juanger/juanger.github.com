@@ -1,8 +1,8 @@
 import Head from "next/head";
 import jdown from "jdown";
-import Layout from "../components/Layout";
-import TableOfContents from "../components/TableOfContents";
-import { parseMarkdownPost } from "../lib/posts";
+import Layout from "../../components/Layout";
+import TableOfContents from "../../components/TableOfContents";
+import { parseMarkdownPost } from "../../lib/posts";
 import { GetStaticProps } from "next";
 
 export default function Home({ posts }) {
@@ -14,7 +14,7 @@ export default function Home({ posts }) {
       </Head>
 
       <h1 id="blog-name">Ruby Xocolatl</h1>
-      <h3>Shenanigans of a not so exciting life.</h3>
+      <h3>Picardías de una vida no muy interesante.</h3>
 
       <TableOfContents posts={posts}>
         <h2>Front matter</h2>
@@ -36,7 +36,7 @@ export default function Home({ posts }) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const markdownPosts = await jdown("posts", { fileInfo: true });
   // TODO add lang param
-  const lang = "en";
+  const lang = "es";
 
   const posts = Object.values(markdownPosts[lang]);
 

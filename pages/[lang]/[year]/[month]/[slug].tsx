@@ -1,11 +1,14 @@
 import jdown from "jdown";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Layout from "../../../../components/Layout";
-import { parsePath } from "../../../../pages/index";
+import { parseMarkdownPost } from "../../../../lib/posts";
 
 export default function Post({ title, date, comments, categories, contents }) {
   return (
     <Layout>
+      <header>
+        <a href="#">☰ Table of Contents</a>
+      </header>
       <article>
         <h1>{title}</h1>
         <time dateTime={date}></time>
@@ -17,6 +20,17 @@ export default function Post({ title, date, comments, categories, contents }) {
           </footer>
         </blockquote>
       </article>
+      <style jsx>{`
+        header {
+          text-align: right;
+        }
+        header a {
+          background: none;
+          color: #aaa;
+          font-size: 1.2em;
+          margin-right: 10px;
+        }
+      `}</style>
     </Layout>
   );
 }
@@ -63,7 +77,7 @@ function generatePostPaths(markdownPosts) {
 
   Object.entries(markdownPosts).forEach(([lang, posts]) => {
     Object.values(posts).forEach((post) => {
-      const { year, month, slug } = parsePath(post, lang);
+      const { year, month, slug } = parseMarkdownPost(post, lang);
 
       const postPath = {
         params: {

@@ -3,6 +3,8 @@ function Layout(props) {
     <div className="page-layout">
       {props.children}
       <style jsx global>{`
+        // FROM: https://github.com/edwardtufte/tufte-css/blob/gh-pages/tufte.css
+
         @charset "UTF-8";
 
         /* Import ET Book styles
@@ -439,9 +441,16 @@ function Layout(props) {
           }
         }
       `}</style>
+
       <style jsx global>{`
         #blog-name {
           color: #dc322f;
+        }
+
+        @media (max-width: 760px) {
+          article {
+            padding: 1em 0em;
+          }
         }
 
         #TOC {
