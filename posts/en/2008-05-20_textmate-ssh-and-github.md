@@ -4,12 +4,11 @@ title: "TextMate, SSH and github"
 date: 2008-05-20
 comments: false
 categories:
- - SSH
- - TextMate
- - Mac OS X
+  - SSH
+  - TextMate
+  - Mac OS X
 ---
 
-<div class='post'>
 <a href="http://macromates.com/">TextMate</a> is a flexible Mac OS X text editor, it has everything i need, but some days ago I found that it can't prompt me for my password when needed(like when I want to push my changes to github) and that's not cool.
 
-Fortunately, github uses ssh keys and with <a href="http://www.sshkeychain.org/">SSHKeychain</a> installed you can forget about passwords and it helps TextMate to pull and push to github(or any other server) without pubkey authentication errors. Now that's cool.</div>
+Fortunately, github uses ssh keys and with <a href="http://www.sshkeychain.org/">SSHKeychain</a> installed you can forget about passwords and it helps TextMate to pull and push to github(or any other server) without pubkey authentication errors. Now that's cool.

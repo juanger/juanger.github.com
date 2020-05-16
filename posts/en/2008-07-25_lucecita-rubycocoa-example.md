@@ -4,24 +4,23 @@ title: "Lucecita: RubyCocoa example"
 date: 2008-07-25
 comments: false
 categories:
- - ruby
- - Lucecita
- - code
- - RubyCocoa
+  - ruby
+  - Lucecita
+  - code
+  - RubyCocoa
 ---
 
-<div class='post'>
 <p><span style="font-weight:bold;">UPDATE:</span> Version 2.0 of Lucecita is out. <a href="http://blog.juanger.com/2008/10/lucecita-20.html">Lucecita 2.0</a></p>
 
 <p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a>.</p>
 
-<a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s1600-h/LucecitaInAction.png"><img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s400/LucecitaInAction.png" border="0" alt=""id="BLOGGER_PHOTO_ID_5227186858005960322" /></a>
-
-<span id="fullpost">
+<p>
+  <img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/\_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s400/LucecitaInAction.png" border="0" alt="" id="BLOGGER_PHOTO_ID_5227186858005960322" />
+</p>
 
 <h3>DarkWindow.rb</h3>
 
-{% codeblock lang:ruby %}
+```ruby
 require 'osx/cocoa'
 include OSX
 
@@ -44,11 +43,11 @@ class DarkWindow < NSWindow
   end
 
 end
-{% endcodeblock %}
+```
 
 <h3>LightView.rb</h3>
 
-{% codeblock lang:ruby %}
+```ruby
 require 'osx/cocoa'
 include OSX
 
@@ -92,11 +91,11 @@ class LuzView <  OSX::NSView
   end
 
 end
-{% endcodeblock %}
+```
 
 <h3>LightController.rb</h3>
 
-{% codeblock lang:ruby %}
+```ruby
 require 'osx/cocoa'
 
 class LuzController < OSX::NSObject
@@ -163,12 +162,10 @@ class LuzController < OSX::NSObject
   end
 
 end
-{% endcodeblock %}
+```
 
 <p>And the application is here: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a></p>
 
 <p>You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.</p>
 
 <p>I am preparing a screencast to show yo how I coded it but that will be later, until then you can see inside the app package and check  the ruby code.</p>
-
-</span></div>

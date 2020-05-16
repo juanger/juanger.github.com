@@ -5,8 +5,7 @@ date: 2009-07-01
 comments: false
 ---
 
-<div class='post'>
-<p>I've been very busy in the last month and I haven't had the time to post here.</p> 
+<p>I've been very busy in the last month and I haven't had the time to post here.</p>
 
 <p>I love to learn new things and sometimes that's the reason I don't have enough time. I'm learning Cocoa, Objective-C and Tcl (just a little) and If if you think that's enough, read this: I can now watch the WWDC sessions videos and learn even more!</p>
 
@@ -16,8 +15,6 @@ comments: false
 
 <a href="http://content.screencast.com/users/juanger/folders/Jing/media/c35f7ed9-876d-4acb-ab87-7c1b8f958ab2/00000001.png"><img class="embeddedObject" src="http://content.screencast.com/users/juanger/folders/Jing/media/c35f7ed9-876d-4acb-ab87-7c1b8f958ab2/00000001.png" width="300" border="0" /></a>
 
-
 <p>There's still a lot of work to be done (including some major changes in how the MacPorts framework sends notifications) but I hope to be releasing a usable app after the midterm week. I also made a weekly list of tasks and published here: <a href="http://juanger.heroku.com/gsoc-09">Tasks</a></p>
 
-
-<p>Till then!</p></div>
+<p>Till then!</p>

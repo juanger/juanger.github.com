@@ -9,7 +9,7 @@ colors: ["grey", "black", "blue"]
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/css_buttons.css">
 
-__These input tags were styled entirely with css.__
+**These input tags were styled entirely with css.**
 
 <label class="text">
   <span>Text Field:</span><input type="text" class="btn-grey" value="Edit me"/>
@@ -35,18 +35,17 @@ __These input tags were styled entirely with css.__
   </select>
 </label>
 
-
-#### Why?
+## Why?
 
 Just because. Consider this piece of code as leisure programming.
 
-#### What is the problem with images?
+## What is the problem with images?
 
 Well, metainformation can be tracked in a very efficient way with a version control system, it can be generated programatically, your html code is cleaner and you don't have to send another asset to your clients.
 
 CSS can be generated with compass making the source code much more manageable and you can even create animations and effects that were once only doable with Flash.
 
-#### Code
+## Code
 
 The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.
 
@@ -56,22 +55,23 @@ If you want to add more themes, you can do so by creating a new button style wit
 
 {% for color in page.colors %}
 <label class="text">
-  <span>Text Field:</span><input type="text" class="btn-{{ color }}" value="Edit me"/>
+<span>Text Field:</span><input type="text" class="btn-{{ color }}" value="Edit me"/>
 </label>
 <input type="submit" class="btn-{{ color }}" value="Button"/>
 <input type="submit" class="btn-{{ color }}" value="Button" disabled="disabled"/>
 <label class="checkbox">
-  <input type="checkbox" class="btn-{{ color }}" checked/><span>Checkbox</span>
+<input type="checkbox" class="btn-{{ color }}" checked/><span>Checkbox</span>
 </label>
 <label class="radio">
-  <input type="radio" name="radio-{{ color }}" value="radio_1" class="btn-{{ color }}" checked/><span>Option 1</span>
+<input type="radio" name="radio-{{ color }}" value="radio_1" class="btn-{{ color }}" checked/><span>Option 1</span>
 </label>
 <label class="radio">
-  <input type="radio" name="radio-{{ color }}" value="radio_2" class="btn-{{ color }}"/><span>Option 2</span>
+<input type="radio" name="radio-{{ color }}" value="radio_2" class="btn-{{ color }}"/><span>Option 2</span>
 </label>
 <label class="select">
-  <span>Select:</span>
-  <select class="btn-{{ color }}">
+<span>Select:</span>
+<select class="btn-{{ color }}">
+
   <option value="volvo">Option 1</option>
   <option value="saab">Option 2</option>
   <option value="mercedes">Option 3</option>
