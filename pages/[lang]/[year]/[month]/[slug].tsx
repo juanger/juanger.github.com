@@ -1,14 +1,20 @@
 import jdown from "jdown";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Layout from "../../../../components/Layout";
+import PageHeader from "../../../../components/PageHeader";
 import { parseMarkdownPost } from "../../../../lib/posts";
 
-export default function Post({ title, date, comments, categories, contents }) {
+export default function Post({
+  title,
+  date,
+  comments,
+  categories,
+  contents,
+  lang,
+}) {
   return (
     <Layout>
-      <header>
-        <a href="#">☰ Table of Contents</a>
-      </header>
+      <PageHeader lang={lang}></PageHeader>
       <article>
         <h1>{title}</h1>
         <time dateTime={date}></time>
@@ -20,17 +26,6 @@ export default function Post({ title, date, comments, categories, contents }) {
           </footer>
         </blockquote>
       </article>
-      <style jsx>{`
-        header {
-          text-align: right;
-        }
-        header a {
-          background: none;
-          color: #aaa;
-          font-size: 1.2em;
-          margin-right: 10px;
-        }
-      `}</style>
     </Layout>
   );
 }
@@ -57,6 +52,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       categories: post.categories || [],
       comments: post.comments || false,
       date: new Date(post.date).toISOString().split("T")[0],
+      lang,
     },
   };
 };

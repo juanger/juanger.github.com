@@ -1,35 +1,27 @@
-import Head from "next/head";
 import jdown from "jdown";
-import Layout from "../components/Layout";
-import TableOfContents from "../components/TableOfContents";
+import Home from "../components/Home";
 import { parseMarkdownPost } from "../lib/posts";
 import { GetStaticProps } from "next";
 
-export default function Home({ posts }) {
+export default function ({ posts }) {
   return (
-    <Layout>
-      <Head>
-        <title>Ruby Xocolatl</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <h1 id="blog-name">Ruby Xocolatl</h1>
-      <h3>Shenanigans of a not so exciting life.</h3>
-
-      <TableOfContents posts={posts}>
+    <Home
+      lang="en"
+      subtitle="Shenanigans of my not so exciting life."
+      posts={posts}
+    >
+      <>
         <h2>Front matter</h2>
         <ol>
           <li>
-            <a href="/about_me">About Me</a>
+            <a href="/about">About Me</a>
           </li>
-          <li>
+          {/* <li>
             <a href="/projects">Projects</a>
-          </li>
+          </li> */}
         </ol>
-      </TableOfContents>
-
-      <footer></footer>
-    </Layout>
+      </>
+    </Home>
   );
 }
 

@@ -29,3 +29,8 @@ it will be published at the path: `LANG/YEAR/MONTH/your-post-name`
 - _markdown format_ - for the posts
 - _jdown_ - To convert markdown files into
 - _tufte css_ - Styles for book-like look
+
+# TODO
+
+- Improve UI translations using i18next
+- Fix broken old images and css

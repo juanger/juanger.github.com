@@ -453,32 +453,9 @@ function Layout(props) {
           }
         }
 
-        #TOC {
-          max-width: 90%;
-        }
-        #TOC ol,
-        #TOC ul {
+        #TOC ol {
           width: auto;
           list-style-type: none;
-        }
-
-        #TOC li {
-          position: relative;
-        }
-
-        #TOC li time {
-          font-variant: small-caps;
-          font-size: 0.7em;
-        }
-
-        #TOC li time span {
-          margin-right: 5px;
-        }
-
-        #TOC li > time + a {
-          margin-left: 20px;
-          position: absolute;
-          left: 50px;
         }
       `}</style>
     </div>

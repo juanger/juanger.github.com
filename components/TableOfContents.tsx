@@ -32,7 +32,9 @@ export default function TableOfContents({ posts, children }) {
                           <span>{month}</span>
                           <span>{post.day}</span>
                         </time>
-                        <a href={post.path}>{post.title}</a>
+                        <span>
+                          <a href={post.path}>{post.title}</a>
+                        </span>
                       </li>
                     );
                   })}
@@ -40,6 +42,32 @@ export default function TableOfContents({ posts, children }) {
             </React.Fragment>
           );
         })}
+      <style jsx>{`
+        #TOC {
+          max-width: 90%;
+        }
+        #TOC ol,
+        #TOC ul {
+          width: auto;
+          list-style-type: none;
+        }
+
+        #TOC li {
+          display: grid;
+          grid-template-columns: 60px auto;
+        }
+
+        #TOC li time {
+          font-variant: small-caps;
+          font-size: 0.7em;
+          width: 60px;
+          display: inline-block;
+        }
+
+        #TOC li time span {
+          margin-right: 5px;
+        }
+      `}</style>
     </section>
   );
 }
