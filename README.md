@@ -1,30 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+# Blog
 
-## Getting Started
+This blog is built with Next.js static generation from markdown files.
 
-First, run the development server:
+Some custom components were created but it is very easy to author new posts
+as all you need is to create a file in the `posts` directory.
 
-```bash
-npm run dev
-# or
-yarn dev
+## Posts
+
+Posts are written inside subdirectories for each supported language.
+
+```
+posts
+├── en
+│   └── 2020-05-15_time-flies-when-you-are-having-fun.md
+└── es
+    └── 2020-05-15_time-flies-when-you-are-having-fun.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The post file name is important, it has to follow this pattern:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+`YEAR-MONTH-DAY_your-post-name`
 
-## Learn More
+it will be published at the path: `LANG/YEAR/MONTH/your-post-name`
 
-To learn more about Next.js, take a look at the following resources:
+# Used technologies and libraries
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- _next.js_ - Static generation of the blog
+- _markdown format_ - for the posts
+- _jdown_ - To convert markdown files into
+- _tufte css_ - Styles for book-like look
