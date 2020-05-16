@@ -41,7 +41,7 @@ function generateTOCFromPosts(posts) {
         })
         .map(([year, posts]) => {
           return (
-            <>
+            <React.Fragment key={year}>
               <h2>{year}</h2>
               <ol>
                 {posts
@@ -60,7 +60,7 @@ function generateTOCFromPosts(posts) {
                     });
 
                     return (
-                      <li>
+                      <li key={post.slug}>
                         <time>
                           <span>{month}</span>
                           <span>{post.day}</span>
@@ -70,7 +70,7 @@ function generateTOCFromPosts(posts) {
                     );
                   })}
               </ol>
-            </>
+            </React.Fragment>
           );
         })}
     </>
@@ -96,14 +96,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       posts: posts.map((post) => {
-        const { year, month, day, path } = parsePath(post, lang);
+        const parsed = parsePath(post, lang);
 
         return {
           title: post.title,
-          year,
-          month,
-          day,
-          path,
+          ...parsed,
         };
       }),
     },
