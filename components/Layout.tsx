@@ -4,6 +4,22 @@ export default function Layout(props) {
   return (
     <>
       <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-3608240-2"
+        ></script>
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){window.dataLayer.push(arguments)}
+                gtag("js", new Date());
+                gtag("config", "UA-3608240-2");
+            `,
+          }}
+        />
+
         <title>Ruby Xocolatl</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
