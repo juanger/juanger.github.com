@@ -1,6 +1,6 @@
 import jdown from "jdown";
 import Home from "../components/Home";
-import { parseMarkdownPost } from "../lib/posts";
+import { parseMarkdownPost, MarkdownPost } from "../lib/posts";
 import { GetStaticProps } from "next";
 
 export default function ({ posts }) {
@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // TODO add lang param
   const lang = "en";
 
-  const posts = Object.values(markdownPosts[lang]);
+  const posts: MarkdownPost[] = Object.values(markdownPosts[lang]);
 
   return {
     props: {

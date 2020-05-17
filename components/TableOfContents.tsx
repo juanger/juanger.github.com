@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 export default function TableOfContents({ posts, children }) {
   return (
     <section id="TOC">
@@ -8,7 +10,7 @@ export default function TableOfContents({ posts, children }) {
         })
         .map(([year, posts]) => {
           return (
-            <React.Fragment key={year}>
+            <Fragment key={year}>
               <h2>{year}</h2>
               <ol>
                 {posts
@@ -39,7 +41,7 @@ export default function TableOfContents({ posts, children }) {
                     );
                   })}
               </ol>
-            </React.Fragment>
+            </Fragment>
           );
         })}
       <style jsx>{`
@@ -72,7 +74,7 @@ export default function TableOfContents({ posts, children }) {
   );
 }
 
-function postsByYear(posts) {
+function postsByYear(posts): { [year: string]: any[] } {
   const byYear = {};
   posts.forEach((post) => {
     byYear[post.year] = byYear[post.year] || [];

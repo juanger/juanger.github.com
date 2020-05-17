@@ -1,10 +1,15 @@
-type Post = {
+export type Post = {
   lang: string;
   year: string;
   month: string;
   day: string;
   slug: string;
   path: string;
+};
+
+export type MarkdownPost = {
+  content: string;
+  title: string;
 };
 
 export function parseMarkdownPost(post: any, lang: string): Post {
