@@ -5,11 +5,6 @@ import TableOfContents from "../components/TableOfContents";
 export default function Home({ subtitle, posts, lang, children }) {
   return (
     <Layout>
-      <Head>
-        <title>Ruby Xocolatl</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <header>
         <a href={lang === "es" ? "/" : "/es"}>
           {lang === "es" ? "🇺🇸 English" : "🇲🇽 Español"}
