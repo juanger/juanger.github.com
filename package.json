@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export && rm -rf _deploy/_next && cp -r out/* _deploy/",
     "start": "next start"
   },
   "dependencies": {

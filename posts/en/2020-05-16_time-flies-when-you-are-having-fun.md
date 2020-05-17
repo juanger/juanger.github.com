@@ -15,4 +15,4 @@ It is not that I don't have crazy or stupid ideas to write about, I have been wr
 
 But recent happenings, or viruses, had made me think that some tools are worth sharing even when blunt, some rambling thoughts may spark others or invite other people to work them out, that I need more practice communicating my ideas in written form and that life is too short to delay things until "I have time".
 
-Now, on to revive this blog. If you want to read me in Spanish, use the link at the top to switch languages.
+Now, on to revive this blog. If you want to read me in Spanish, use the link at the top of the index page to switch languages.
