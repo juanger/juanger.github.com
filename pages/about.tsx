@@ -8,7 +8,7 @@ import Twitter from "@fortawesome/fontawesome-free/svgs/brands/twitter-square.sv
 export default function () {
   return (
     <Layout>
-      <PageHeader lang="en"></PageHeader>
+      <PageHeader lang="en" translationUrl={false}></PageHeader>
 
       <article>
         <h1>About me</h1>

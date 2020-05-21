@@ -8,7 +8,7 @@ import PageHeader from "../components/PageHeader";
 export default function () {
   return (
     <Layout>
-      <PageHeader lang="es"></PageHeader>
+      <PageHeader lang="es" translationUrl={false}></PageHeader>
 
       <article>
         <h1>Acerca de mi</h1>

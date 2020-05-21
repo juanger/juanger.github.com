@@ -2,7 +2,7 @@ import jdown from "jdown";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Layout from "../../../../components/Layout";
 import PageHeader from "../../../../components/PageHeader";
-import { parseMarkdownPost } from "../../../../lib/posts";
+import { parseMarkdownPost, MarkdownPost } from "../../../../lib/posts";
 
 export default function Post({
   title,
@@ -79,11 +79,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   let allPosts = await jdown("posts", { fileInfo: true });
-  let posts = allPosts[lang];
+  let posts: MarkdownPost[] = allPosts[lang];
 
   let hasTranslation = !!translatedPost(slug, lang, allPosts);
 
-  const post = findPost(posts, slug);
+  const post: MarkdownPost = findPost(posts, slug);
 
   return {
     props: {
@@ -144,7 +144,7 @@ function translatedPost(slug, lang, posts) {
   return findPost(posts[otherLang], slug);
 }
 
-function findPost(posts, slug) {
+function findPost(posts: MarkdownPost[], slug) {
   return Object.values(posts).find((post) => {
     return post.fileInfo.name.endsWith(slug);
   });

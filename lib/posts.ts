@@ -8,8 +8,12 @@ export type Post = {
 };
 
 export type MarkdownPost = {
-  content: string;
+  contents: string;
   title: string;
+  categories: string[];
+  comments: boolean;
+  date: string;
+  fileInfo: any;
 };
 
 export function parseMarkdownPost(post: any, lang: string): Post {
