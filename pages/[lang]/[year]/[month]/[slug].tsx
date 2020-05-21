@@ -7,15 +7,22 @@ import { parseMarkdownPost } from "../../../../lib/posts";
 export default function Post({
   title,
   date,
+  year,
+  month,
   comments,
   categories,
   contents,
   lang,
   slug,
+  hasTranslation,
 }) {
+  let translationUrl = hasTranslation
+    ? `/${lang === "en" ? "es" : "en"}/${year}/${month}/${slug}`
+    : false;
+
   return (
     <Layout>
-      <PageHeader lang={lang}></PageHeader>
+      <PageHeader lang={lang} translationUrl={translationUrl}></PageHeader>
       <article>
         <h1>{title}</h1>
         <time dateTime={date}>
@@ -38,7 +45,7 @@ export default function Post({
               *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
               
               var disqus_config = function () {
-                this.page.url = 'http://blog.juanger.com/${lang}/${date}/${slug}';  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.url = 'http://blog.juanger.com/${lang}/${year}/${month}/${slug}';  // Replace PAGE_URL with your page's canonical URL variable
                 this.page.identifier = '${lang}/${date}/${slug}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
                 this.language = '${lang == "es" ? "es_MX" : "en_US"}';
               };
@@ -71,12 +78,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     lang = "en";
   }
 
-  let posts = await jdown("posts", { fileInfo: true });
-  posts = posts[lang];
+  let allPosts = await jdown("posts", { fileInfo: true });
+  let posts = allPosts[lang];
 
-  const post = Object.values(posts).find((post) => {
-    return post.fileInfo.name.endsWith(slug);
-  });
+  let hasTranslation = !!translatedPost(slug, lang, allPosts);
+
+  const post = findPost(posts, slug);
 
   return {
     props: {
@@ -85,8 +92,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       categories: post.categories || [],
       comments: post.comments || false,
       date: new Date(post.date).toISOString().split("T")[0],
+      year: params.year,
+      month: params.month,
       slug,
       lang,
+      hasTranslation,
     },
   };
 };
@@ -126,4 +136,16 @@ function generatePostPaths(markdownPosts) {
     });
   });
   return postPaths;
+}
+
+function translatedPost(slug, lang, posts) {
+  let otherLang = lang === "es" ? "en" : "es";
+
+  return findPost(posts[otherLang], slug);
+}
+
+function findPost(posts, slug) {
+  return Object.values(posts).find((post) => {
+    return post.fileInfo.name.endsWith(slug);
+  });
 }
