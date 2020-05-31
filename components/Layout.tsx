@@ -480,6 +480,10 @@ export default function Layout(props) {
             width: auto;
             list-style-type: none;
           }
+
+          .fullwidth hr {
+            width: 100%;
+          }
         `}</style>
       </div>
     </>
