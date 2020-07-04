@@ -28,7 +28,7 @@ export default function Post({
         <meta property="og:type" content="article" />
         <meta
           property="og:image"
-          content="https://blog.juanger.com/blog-og-image.png"
+          content="https://blog.juanger.com/images/blog-og-image.png"
         />
       </Head>
       <PageHeader lang={lang} translationUrl={translationUrl}></PageHeader>

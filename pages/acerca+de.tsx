@@ -15,7 +15,7 @@ export default function () {
         <meta property="og:type" content="profile" />
         <meta
           property="og:image"
-          content="https://blog.juanger.com/blog-og-image.png"
+          content="https://blog.juanger.com/images/blog-og-image.png"
         />
       </Head>
       <PageHeader lang="es" translationUrl={false}></PageHeader>
