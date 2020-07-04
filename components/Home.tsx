@@ -5,6 +5,15 @@ import TableOfContents from "../components/TableOfContents";
 export default function Home({ subtitle, posts, lang, children }) {
   return (
     <Layout>
+      <Head>
+        <meta property="og:title" content="Ruby Xocolatl" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content={subtitle} />
+        <meta
+          property="og:image"
+          content="https://blog.juanger.com/blog-og-image.png"
+        />
+      </Head>
       <header>
         <a href={lang === "es" ? "/" : "/es"}>
           {lang === "es" ? "🇺🇸 English" : "🇲🇽 Español"}

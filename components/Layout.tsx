@@ -484,6 +484,18 @@ export default function Layout(props) {
           .fullwidth hr {
             width: 100%;
           }
+
+          body {
+            -webkit-font-smoothing: antialiased;
+          }
+
+          a:link {
+            background-position-y: 100%;
+          }
+
+          a:hover {
+            background-size: 0.05em 1px, 0.05em 1px, 1px 3px;
+          }
         `}</style>
       </div>
     </>

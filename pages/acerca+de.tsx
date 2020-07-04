@@ -1,4 +1,6 @@
 import Layout from "../components/Layout";
+import Head from "next/head";
+
 import Github from "@fortawesome/fontawesome-free/svgs/brands/github-square.svg";
 import Linkedin from "@fortawesome/fontawesome-free/svgs/brands/linkedin.svg";
 import Flickr from "@fortawesome/fontawesome-free/svgs/brands/flickr.svg";
@@ -8,6 +10,14 @@ import PageHeader from "../components/PageHeader";
 export default function () {
   return (
     <Layout>
+      <Head>
+        <meta property="og:title" content="About Ruby Xocolatl" />
+        <meta property="og:type" content="profile" />
+        <meta
+          property="og:image"
+          content="https://blog.juanger.com/blog-og-image.png"
+        />
+      </Head>
       <PageHeader lang="es" translationUrl={false}></PageHeader>
 
       <article>

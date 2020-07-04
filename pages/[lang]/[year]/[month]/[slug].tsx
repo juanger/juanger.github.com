@@ -1,6 +1,7 @@
 import jdown from "jdown";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Layout from "../../../../components/Layout";
+import Head from "next/head";
 import PageHeader from "../../../../components/PageHeader";
 import { parseMarkdownPost, MarkdownPost } from "../../../../lib/posts";
 
@@ -22,6 +23,14 @@ export default function Post({
 
   return (
     <Layout>
+      <Head>
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:image"
+          content="https://blog.juanger.com/blog-og-image.png"
+        />
+      </Head>
       <PageHeader lang={lang} translationUrl={translationUrl}></PageHeader>
       <article>
         <h1>{title}</h1>
