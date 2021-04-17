@@ -22,7 +22,6 @@ The post file name is important, it has to follow this pattern:
 `YEAR-MONTH-DAY_your-post-name`
 
 it will be published at the path: `LANG/YEAR/MONTH/your-post-name`
-
 # Used technologies and libraries
 
 - _next.js_ - Static generation of the blog
@@ -34,3 +33,26 @@ it will be published at the path: `LANG/YEAR/MONTH/your-post-name`
 
 - Improve UI translations using i18next
 - Fix broken old images and css
+
+## Dev server
+
+```sh
+npm run dev
+```
+
+## Building and publishing
+
+The following command generates files and moves them to the `_deploy` directory, a clone pointing to the `master` branch that is published via Github Pages.
+
+```sh
+npm run build
+
+cd _deploy
+
+git commit -m "MESSAGE"
+
+git push origin master
+```
+
+
+
