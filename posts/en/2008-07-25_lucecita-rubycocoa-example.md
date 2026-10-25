@@ -15,7 +15,7 @@ categories:
 <p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a>.</p>
 
 <p>
-  <img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/\_WeoTLD0cYR0/SIqywKYJFoI/AAAAAAAAAB0/SIHWBCG1acA/s400/LucecitaInAction.png" border="0" alt="" id="BLOGGER_PHOTO_ID_5227186858005960322" />
+  <img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="/images/2008-07-25_lucecita-rubycocoa-example/LucecitaInAction.png" border="0" alt="" id="BLOGGER_PHOTO_ID_5227186858005960322" />
 </p>
 
 <h3>DarkWindow.rb</h3>

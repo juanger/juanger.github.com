@@ -37,6 +37,6 @@ There are three new features in RoRGate 3.0:
 
 <p class="marginnote shownote">Now you can change the name, port and icon of an existing app.</p>
 
-<img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="http://bp1.blogger.com/_WeoTLD0cYR0/SHyI6ktdN2I/AAAAAAAAABs/5vgsElW1JyQ/s400/Preferences.png" border="0" alt="" id="BLOGGER_PHOTO_ID_5223200207711057762" />
+<img style="display:block; margin:0px auto 10px; text-align:center;cursor:pointer; cursor:hand;" src="/images/2008-07-15_new-features-in-rorgate-30-beta/Preferences.png" border="0" alt="" id="BLOGGER_PHOTO_ID_5223200207711057762" />
 
 </figure>

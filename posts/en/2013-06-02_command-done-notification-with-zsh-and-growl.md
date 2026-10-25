@@ -6,7 +6,7 @@ comments: true
 categories: zsh oh-my-zsh
 ---
 
-{% img right /images/notification.png 400 350 'image' 'images' %}
+<img src="/images/2013-06-02_command-done-notification-with-zsh-and-growl/notification.png" alt="Growl notification shown when a command finishes" style="float: right; width: 400px; max-width: 50%; margin: 0 0 1em 1em;" />
 
 The little banner in bottom of the screen in this image shows what I see when a command has finished (for peace of mind, only for the ones that have been running for at least 5 seconds).
 
@@ -18,6 +18,6 @@ So, tired of finding out that the command I ran <strike>one hour ago</strike> ha
 
 And I can customize the style of the growl notification when it fails:
 
-{% img center /images/notification-fail.png 500 350 'image' 'images' %}
+<img src="/images/2013-06-02_command-done-notification-with-zsh-and-growl/notification-fail.png" alt="Growl notification styled for a failed command" style="display: block; width: 500px; max-width: 100%; margin: 1em auto;" />
 
 Ain't it cool?
