@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "La vida después de la COVID-19"
-date: 2015-05-30 12:00
+date: 2020-05-30 12:00
 comments: true
 categories:
   - opinion
