@@ -83,6 +83,7 @@
   --paper: #fbf8f1;
   --ink: #1f1b16;
   --ink-muted: #5c5248;
+  --ink-soft: #8a7d70;
   --rule: #e3dccf;
   --code-bg: #f3eee3;
   --accent: #9b1b30;
@@ -91,16 +92,16 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #17130f; --ink: #e8e1d6; --ink-muted: #a89c8e; --rule: #3a322a;
+    --paper: #17130f; --ink: #e8e1d6; --ink-muted: #a89c8e; --ink-soft: #7f7366; --rule: #3a322a;
     --code-bg: #211b16; --accent: #d69a6f; --link-line: #6e6254; --selection: #4a3626;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #17130f; --ink: #e8e1d6; --ink-muted: #a89c8e; --rule: #3a322a;
+  --paper: #17130f; --ink: #e8e1d6; --ink-muted: #a89c8e; --ink-soft: #7f7366; --rule: #3a322a;
   --code-bg: #211b16; --accent: #d69a6f; --link-line: #6e6254; --selection: #4a3626;
 }
 :root[data-theme="light"] {
-  --paper: #fbf8f1; --ink: #1f1b16; --ink-muted: #5c5248; --rule: #e3dccf;
+  --paper: #fbf8f1; --ink: #1f1b16; --ink-muted: #5c5248; --ink-soft: #8a7d70; --rule: #e3dccf;
   --code-bg: #f3eee3; --accent: #9b1b30; --link-line: #b9ad9c; --selection: #ecdcc8;
 }
 
@@ -260,6 +261,15 @@ pre {
   border-radius: 0 3px 3px 0;
 }
 pre code { font-size: inherit; background: none; padding: 0; }
+
+/* Build-time highlighting (hljs spans), variant C "Accent keywords":
+   ink by default, one hue (the accent) for keywords/meta. Works in both themes
+   through the tokens. */
+pre code span { color: inherit; font-weight: inherit; font-style: inherit; }
+.hljs-keyword, .hljs-meta { color: var(--accent); }
+.hljs-title { font-weight: 600; }
+.hljs-comment { font-style: italic; color: var(--ink-soft); }
+.hljs-string, .hljs-symbol { color: var(--ink-muted); }
 
 /* ---------- Tables ---------- */
 table {

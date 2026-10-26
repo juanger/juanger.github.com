@@ -4,141 +4,141 @@
   <img src="/images/2008-07-25_lucecita-rubycocoa-example/LucecitaInAction.png" alt="Lucecita in action" />
 </p>
 <h3>DarkWindow.rb</h3>
-<pre><code class="language-ruby">require 'osx/cocoa'
-include OSX
+<pre><code class="language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;osx/cocoa&#x27;</span>
+<span class="hljs-keyword">include</span> <span class="hljs-variable constant_">OSX</span>
 
-class DarkWindow &lt; NSWindow
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DarkWindow</span> &lt; <span class="hljs-title class_ inherited__">NSWindow</span>
 
-  def initWithContentRect_styleMask_backing_defer(contentRect, aStyle, bufferingType, flag)
-    result = super_initWithContentRect_styleMask_backing_defer(NSScreen.mainScreen.frame,
-                  NSBorderlessWindowMask,
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">initWithContentRect_styleMask_backing_defer</span>(<span class="hljs-params">contentRect, aStyle, bufferingType, flag</span>)
+    result = super_initWithContentRect_styleMask_backing_defer(<span class="hljs-title class_">NSScreen</span>.mainScreen.frame,
+                  <span class="hljs-title class_">NSBorderlessWindowMask</span>,
                   bufferingType,
                   flag)
-    if result
-      result.setBackgroundColor(NSColor.clearColor)
-      result.setOpaque(false)
-      result.setIgnoresMouseEvents(true)
-      result.setLevel(NSScreenSaverWindowLevel)
-      result.setCollectionBehavior(NSWindowCollectionBehaviorCanJoinAllSpaces)
-    end
+    <span class="hljs-keyword">if</span> result
+      result.setBackgroundColor(<span class="hljs-title class_">NSColor</span>.clearColor)
+      result.setOpaque(<span class="hljs-literal">false</span>)
+      result.setIgnoresMouseEvents(<span class="hljs-literal">true</span>)
+      result.setLevel(<span class="hljs-title class_">NSScreenSaverWindowLevel</span>)
+      result.setCollectionBehavior(<span class="hljs-title class_">NSWindowCollectionBehaviorCanJoinAllSpaces</span>)
+    <span class="hljs-keyword">end</span>
 
     result
-  end
+  <span class="hljs-keyword">end</span>
 
-end
+<span class="hljs-keyword">end</span>
 </code></pre>
 <h3>LightView.rb</h3>
-<pre><code class="language-ruby">require 'osx/cocoa'
-include OSX
+<pre><code class="language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;osx/cocoa&#x27;</span>
+<span class="hljs-keyword">include</span> <span class="hljs-variable constant_">OSX</span>
 
-class LuzView &lt;  OSX::NSView
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">LuzView</span> &lt;  <span class="hljs-variable constant_">OSX</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:NSView</span>
 
-  attr_accessor :center, :rect, :radius, :transparency, :enabled
+  <span class="hljs-built_in">attr_accessor</span> <span class="hljs-symbol">:center</span>, <span class="hljs-symbol">:rect</span>, <span class="hljs-symbol">:radius</span>, <span class="hljs-symbol">:transparency</span>, <span class="hljs-symbol">:enabled</span>
 
-  def initialize
-    @radius = 50
-    @transparency = 0.5
-    @enabled = false
-  end
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">initialize</span>
+    <span class="hljs-variable">@radius</span> = <span class="hljs-number">50</span>
+    <span class="hljs-variable">@transparency</span> = <span class="hljs-number">0.5</span>
+    <span class="hljs-variable">@enabled</span> = <span class="hljs-literal">false</span>
+  <span class="hljs-keyword">end</span>
 
-  def initWithFrame(frame)
-    self.setNeedsDisplay true
-    return self
-  end
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">initWithFrame</span>(<span class="hljs-params">frame</span>)
+    <span class="hljs-variable language_">self</span>.setNeedsDisplay <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>
+  <span class="hljs-keyword">end</span>
 
-  def drawRect(rect)
-    if @enabled
-    NSGraphicsContext.currentContext.setCompositingOperation NSCompositeSourceOut
-    context = NSGraphicsContext.currentContext.graphicsPort
-    @center = NSEvent.mouseLocation
-    CGContextSetRGBFillColor(context, 0.0, 0.0, 0.0, @transparency)
-    CGContextFillRect(context, rect)
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">drawRect</span>(<span class="hljs-params">rect</span>)
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@enabled</span>
+    <span class="hljs-title class_">NSGraphicsContext</span>.currentContext.setCompositingOperation <span class="hljs-title class_">NSCompositeSourceOut</span>
+    context = <span class="hljs-title class_">NSGraphicsContext</span>.currentContext.graphicsPort
+    <span class="hljs-variable">@center</span> = <span class="hljs-title class_">NSEvent</span>.mouseLocation
+    <span class="hljs-title class_">CGContextSetRGBFillColor</span>(context, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-variable">@transparency</span>)
+    <span class="hljs-title class_">CGContextFillRect</span>(context, rect)
 
     drawLight
-    end
-  end
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
 
-  def drawLight
-    context = NSGraphicsContext.currentContext.graphicsPort
-    NSColor.colorWithCalibratedRed_green_blue_alpha(1.0,1.0,1.0,0.0).set
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">drawLight</span>
+    context = <span class="hljs-title class_">NSGraphicsContext</span>.currentContext.graphicsPort
+    <span class="hljs-title class_">NSColor</span>.colorWithCalibratedRed_green_blue_alpha(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.0</span>).set
 
-    CGContextSetGrayStrokeColor(context, 0, 1)
-    CGContextSetLineWidth(context, 0)
+    <span class="hljs-title class_">CGContextSetGrayStrokeColor</span>(context, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+    <span class="hljs-title class_">CGContextSetLineWidth</span>(context, <span class="hljs-number">0</span>)
 
-    @rect = NSRect.new(@center.x - @radius, @center.y - @radius, @radius*2, @radius*2)
-    CGContextAddEllipseInRect(context, @rect)
-    CGContextDrawPath(context, KCGPathFill)
-  end
+    <span class="hljs-variable">@rect</span> = <span class="hljs-title class_">NSRect</span>.new(<span class="hljs-variable">@center</span>.x - <span class="hljs-variable">@radius</span>, <span class="hljs-variable">@center</span>.y - <span class="hljs-variable">@radius</span>, <span class="hljs-variable">@radius</span>*<span class="hljs-number">2</span>, <span class="hljs-variable">@radius</span>*<span class="hljs-number">2</span>)
+    <span class="hljs-title class_">CGContextAddEllipseInRect</span>(context, <span class="hljs-variable">@rect</span>)
+    <span class="hljs-title class_">CGContextDrawPath</span>(context, <span class="hljs-title class_">KCGPathFill</span>)
+  <span class="hljs-keyword">end</span>
 
-end
+<span class="hljs-keyword">end</span>
 </code></pre>
 <h3>LightController.rb</h3>
-<pre><code class="language-ruby">require 'osx/cocoa'
+<pre><code class="language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;osx/cocoa&#x27;</span>
 
-class LuzController &lt; OSX::NSObject
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">LuzController</span> &lt; <span class="hljs-variable constant_">OSX</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:NSObject</span>
 
-  ib_outlets :luz_view
-  ib_outlets :menu, :size, :size_lbl, :alpha, :alpha_lbl, :enabled
+  ib_outlets <span class="hljs-symbol">:luz_view</span>
+  ib_outlets <span class="hljs-symbol">:menu</span>, <span class="hljs-symbol">:size</span>, <span class="hljs-symbol">:size_lbl</span>, <span class="hljs-symbol">:alpha</span>, <span class="hljs-symbol">:alpha_lbl</span>, <span class="hljs-symbol">:enabled</span>
 
-  def awakeFromNib
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">awakeFromNib</span>
     activateStatusMenu()
-    @callback = lambda { |p,t,e,r|
-      if (t == KCGEventOtherMouseDown &amp;&amp;
-        CGEventGetFlags(e) &amp; KCGEventFlagMaskControl == KCGEventFlagMaskControl)
-        toggle(self)
-        return
-      end
-      if @luz_view.enabled
-        @luz_view.center = CGEventGetLocation(e)
-        @luz_view.setNeedsDisplayInRect NSInsetRect(@luz_view.rect, -30, -30)
-      end
+    <span class="hljs-variable">@callback</span> = <span class="hljs-built_in">lambda</span> { |<span class="hljs-params">p,t,e,r</span>|
+      <span class="hljs-keyword">if</span> (t == <span class="hljs-title class_">KCGEventOtherMouseDown</span> &amp;&amp;
+        <span class="hljs-title class_">CGEventGetFlags</span>(e) &amp; <span class="hljs-title class_">KCGEventFlagMaskControl</span> == <span class="hljs-title class_">KCGEventFlagMaskControl</span>)
+        toggle(<span class="hljs-variable language_">self</span>)
+        <span class="hljs-keyword">return</span>
+      <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">if</span> <span class="hljs-variable">@luz_view</span>.enabled
+        <span class="hljs-variable">@luz_view</span>.center = <span class="hljs-title class_">CGEventGetLocation</span>(e)
+        <span class="hljs-variable">@luz_view</span>.setNeedsDisplayInRect <span class="hljs-title class_">NSInsetRect</span>(<span class="hljs-variable">@luz_view</span>.rect, -<span class="hljs-number">30</span>, -<span class="hljs-number">30</span>)
+      <span class="hljs-keyword">end</span>
       e
     }
     start_tapping()
-  end
+  <span class="hljs-keyword">end</span>
 
-  ib_action :change_alpha do |sender|
-    @luz_view.transparency = @alpha.floatValue
-    @alpha_lbl.setStringValue &quot;#{(@alpha.floatValue*100).to_i}%&quot;
-    @luz_view.setNeedsDisplay true
-  end
+  ib_action <span class="hljs-symbol">:change_alpha</span> <span class="hljs-keyword">do</span> |<span class="hljs-params">sender</span>|
+    <span class="hljs-variable">@luz_view</span>.transparency = <span class="hljs-variable">@alpha</span>.floatValue
+    <span class="hljs-variable">@alpha_lbl</span>.setStringValue <span class="hljs-string">&quot;<span class="hljs-subst">#{(<span class="hljs-variable">@alpha</span>.floatValue*<span class="hljs-number">100</span>).to_i}</span>%&quot;</span>
+    <span class="hljs-variable">@luz_view</span>.setNeedsDisplay <span class="hljs-literal">true</span>
+  <span class="hljs-keyword">end</span>
 
-  ib_action :change_size do |sender|
-    @luz_view.radius = @size.floatValue
-    @size_lbl.setStringValue &quot;#{(@size.intValue)}px&quot;
-    @luz_view.setNeedsDisplay true
-  end
+  ib_action <span class="hljs-symbol">:change_size</span> <span class="hljs-keyword">do</span> |<span class="hljs-params">sender</span>|
+    <span class="hljs-variable">@luz_view</span>.radius = <span class="hljs-variable">@size</span>.floatValue
+    <span class="hljs-variable">@size_lbl</span>.setStringValue <span class="hljs-string">&quot;<span class="hljs-subst">#{(<span class="hljs-variable">@size</span>.intValue)}</span>px&quot;</span>
+    <span class="hljs-variable">@luz_view</span>.setNeedsDisplay <span class="hljs-literal">true</span>
+  <span class="hljs-keyword">end</span>
 
-  ib_action :toggle do |sender|
-    @luz_view.enabled = !@luz_view.enabled
-    @enabled.setState(@luz_view.enabled ? 1 : 0)
-    @luz_view.setNeedsDisplay true
-  end
+  ib_action <span class="hljs-symbol">:toggle</span> <span class="hljs-keyword">do</span> |<span class="hljs-params">sender</span>|
+    <span class="hljs-variable">@luz_view</span>.enabled = !<span class="hljs-variable">@luz_view</span>.enabled
+    <span class="hljs-variable">@enabled</span>.setState(<span class="hljs-variable">@luz_view</span>.enabled ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>)
+    <span class="hljs-variable">@luz_view</span>.setNeedsDisplay <span class="hljs-literal">true</span>
+  <span class="hljs-keyword">end</span>
 
-  def activateStatusMenu()
-      statusItem = NSStatusBar.systemStatusBar.statusItemWithLength(NSVariableStatusItemLength)
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">activateStatusMenu</span>()
+      statusItem = <span class="hljs-title class_">NSStatusBar</span>.systemStatusBar.statusItemWithLength(<span class="hljs-title class_">NSVariableStatusItemLength</span>)
       statusItem.retain
-      icon = NSImage.alloc.initWithContentsOfFile(&quot;#{NSBundle.mainBundle.resourcePath}/Lucecita.png&quot;)
+      icon = <span class="hljs-title class_">NSImage</span>.alloc.initWithContentsOfFile(<span class="hljs-string">&quot;<span class="hljs-subst">#{<span class="hljs-title class_">NSBundle</span>.mainBundle.resourcePath}</span>/Lucecita.png&quot;</span>)
       statusItem.setImage icon
-      statusItem.setHighlightMode true
-      statusItem.setMenu @menu
-  end
+      statusItem.setHighlightMode <span class="hljs-literal">true</span>
+      statusItem.setMenu <span class="hljs-variable">@menu</span>
+  <span class="hljs-keyword">end</span>
 
-  def start_tapping
-    eventMask = 167772384 # Magic Number: LeftMouseDragged MouseMoved RightMouseDragged OtherMouseDragged OtherMouseDown
-    eventTap = CGEventTapCreate(KCGSessionEventTap, KCGHeadInsertEventTap,
-                                0, eventMask, @callback, nil)
-    eventSrc = CFMachPortCreateRunLoopSource(nil, eventTap, 0)
-    CFRelease(eventTap)
-    CFRunLoopAddSource(CFRunLoopGetCurrent(),  eventSrc, KCFRunLoopCommonModes)
-    CFRelease(eventSrc)
-  end
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">start_tapping</span>
+    eventMask = <span class="hljs-number">167772384</span> <span class="hljs-comment"># Magic Number: LeftMouseDragged MouseMoved RightMouseDragged OtherMouseDragged OtherMouseDown</span>
+    eventTap = <span class="hljs-title class_">CGEventTapCreate</span>(<span class="hljs-title class_">KCGSessionEventTap</span>, <span class="hljs-title class_">KCGHeadInsertEventTap</span>,
+                                <span class="hljs-number">0</span>, eventMask, <span class="hljs-variable">@callback</span>, <span class="hljs-literal">nil</span>)
+    eventSrc = <span class="hljs-title class_">CFMachPortCreateRunLoopSource</span>(<span class="hljs-literal">nil</span>, eventTap, <span class="hljs-number">0</span>)
+    <span class="hljs-title class_">CFRelease</span>(eventTap)
+    <span class="hljs-title class_">CFRunLoopAddSource</span>(<span class="hljs-title class_">CFRunLoopGetCurrent</span>(),  eventSrc, <span class="hljs-title class_">KCFRunLoopCommonModes</span>)
+    <span class="hljs-title class_">CFRelease</span>(eventSrc)
+  <span class="hljs-keyword">end</span>
 
-  def applicationShouldTerminate
-    CFRunLoopRemoveSource(CFRunLoopGetCurrent(), mEventSrc, KCFRunLoopCommonModes)
-  end
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">applicationShouldTerminate</span>
+    <span class="hljs-title class_">CFRunLoopRemoveSource</span>(<span class="hljs-title class_">CFRunLoopGetCurrent</span>(), mEventSrc, <span class="hljs-title class_">KCFRunLoopCommonModes</span>)
+  <span class="hljs-keyword">end</span>
 
-end
+<span class="hljs-keyword">end</span>
 </code></pre>
 <p>And the application is here: <span class="dead-link" title="Link no longer available">Lucecita.app</span></p>
 <p>You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.</p>

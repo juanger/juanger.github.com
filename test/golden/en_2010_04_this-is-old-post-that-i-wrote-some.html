@@ -19,7 +19,7 @@ public class Pétalo {
 </code></pre>
 <p><small><a href="https://gist.github.com/juanger/489709">Gist ↗</a></small></p>
 <p>That is not good. When using autocompletion the filename is represented in <span class='caps'>NFD</span> or Normalization Form Canonical Decomposition (é =&gt; 65 cc81) but the class name in the file uses <span class='caps'>NFC</span> or Normalization Form Canonical Composition (é =&gt; c3a9). What a mess! Do you see the difference?:</p>
-<pre><code class="language-console">$ echo Pétalo | xxd
+<pre><code class="language-console">$ <span class="hljs-built_in">echo</span> Pétalo | xxd
     0000000: 5065 cc81 7461 6c6f 0a                   Pe..talo.
     $ echo Pétalo | xxd
     0000000: 50c3 a974 616c 6f0a                      P..talo.

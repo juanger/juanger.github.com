@@ -7,9 +7,59 @@ import MarkdownIt from "markdown-it";
 import footnote from "markdown-it-footnote";
 import container from "markdown-it-container";
 import type Token from "markdown-it/lib/token.mjs";
+import hljs from "highlight.js/lib/core";
+import ruby from "highlight.js/lib/languages/ruby";
+import scss from "highlight.js/lib/languages/scss";
+import xml from "highlight.js/lib/languages/xml";
+import objectivec from "highlight.js/lib/languages/objectivec";
+import bash from "highlight.js/lib/languages/bash";
+
+// Register only the languages our posts actually use. Each module brings its own
+// aliases: xml covers `html`, objectivec covers `objc`, bash covers `sh`. We never
+// auto-detect — an unregistered language falls through to plain, escaped text.
+hljs.registerLanguage("ruby", ruby);
+hljs.registerLanguage("scss", scss);
+hljs.registerLanguage("xml", xml);
+hljs.registerLanguage("objectivec", objectivec);
+hljs.registerLanguage("bash", bash);
+
+// markdown-it's own HTML escaping (& < > "), so an unknown-language fence looks
+// exactly as it would with no highlight hook at all.
+const HTML_REPLACEMENTS: Record<string, string> = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+};
+function mdEscape(s: string): string {
+  return s.replace(/[&<>"]/g, (ch) => HTML_REPLACEMENTS[ch]);
+}
 
 function slugifyLabel(label: string): string {
   return label.replace(/[^a-zA-Z0-9_-]/g, "-");
+}
+
+// Build-time syntax highlighting (ships no client JS). Returns the inner HTML for
+// <code>; markdown-it adds the `language-x` class and the <pre><code> wrapper.
+function highlightCode(code: string, lang: string): string {
+  // `console` is a shell session, not a single language: highlight only the
+  // commands (lines starting with "$ " or "% "); output lines stay plain ink.
+  if (lang === "console") {
+    return code
+      .split("\n")
+      .map((line) => {
+        const m = /^([$%] )(.*)$/.exec(line);
+        if (!m) return mdEscape(line);
+        return mdEscape(m[1]) + hljs.highlight(m[2], { language: "bash" }).value;
+      })
+      .join("\n");
+  }
+  // A known language (directly or via alias). Never auto-detect.
+  if (lang && hljs.getLanguage(lang)) {
+    return hljs.highlight(code, { language: lang }).value;
+  }
+  // Unknown or missing language: escape and leave plain, no spans.
+  return mdEscape(code);
 }
 
 // A sidenote (numbered) or margin note (⊕), with the Tufte label+input+span so
@@ -38,6 +88,7 @@ export function createMarkdown(): MarkdownIt {
     linkify: false,
     typographer: false,
     breaks: false,
+    highlight: highlightCode,
   });
 
   md.use(footnote);

@@ -109,162 +109,162 @@
 </div>
 <p>The full source is also in <a href="https://gist.github.com/juanger/4582253">this gist</a>.</p>
 <h3 id="buttonscss">button.scss</h3>
-<pre><code class="language-scss">@mixin button($bg-image,
-              $color,
-              $border-color,
-              $bg-hover: linear-gradient(#e8e8e8, #d1cfcf),
-              $color-hover: #555454,
-              $border-color-hover: #bebdbd,
-              $bg-disabled: linear-gradient(#CACACA, #ABABAB),
-              $color-disabled: #EEE,
-              $border-color-disabled: #bebdbd,
-              $border-radius: 5px) {
+<pre><code class="language-scss"><span class="hljs-keyword">@mixin</span> button(<span class="hljs-variable">$bg-image</span>,
+              <span class="hljs-variable">$color</span>,
+              <span class="hljs-variable">$border-color</span>,
+              <span class="hljs-variable">$bg-hover</span>: linear-gradient(<span class="hljs-number">#e8e8e8</span>, <span class="hljs-number">#d1cfcf</span>),
+              <span class="hljs-variable">$color-hover</span>: <span class="hljs-number">#555454</span>,
+              <span class="hljs-variable">$border-color-hover</span>: <span class="hljs-number">#bebdbd</span>,
+              <span class="hljs-variable">$bg-disabled</span>: linear-gradient(<span class="hljs-number">#CACACA</span>, <span class="hljs-number">#ABABAB</span>),
+              <span class="hljs-variable">$color-disabled</span>: <span class="hljs-number">#EEE</span>,
+              <span class="hljs-variable">$border-color-disabled</span>: <span class="hljs-number">#bebdbd</span>,
+              <span class="hljs-variable">$border-radius</span>: <span class="hljs-number">5px</span>) {
 
-    @include border-radius($border-radius);
-    @include background-image($bg-image);
-    @include single-box-shadow(#555, 0px, 1px, 2px);
-    color: $color;
-    border: 1px solid $border-color;
+    <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-variable">$border-radius</span>);
+    <span class="hljs-keyword">@include</span> background-image(<span class="hljs-variable">$bg-image</span>);
+    <span class="hljs-keyword">@include</span> single-box-shadow(<span class="hljs-number">#555</span>, <span class="hljs-number">0px</span>, <span class="hljs-number">1px</span>, <span class="hljs-number">2px</span>);
+    <span class="hljs-attribute">color</span>: <span class="hljs-variable">$color</span>;
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-variable">$border-color</span>;
 
-    &amp;:hover {
-        @include background-image($bg-hover);
-        cursor: pointer;
-        border: 1px solid $border-color-hover;
+    &amp;<span class="hljs-selector-pseudo">:hover</span> {
+        <span class="hljs-keyword">@include</span> background-image(<span class="hljs-variable">$bg-hover</span>);
+        <span class="hljs-attribute">cursor</span>: pointer;
+        <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-variable">$border-color-hover</span>;
     }
 
-    &amp;[disabled=&quot;disabled&quot;] {
-        color: $color-disabled;
-        cursor: default;
-        @include background-image($bg-disabled);
-        border: 1px solid $border-color-disabled;
-        &amp;:hover {
-            @include background-image($bg-disabled);
-            border: 1px solid $border-color-disabled;
+    &amp;<span class="hljs-selector-attr">[disabled=<span class="hljs-string">&quot;disabled&quot;</span>]</span> {
+        <span class="hljs-attribute">color</span>: <span class="hljs-variable">$color-disabled</span>;
+        <span class="hljs-attribute">cursor</span>: default;
+        <span class="hljs-keyword">@include</span> background-image(<span class="hljs-variable">$bg-disabled</span>);
+        <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-variable">$border-color-disabled</span>;
+        &amp;<span class="hljs-selector-pseudo">:hover</span> {
+            <span class="hljs-keyword">@include</span> background-image(<span class="hljs-variable">$bg-disabled</span>);
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-variable">$border-color-disabled</span>;
         }
     }
 }
 </code></pre>
 <h3 id="buttonscssscss">buttons.css.scss</h3>
-<pre><code class="language-scss">.btn-grey {
-    @include button(linear-gradient(#F7F7F7, #DFDFDF), #555454, #bebdbd);
+<pre><code class="language-scss"><span class="hljs-selector-class">.btn-grey</span> {
+    <span class="hljs-keyword">@include</span> button(linear-gradient(<span class="hljs-number">#F7F7F7</span>, <span class="hljs-number">#DFDFDF</span>), <span class="hljs-number">#555454</span>, <span class="hljs-number">#bebdbd</span>);
 }
 
-label {
-    position: relative;
+<span class="hljs-selector-tag">label</span> {
+    <span class="hljs-attribute">position</span>: relative;
     
-    span {
-      position: relative;
-      height: 16px;
-      display: inline-block;
-      margin: 2px;
-      @include user-select(none);
+    <span class="hljs-selector-tag">span</span> {
+      <span class="hljs-attribute">position</span>: relative;
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">16px</span>;
+      <span class="hljs-attribute">display</span>: inline-block;
+      <span class="hljs-attribute">margin</span>: <span class="hljs-number">2px</span>;
+      <span class="hljs-keyword">@include</span> user-select(none);
     }
 }
 
-input {
-    &amp;[type=&quot;submit&quot;] {
-        padding: 4px 10px;
-        @include border-radius(5px);
+<span class="hljs-selector-tag">input</span> {
+    &amp;<span class="hljs-selector-attr">[type=<span class="hljs-string">&quot;submit&quot;</span>]</span> {
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">4px</span> <span class="hljs-number">10px</span>;
+        <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">5px</span>);
     }
 
-    &amp;[type=&quot;text&quot;] {
-        padding: 9px;
-        @include border-radius(5px);
-        @include single-box-shadow(none);
-        border: 1px solid #CDCDCD;
+    &amp;<span class="hljs-selector-attr">[type=<span class="hljs-string">&quot;text&quot;</span>]</span> {
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">9px</span>;
+        <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">5px</span>);
+        <span class="hljs-keyword">@include</span> single-box-shadow(none);
+        <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#CDCDCD</span>;
     }
 
-    &amp;[type=&quot;checkbox&quot;] {
-        @include opacity(0);
-        position: static\9; // fallback for IE &lt; 9
+    &amp;<span class="hljs-selector-attr">[type=<span class="hljs-string">&quot;checkbox&quot;</span>]</span> {
+        <span class="hljs-keyword">@include</span> opacity(<span class="hljs-number">0</span>);
+        <span class="hljs-attribute">position</span>: static\<span class="hljs-number">9</span>; <span class="hljs-comment">// fallback for IE &lt; 9</span>
 
-        &amp; + span::before {
-            @include border-radius(2px);
-            content: &quot;&quot;;
-            display: inline-block;
-            width: 15px;
-            height: 16px;
-            margin-right: 5px;
-            margin-top: -4px;
-            vertical-align: middle;
+        &amp; + <span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::before</span> {
+            <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">2px</span>);
+            <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;&quot;</span>;
+            <span class="hljs-attribute">display</span>: inline-block;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">15px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">16px</span>;
+            <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">5px</span>;
+            <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">4px</span>;
+            <span class="hljs-attribute">vertical-align</span>: middle;
         }
 
-        &amp;.btn-grey + span::before {
-            @extend .btn-grey;
-            @include border-radius(2px);
+        &amp;<span class="hljs-selector-class">.btn-grey</span> + <span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::before</span> {
+            <span class="hljs-keyword">@extend</span> .btn-grey;
+            <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">2px</span>);
         }
 
-        &amp;:checked + span::after {
-            content: &quot;\2713\0020&quot;;
-            font-size: 1em;
-            position: absolute;
-            top: 1px;
-            left: 2px;
-            color: #888;
+        &amp;<span class="hljs-selector-pseudo">:checked</span> + <span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::after</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;\2713\0020&quot;</span>;
+            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1em</span>;
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">top</span>: <span class="hljs-number">1px</span>;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">2px</span>;
+            <span class="hljs-attribute">color</span>: <span class="hljs-number">#888</span>;
         }
     }
 
-    &amp;[type=&quot;radio&quot;] {
-        @extend input[type=&quot;checkbox&quot;];
+    &amp;<span class="hljs-selector-attr">[type=<span class="hljs-string">&quot;radio&quot;</span>]</span> {
+        <span class="hljs-keyword">@extend</span> input[type=<span class="hljs-string">&quot;checkbox&quot;</span>];
 
-        &amp; + span::before {
-            @include border-radius(8px);
-            width: 16px;
+        &amp; + <span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::before</span> {
+            <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">8px</span>);
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">16px</span>;
         }
 
-        &amp;.btn-grey + span::before {
-            @include border-radius(8px);
+        &amp;<span class="hljs-selector-class">.btn-grey</span> + <span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::before</span> {
+            <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">8px</span>);
         }
 
-        &amp;:checked + span::after {
-            position: absolute;
-            content: &quot;&quot;;
-            top: 11px;
-            left: 6px;
-            width: 4px;
-            height: 4px;
-            border: 1px solid #888;
-            @include border-radius(6px);
-            background-color: #888;
+        &amp;<span class="hljs-selector-pseudo">:checked</span> + <span class="hljs-selector-tag">span</span><span class="hljs-selector-pseudo">::after</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;&quot;</span>;
+            <span class="hljs-attribute">top</span>: <span class="hljs-number">11px</span>;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">6px</span>;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">4px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">4px</span>;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#888</span>;
+            <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">6px</span>);
+            <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#888</span>;
         }
     }
 }
 
-select {
-  @include user-select(none);
-  @include border-radius(5px);
-  padding: 9px;
-  @include single-box-shadow(none);
-  border: 1px solid #CDCDCD;
+<span class="hljs-selector-tag">select</span> {
+  <span class="hljs-keyword">@include</span> user-select(none);
+  <span class="hljs-keyword">@include</span> border-radius(<span class="hljs-number">5px</span>);
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">9px</span>;
+  <span class="hljs-keyword">@include</span> single-box-shadow(none);
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#CDCDCD</span>;
 
-  -webkit-appearance: button;
-  -moz-appearance: button;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  -webkit-<span class="hljs-attribute">appearance</span>: button;
+  -moz-<span class="hljs-attribute">appearance</span>: button;
+  <span class="hljs-selector-tag">text</span>-<span class="hljs-attribute">overflow</span>: ellipsis;
+  <span class="hljs-attribute">white-space</span>: nowrap;
 }
 </code></pre>
 <h3 id="buttonshtml">buttons.html</h3>
-<pre><code class="language-html">&lt;label class=&quot;text&quot;&gt;
-  &lt;span&gt;Text Field:&lt;/span&gt;&lt;input type=&quot;text&quot; class=&quot;btn-grey&quot; value=&quot;Edit me&quot;/&gt;
-&lt;/label&gt;
-&lt;input type=&quot;submit&quot; class=&quot;btn-grey&quot; value=&quot;Button&quot;/&gt;
-&lt;input type=&quot;submit&quot; class=&quot;btn-grey&quot; value=&quot;Button&quot; disabled=&quot;disabled&quot;/&gt;
-&lt;label class=&quot;checkbox&quot;&gt;
-  &lt;input type=&quot;checkbox&quot; class=&quot;btn-grey&quot; checked/&gt;&lt;span&gt;Checkbox&lt;/span&gt;
-&lt;/label&gt;
-&lt;label class=&quot;radio&quot;&gt;
-  &lt;input type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;radio_1&quot; class=&quot;btn-grey&quot; checked/&gt;&lt;span&gt;Option 1&lt;/span&gt;
-&lt;/label&gt;
-&lt;label class=&quot;radio&quot;&gt;
-  &lt;input type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;radio_2&quot; class=&quot;btn-grey&quot;/&gt;&lt;span&gt;Option 2&lt;/span&gt;
-&lt;/label&gt;
-&lt;label class=&quot;select&quot;&gt;
-  &lt;span&gt;Select:&lt;/span&gt;
-  &lt;select class=&quot;btn-grey&quot;&gt;
-  &lt;option value=&quot;one&quot;&gt;Option 1&lt;/option&gt;
-  &lt;option value=&quot;two&quot;&gt;Option 2&lt;/option&gt;
-  &lt;option value=&quot;three&quot;&gt;Option 3&lt;/option&gt;
-  &lt;option value=&quot;four&quot;&gt;Option 4&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/label&gt;
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Text Field:<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-grey&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Edit me&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-grey&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Button&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-grey&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Button&quot;</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">&quot;disabled&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;checkbox&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-grey&quot;</span> <span class="hljs-attr">checked</span>/&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Checkbox<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;radio&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;radio&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;radio&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;radio_1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-grey&quot;</span> <span class="hljs-attr">checked</span>/&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Option 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;radio&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;radio&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;radio&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;radio_2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-grey&quot;</span>/&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Option 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;select&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Select:<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-grey&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;one&quot;</span>&gt;</span>Option 1<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;two&quot;</span>&gt;</span>Option 2<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;three&quot;</span>&gt;</span>Option 3<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;four&quot;</span>&gt;</span>Option 4<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 </code></pre>

@@ -253,3 +253,27 @@ so none is a mixed-content or bare-`http` link. Archived markers are styled
   the linux-x64 build CI uses. It is a devDependency and never runs in the build, so
   a missing binary on another platform would not affect `bun run build`.
 - The earlier report's "Gist inlining" under *Not done* is now **done** (item 1).
+
+## Code highlighting + index spacing
+
+### Item 1 — build-time syntax highlighting (variant C)
+
+Fenced code is now highlighted at build time in `src/markdown.ts` via markdown-it's
+`highlight` hook — **no client JS**. Uses `highlight.js` (pinned `11.11.1`),
+importing `highlight.js/lib/core` and registering only the languages the posts use:
+ruby, scss, xml (covers `html`), objectivec (covers `objc`), bash. Unknown or
+missing languages are escaped and left plain; there is **no auto-detection**.
+`console` blocks get a small custom handler: only command lines (starting `$ ` or
+`% `) are highlighted as bash, output lines stay plain ink. Output keeps the
+`<pre><code class="language-x">…</code></pre>` shape with `hljs-*` spans inside.
+
+Styles live in `public/css/site.css` ("C · Accent keywords": ink by default, the
+accent for keywords/meta, italic muted comments). Added an `--ink-soft` token
+(`#8a7d70` light / `#7f7366` dark) in all four token blocks. The IBM Plex Mono 600
+face for `.hljs-title` was already self-hosted, so no new font was needed.
+
+Tests in `test/highlight.test.ts`: a ruby fence emits `hljs-keyword` spans; an
+unknown-language fence is escaped with no spans; rendered code adds no `<script>`;
+`console` highlights commands only. The 7 posts with fenced code had their golden
+code blocks regenerated (prose byte-for-byte unchanged) — see
+`test/golden/DIFFERENCES.md`.

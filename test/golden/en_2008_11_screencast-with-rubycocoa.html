@@ -1,42 +1,42 @@
 <p>I know I promised a screencast about Lucecita, but that will be in the Holydays, now I post a little code that captures the screen and creates a video.</p><p>The not so good thing is that the frame rate isn't controlled by my code and it is very slow, but maybe with MacRuby and some threads we could make that code very fast and even parallelize the capturing and the creation of the movie (the other option is to use Objective-C) but MacRuby is under development and it doesn't have all the things we need.</p><p>What do you think? Can we improve it with a ruby/cocoa hack?</p><p>Leave any idea or comment, the code is in the full post:</p>
-<pre><code class="language-ruby">require 'osx/cocoa'
-include OSX
-require_framework 'QTKit'
+<pre><code class="language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;osx/cocoa&#x27;</span>
+<span class="hljs-keyword">include</span> <span class="hljs-variable constant_">OSX</span>
+require_framework <span class="hljs-string">&#x27;QTKit&#x27;</span>
 
-class Screen
-  def self.capture
-    screenshot = OSX::CGWindowListCreateImage(OSX::NSScreen.mainScreen.frame, OSX::KCGWindowListOptionOnScreenOnly, OSX::KCGNullWindowID, OSX::KCGWindowImageDefault)
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Screen</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">self</span>.capture
+    screenshot = <span class="hljs-variable constant_">OSX</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:CGWindowListCreateImage</span>(<span class="hljs-variable constant_">OSX</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:NSScreen</span>.mainScreen.frame, <span class="hljs-variable constant_">OSX</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:KCGWindowListOptionOnScreenOnly</span>, <span class="hljs-variable constant_">OSX</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:KCGNullWindowID</span>, <span class="hljs-variable constant_">OSX</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:KCGWindowImageDefault</span>)
     screenshot.retain
-  end
+  <span class="hljs-keyword">end</span>
   
-  def self.to_nsimage(cgimage)
-    bitmapRep = NSBitmapImageRep.alloc.initWithCGImage(cgimage)
-    blob = bitmapRep.representationUsingType_properties(NSJPEGFileType, nil)
-    nsimage = NSImage.alloc.initWithData(blob)
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">self</span>.to_nsimage(cgimage)
+    bitmapRep = <span class="hljs-title class_">NSBitmapImageRep</span>.alloc.initWithCGImage(cgimage)
+    blob = bitmapRep.representationUsingType_properties(<span class="hljs-title class_">NSJPEGFileType</span>, <span class="hljs-literal">nil</span>)
+    nsimage = <span class="hljs-title class_">NSImage</span>.alloc.initWithData(blob)
     nsimage
-  end
-end
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
 
-  error = nil
-  mMovie = QTMovie.alloc.initToWritableData_error(NSMutableData.data, error)
+  error = <span class="hljs-literal">nil</span>
+  mMovie = <span class="hljs-title class_">QTMovie</span>.alloc.initToWritableData_error(<span class="hljs-title class_">NSMutableData</span>.data, error)
   images = []
   
-  80.times {
-    images &lt;&lt; Screen.capture
+  <span class="hljs-number">80</span>.times {
+    images &lt;&lt; <span class="hljs-title class_">Screen</span>.capture
   }
     
-  puts &quot;Now encoding...&quot;
+  puts <span class="hljs-string">&quot;Now encoding...&quot;</span>
   
-  images.each do |img|
-    mMovie.objc_send :addImage, Screen.to_nsimage(img),
-                 :forDuration, QTMakeTime(1,20),
-                 :withAttributes, {:QTAddImageCodecType =&gt; &quot;mp4v&quot;}
+  images.each <span class="hljs-keyword">do</span> |<span class="hljs-params">img</span>|
+    mMovie.objc_send <span class="hljs-symbol">:addImage</span>, <span class="hljs-title class_">Screen</span>.to_nsimage(img),
+                 <span class="hljs-symbol">:forDuration</span>, <span class="hljs-title class_">QTMakeTime</span>(<span class="hljs-number">1</span>,<span class="hljs-number">20</span>),
+                 <span class="hljs-symbol">:withAttributes</span>, {<span class="hljs-symbol">:QTAddImageCodecType</span> =&gt; <span class="hljs-string">&quot;mp4v&quot;</span>}
     img.release
-  end
+  <span class="hljs-keyword">end</span>
   
-  mMovie.objc_send :writeToFile, &quot;screencast.mov&quot;,
-                  :withAttributes, {:QTMovieFlatten =&gt; true}
+  mMovie.objc_send <span class="hljs-symbol">:writeToFile</span>, <span class="hljs-string">&quot;screencast.mov&quot;</span>,
+                  <span class="hljs-symbol">:withAttributes</span>, {<span class="hljs-symbol">:QTMovieFlatten</span> =&gt; <span class="hljs-literal">true</span>}
                   
-  puts &quot;Done!!&quot;
+  puts <span class="hljs-string">&quot;Done!!&quot;</span>
 </code></pre>
 <p><small><a href="https://gist.github.com/juanger/489722">Gist ↗</a></small></p>

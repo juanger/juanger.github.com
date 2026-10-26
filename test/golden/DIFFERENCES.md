@@ -14,6 +14,30 @@ For **8 posts** the golden was taken from a fresh render of the current source,
 because the baseline is stale or the markup was intentionally changed. They still
 guard against future regressions from the current source. Each is listed below.
 
+## Build-time syntax highlighting (golden code blocks regenerated)
+
+Fenced code is now highlighted at build time in `src/markdown.ts` (highlight.js
+core, with ruby/scss/xml/objectivec/bash hand-registered; `console` gets a small
+custom handler that highlights only `$ `/`% ` command lines). This is pure markup —
+`hljs-*` spans baked inside the existing `<pre><code class="language-x">…</code></pre>`
+wrapper, no client JS.
+
+The golden for the **7 posts with fenced code** was regenerated for this: each
+file's prose is byte-for-byte the prior baseline, and only the innards of its
+`<pre><code>` blocks changed (the `hljs-*` spans were injected, block-for-block).
+After entity-decoding and whitespace normalization the code text is identical to
+before — the spans are the only new tokens.
+
+| Post | Fenced languages |
+|------|------------------|
+| `en/2008/03/macruby` | `objc`, `ruby`, one no-language block (left plain) |
+| `en/2008/05/rtranscoder-jpeg-to-mpeg` | `ruby` |
+| `en/2008/05/freebsd-startup-script-with-ruby` | `ruby` |
+| `en/2008/07/lucecita-rubycocoa-example` | `ruby` |
+| `en/2008/11/screencast-with-rubycocoa` | `ruby` |
+| `en/2010/04/this-is-old-post-that-i-wrote-some` | `console` (commands only) |
+| `en/2013/01/html5-and-css3-buttons` | `scss`, `html` |
+
 ## Normalization that hides benign differences
 
 - **HTML entities are decoded** before comparing. marked 0.7 (the old engine)
