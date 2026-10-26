@@ -1,0 +1,59 @@
+<p>Since some days ago I&#39;ve been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:</p>
+<blockquote>
+<p>Put your .sh script at /usr/local/etc/rc.d</p>
+</blockquote>
+<p>And since I like ruby, I began to code my script with it and the problems came:</p>
+<blockquote>
+<p>env: ruby: No such file or directory</p>
+</blockquote>
+<blockquote>
+<p>custom_require.rb:27: command not found: mongrel_rails</p>
+</blockquote>
+<p>First, here is my final code that was inspired by <a href="http://snippets.dzone.com/posts/show/2594">Tim Morgan&#39;s</a>:</p>
+<pre><code class="language-ruby">#!/usr/local/bin/ruby
+
+puts ENV[&quot;PATH&quot;] += &quot;:/usr/local/bin&quot;
+app_dir = &#39;/usr/local/www&#39;
+
+apps = [
+  scielo_index = { :name =&gt; &quot;ScieloIndex&quot;,
+                   :path =&gt; &#39;index.scielo.unam.mx/current&#39;,
+                   :config =&gt; &quot;config/mongrel_cluster.yml&quot;,
+                   :cluster =&gt; true },
+
+  redmine = { :name =&gt; &quot;Redmine&quot;,
+              :path =&gt; &#39;dev.scielo.unam.mx/Redmine&#39;,
+              :config =&gt; &quot;config/mongrel_8000.yml&quot;,
+              :pid =&gt; &quot;log/mongrel.pid&quot; }
+  ]
+
+if [&#39;stop&#39;, &#39;restart&#39;].include? ARGV.first
+  apps.each do |app|
+    path = File.join app_dir, app[:path]
+    puts &quot;Stopping #{app[:name]}...&quot;
+    if app[:cluster]
+      `mongrel_rails cluster::stop -C #{path}/#{app[:config]}`
+    else
+      `mongrel_rails stop -c #{path} -P #{app[:pid]}`
+    end
+  end
+end
+
+if [&#39;start&#39;, &#39;restart&#39;].include? ARGV.first
+  apps.each do |app|
+    path = File.join app_dir, app[:path]
+    puts &quot;Starting #{app[:name]}...&quot;
+    if app[:cluster]
+      `mongrel_rails cluster::start -C #{path}/#{app[:config]}`
+    else
+      `mongrel_rails start -C #{path}/#{app[:config]}`
+    end
+  end
+end
+
+unless [&#39;start&#39;, &#39;stop&#39;, &#39;restart&#39;].include? ARGV.first
+    puts &quot;Usage: mongrel {start|stop|restart}&quot;
+    exit
+end</code></pre>
+<p>The key part is the <code>ENV[&quot;PATH&quot;]</code> setup, that line is needed as FreeBSD&#39;s PATH at startup is <code>&quot;/sbin:/bin:/usr/sbin:/usr/bin&quot;</code> and this also leads us to change the interpreter path from something like <code>&quot;#!/usr/bin/env ruby&quot;</code> to <code>&quot;#!/usr/local/bin/ruby&quot;</code>, i.e. its full path.</p>
+<p>That&#39;s all, now our ruby script really runs at startup time without complaining.</p>

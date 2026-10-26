@@ -1,0 +1,18 @@
+<p>Some days ago I found the MacRuby project and it seems it will bring a lot of new things to ruby+cocoa programming. And as I&#39;ve been reading and writing some RubyCocoa apps in the last months I want to share the joy it gave me.</p>
+<p>First of all, it will use the new YARV interpreter that was released with the 1.9 version of ruby last christmas which is faster than the so called MRV(the &quot;M&quot; is for Matz), also, it doesn&#39;t use the ruby garbage collector, but the cocoa one. This allows the programs to not stop while the garbage collector is running cause the cocoa garbage collector runs in another thread.</p>
+<p>Speaking of threads, another feature of the new ruby 1.9 is that it allows users to use POSIX threads(cool!).</p>
+<p>Another cool feature are named parameters are also useful when calling methods, the message style when calling an object&#39;s &quot;method&quot; of Objective-C looks like:</p>
+<pre><code class="language-objc">NSAlert *alert = [NSAlert alertWithMessageText: @&quot;What?&quot;,
+                          defaultButton: @&quot;OK&quot;,
+                          alternateButton: @&quot;Cancel&quot;,
+                          otherButton: nil,
+                          informativeTextWithFormat: @&quot;I am an alert!&quot;];</code></pre>
+<p>And the MacRuby counterpart:</p>
+<pre><code class="language-ruby">alert = NSAlert.alertWithMessageText(&quot;What?&quot;,
+                defaultButton: &quot;OK&quot;,
+                alternateButton: &quot;Cancel&quot;,
+                otherButton: nil,
+                informativeTextWithFormat: &quot;I am an alert!&quot;)</code></pre>
+<p>Isn&#39;t that sexy?? No more big method names:</p>
+<pre><code>alertWithMessageText_defaultButton_alternateButton_otherButton_informativeTextWithFormat</code></pre><p>The last beautiful thing I am going to comment about are ruby hashes inheriting from NSDictionary. That&#39;s cool because you can pass a ruby hash to methods that need an NSDictionary instead of constructing one in the cocoa way.</p>
+<p>The bad things: MacRuby is under development, it needs Leopard and only runs on Intel Macs. But looks promising.</p>

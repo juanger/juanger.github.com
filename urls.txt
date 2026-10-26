@@ -1,0 +1,99 @@
+# Canonical and legacy URLs that must resolve in out/ (GitHub Pages resolution).
+# Checked by test/urls.test.ts. One path per line; blank lines and # comments ignored.
+
+# --- top-level pages ---
+/
+/es
+/about
+/acerca+de
+/404.html
+
+# --- feeds and sitemap (restores Octopress URLs) ---
+/atom.xml
+/es/atom.xml
+/sitemap.xml
+
+# --- static assets ---
+/favicon.ico
+/favicon.png
+/CNAME
+/images/blog-og-image.png
+/stylesheets/css_buttons.css
+/css/site.css
+
+# --- English posts (canonical) ---
+/en/2008/03/macruby
+/en/2008/05/freebsd-startup-script-with-ruby
+/en/2008/05/rtranscoder-jpeg-to-mpeg
+/en/2008/05/textmate-ssh-and-github
+/en/2008/07/lucecita-rubycocoa-example
+/en/2008/07/new-features-in-rorgate-30-beta
+/en/2008/07/rorgate
+/en/2008/07/server-output-in-rorgate
+/en/2008/10/lucecita-20
+/en/2008/11/adc-student-member
+/en/2008/11/screencast-with-rubycocoa
+/en/2009/01/blogger-bundle-for-textmate-13
+/en/2009/04/accepted-into-gsoc
+/en/2009/07/one-week-till-midterm-evaluation
+/en/2010/04/this-is-old-post-that-i-wrote-some
+/en/2013/01/html5-and-css3-buttons
+/en/2013/06/command-done-notification-with-zsh-and-growl
+/en/2020/05/life-after-covid-19
+/en/2020/05/time-flies-when-you-are-having-fun
+/en/2021/04/on-remote-schools
+
+# --- Spanish posts (canonical) ---
+/es/2020/05/life-after-covid-19
+/es/2020/05/time-flies-when-you-are-having-fun
+
+# --- /blog legacy English aliases (extensionless and trailing-slash) ---
+/blog/2008/03/macruby
+/blog/2008/03/macruby/
+/blog/2008/05/freebsd-startup-script-with-ruby
+/blog/2008/05/freebsd-startup-script-with-ruby/
+/blog/2008/05/rtranscoder-jpeg-to-mpeg
+/blog/2008/05/rtranscoder-jpeg-to-mpeg/
+/blog/2008/05/textmate-ssh-and-github
+/blog/2008/05/textmate-ssh-and-github/
+/blog/2008/07/lucecita-rubycocoa-example
+/blog/2008/07/lucecita-rubycocoa-example/
+/blog/2008/07/new-features-in-rorgate-30-beta
+/blog/2008/07/new-features-in-rorgate-30-beta/
+/blog/2008/07/rorgate
+/blog/2008/07/rorgate/
+/blog/2008/07/server-output-in-rorgate
+/blog/2008/07/server-output-in-rorgate/
+/blog/2008/10/lucecita-20
+/blog/2008/10/lucecita-20/
+/blog/2008/11/adc-student-member
+/blog/2008/11/adc-student-member/
+/blog/2008/11/screencast-with-rubycocoa
+/blog/2008/11/screencast-with-rubycocoa/
+/blog/2009/01/blogger-bundle-for-textmate-13
+/blog/2009/01/blogger-bundle-for-textmate-13/
+/blog/2009/04/accepted-into-gsoc
+/blog/2009/04/accepted-into-gsoc/
+/blog/2009/07/one-week-till-midterm-evaluation
+/blog/2009/07/one-week-till-midterm-evaluation/
+/blog/2010/04/this-is-old-post-that-i-wrote-some
+/blog/2010/04/this-is-old-post-that-i-wrote-some/
+/blog/2013/01/html5-and-css3-buttons
+/blog/2013/01/html5-and-css3-buttons/
+/blog/2013/06/command-done-notification-with-zsh-and-growl
+/blog/2013/06/command-done-notification-with-zsh-and-growl/
+/blog/2020/05/life-after-covid-19
+/blog/2020/05/life-after-covid-19/
+/blog/2020/05/time-flies-when-you-are-having-fun
+/blog/2020/05/time-flies-when-you-are-having-fun/
+/blog/2021/04/on-remote-schools
+/blog/2021/04/on-remote-schools/
+
+# --- Octopress-era and Blogger-era aliases ---
+/blog/2012/06/html5-and-css3-buttons/
+/2012/06/html5-and-css3-buttons.html
+/blog/2009/01/blogger-bundle-for-textmate_13/
+/2009/01/blogger-bundle-for-textmate_13.html
+/2008/10/lucecita-20.html
+/about/
+/blog/archives/

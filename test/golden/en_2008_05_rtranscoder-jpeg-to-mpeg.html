@@ -1,0 +1,17 @@
+<p>Some days ago I made some tests using mencoder to create a mpeg4 video with some jpeg images.</p>
+<p>Then I tried to use RTranscoder to achieve the same result with ruby but it&#39;s kind of tricky to get it running correctly, because you can get an &quot;error parsing command line&quot; error if you don&#39;t give RTranscoder the correct information.</p>
+<p>After a lot of attempts, my code got like this:</p>
+<pre><code class="language-ruby"> MEncoder.encode do |mencoder|
+   mencoder.input = &quot;mf://*.jpg&quot;
+   mencoder.mf.fps = 25
+   mencoder.mf.type = &quot;jpg&quot;
+   mencoder.output_video_codec = :lavc
+   mencoder.lavc.vcodec = &quot;mpeg4&quot;
+   mencoder.lavc.mbd = 2
+   mencoder.lavc.trell = true
+   mencoder.output_audio_codec = &#39;copy&#39;
+
+   mencoder.output = &#39;output.avi&#39;
+ end</code></pre>
+<p>As you can see, instead of doing something like <code>mencoder.mf = &quot;fps=25:type=jpg&quot;</code> (my error) you have to do it with <code>mencoder.mf.fps</code> and <code>mencoder.mf.type</code> respectively, the same with lavc and everytime you need to pass an argument with suboptions separated by &quot;:&quot;.</p>
+<p>Here is the page of <a href="http://rtranscoder.rubyforge.org/">Rtranscoder</a>.</div></p>
