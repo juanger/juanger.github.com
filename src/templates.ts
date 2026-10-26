@@ -22,10 +22,8 @@ type Strings = {
   months: string[];
   monthsFull: string[];
   locale: string;
-  themeLegend: string;
-  system: string;
-  light: string;
-  dark: string;
+  themeToDark: string; // aria-label when the click switches to the dark theme
+  themeToLight: string; // aria-label when the click switches to the light theme
   colophon: string;
   viewSource: string;
 };
@@ -42,10 +40,8 @@ export const i18n: Record<Lang, Strings> = {
     months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     monthsFull: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     locale: "en_US",
-    themeLegend: "Theme",
-    system: "System",
-    light: "Light",
-    dark: "Dark",
+    themeToDark: "Switch to dark theme",
+    themeToLight: "Switch to light theme",
     colophon: "Written by Juan Germán Castañeda Echevarría.",
     viewSource: "View source (.md)",
   },
@@ -60,10 +56,8 @@ export const i18n: Record<Lang, Strings> = {
     months: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
     monthsFull: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
     locale: "es_MX",
-    themeLegend: "Tema",
-    system: "Sistema",
-    light: "Claro",
-    dark: "Oscuro",
+    themeToDark: "Cambiar a tema oscuro",
+    themeToLight: "Cambiar a tema claro",
     colophon: "Escrito por Juan Germán Castañeda Echevarría.",
     viewSource: "Ver fuente (.md)",
   },
@@ -99,7 +93,10 @@ export function layout(opts: {
   canonicalPath: string; // e.g. "/en/2008/03/macruby"
   ogType: "website" | "article" | "profile";
   image?: string;
-  translationPath?: string; // path of the other-language version, if any
+  // The other-language version, if one exists. Its presence (not a truthy
+  // string) is the signal that a translation exists — the English home lives at
+  // "/", a falsy path that must still count as a real translation target.
+  translation?: { url: string }; // full path incl. leading slash, e.g. "/es" or "/en/2008/03/macruby"
   mdPath?: string; // path to the markdown source (e.g. "/en/2008/03/macruby.md")
   indexLink: boolean; // show the Index link in the nav
   home?: boolean; // the index page itself — enlarges the masthead to read as the title
@@ -111,16 +108,14 @@ export function layout(opts: {
   const image = SITE.origin + (opts.image ?? SITE.ogImage);
   const feed = opts.lang === "es" ? "/es/atom.xml" : "/atom.xml";
 
+  const other: Lang = opts.lang === "en" ? "es" : "en";
   const alternates: Raw[] = [];
-  if (opts.translationPath) {
-    const other: Lang = opts.lang === "en" ? "es" : "en";
+  if (opts.translation) {
     alternates.push(
       html`<link rel="alternate" hreflang="${opts.lang}" href="${canonical}" />`,
-      html`<link rel="alternate" hreflang="${other}" href="${SITE.origin}/${opts.translationPath}" />`,
+      html`<link rel="alternate" hreflang="${other}" href="${SITE.origin}${opts.translation.url}" />`,
     );
   }
-
-  const translationUrl = opts.translationPath ? `/${opts.translationPath}` : undefined;
 
   return (
     "<!doctype html>\n" +
@@ -139,7 +134,7 @@ ${alternates}
 <meta property="og:url" content="${canonical}" />
 <meta property="og:image" content="${image}" />
 <meta property="og:locale" content="${t.locale}" />
-${opts.translationPath ? html`<meta property="og:locale:alternate" content="${i18n[opts.lang === "en" ? "es" : "en"].locale}" />` : ""}
+${opts.translation ? html`<meta property="og:locale:alternate" content="${i18n[other].locale}" />` : ""}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${opts.pageTitle}" />
 <meta name="twitter:description" content="${opts.description}" />
@@ -157,14 +152,16 @@ ${opts.mdPath ? html`<link rel="alternate" type="text/markdown" href="${opts.mdP
 <a class="masthead" href="${homeUrl(opts.lang)}">${SITE.name}</a>
 <nav class="site-nav">
 ${opts.indexLink ? html`<a href="${homeUrl(opts.lang)}">☰ ${t.index}</a>` : ""}
-${translationUrl ? html`<a href="${translationUrl}">${t.toOther}</a>` : ""}
+${opts.translation ? html`<a href="${opts.translation.url}">${t.toOther}</a>` : ""}
+${raw(themeToggle(opts.lang))}
 </nav>
 </header>
 <main>
 ${opts.body}
 </main>
 ${raw(footer(opts.lang))}
-</div>`) +
+</div>
+<script>${raw(THEME_TOGGLE)}</script>`) +
     (opts.dev ? `\n<script>${DEV_RELOAD}</script>` : "") +
     "\n</body>\n</html>\n"
   );
@@ -180,28 +177,41 @@ const THEME_INIT =
 function footer(lang: Lang): string {
   const t = i18n[lang];
   return render(html`<footer class="site-foot">
-<form class="theme-select" aria-label="${t.themeLegend}">
-<span class="legend">${t.themeLegend}</span>
-<label><input type="radio" name="theme" value="system" /> ${t.system}</label>
-<label><input type="radio" name="theme" value="light" /> ${t.light}</label>
-<label><input type="radio" name="theme" value="dark" /> ${t.dark}</label>
-</form>
 <p class="colophon">${t.colophon}</p>
-<script>${raw(THEME_SELECT)}</script>
 </footer>`);
 }
 
-// Wires the footer radios: reads/writes localStorage["theme"], toggles data-theme.
-const THEME_SELECT = `(function(){
-  var form=document.currentScript.parentNode.querySelector(".theme-select");
-  var saved="system";try{saved=localStorage.getItem("theme")||"system";}catch(e){}
-  var r=form.querySelector('input[value="'+saved+'"]');if(r)r.checked=true;
-  form.addEventListener("change",function(e){
-    var v=e.target.value;
-    try{if(v==="system")localStorage.removeItem("theme");else localStorage.setItem("theme",v);}catch(err){}
-    if(v==="system")document.documentElement.removeAttribute("data-theme");
-    else document.documentElement.setAttribute("data-theme",v);
+// The header theme toggle. Rendered `hidden` and unhidden by THEME_TOGGLE, so
+// with JS off it stays out of the way and CSS @media(prefers-color-scheme)
+// drives the theme. Which icon shows is pure CSS (resolved theme); the
+// localized aria-label is set by the script from the data-* labels. Both SVGs
+// are ~1em and inherit currentColor so they match the nav ink.
+function themeToggle(lang: Lang): string {
+  const t = i18n[lang];
+  return render(html`<button type="button" class="theme-toggle" hidden aria-label="${t.themeToDark}" data-to-dark="${t.themeToDark}" data-to-light="${t.themeToLight}">
+<svg class="icon icon-moon" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.91-.1-1.36a5.39 5.39 0 0 1-7.53-7.53A9.1 9.1 0 0 0 12 3z"/></svg>
+<svg class="icon icon-sun" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+</button>`);
+}
+
+// Wires the header toggle: flips between light/dark, writing the choice to
+// localStorage["theme"] and data-theme. The icon follows the resolved theme in
+// CSS; here we only unhide the button and keep the aria-label in sync (on load,
+// on click, and — while there's no saved choice — on a system theme change).
+const THEME_TOGGLE = `(function(){
+  var btn=document.querySelector(".theme-toggle");if(!btn)return;
+  var root=document.documentElement;
+  var mq=window.matchMedia("(prefers-color-scheme: dark)");
+  function saved(){try{return localStorage.getItem("theme");}catch(e){return null;}}
+  function resolved(){var s=saved();return (s==="light"||s==="dark")?s:(mq.matches?"dark":"light");}
+  function sync(){btn.setAttribute("aria-label",resolved()==="dark"?btn.dataset.toLight:btn.dataset.toDark);}
+  btn.hidden=false;sync();
+  btn.addEventListener("click",function(){
+    var next=resolved()==="dark"?"light":"dark";
+    try{localStorage.setItem("theme",next);}catch(e){}
+    root.setAttribute("data-theme",next);sync();
   });
+  mq.addEventListener("change",function(){if(saved()===null)sync();});
 })();`;
 
 const DEV_RELOAD = `new EventSource("/__reload").onmessage=function(){location.reload()};`;
@@ -247,7 +257,9 @@ ${toc}</section>
     description: t.subtitle,
     canonicalPath: homeUrl(lang),
     ogType: "website",
-    translationPath: lang === "en" ? "es" : undefined,
+    // Both index pages always exist, so each links to the other — including
+    // English → "/es" and Spanish → "/" (the root, a falsy path).
+    translation: { url: homeUrl(lang === "en" ? "es" : "en") },
     indexLink: false,
     home: true,
     body,
@@ -276,7 +288,8 @@ export function postPage(post: Post, renderedBody: string, dev = false): string 
     canonicalPath: `/${post.path}`,
     ogType: "article",
     image: post.image,
-    translationPath: post.translationPath,
+    // Use the explicit pairing flag, not the truthiness of the path.
+    translation: post.hasTranslation ? { url: `/${post.translationPath}` } : undefined,
     mdPath,
     indexLink: true,
     body,
@@ -291,6 +304,7 @@ export function standalonePage(page: Page, renderedBody: string, dev = false): s
 <section>${raw(renderedBody)}</section>
 </article>`;
 
+  const otherLang: Lang = page.lang === "en" ? "es" : "en";
   return layout({
     lang: page.lang,
     title: `${page.title} · ${SITE.name}`,
@@ -298,6 +312,8 @@ export function standalonePage(page: Page, renderedBody: string, dev = false): s
     description: (page.front.description as string) ?? i18n[page.lang].subtitle,
     canonicalPath: `/${page.name}`,
     ogType: "profile",
+    // about ⇄ acerca+de are a fixed pair; each links to the other.
+    translation: { url: i18n[otherLang].aboutUrl },
     indexLink: true,
     body,
     dev,

@@ -14,7 +14,7 @@ are untouched.
 | `src/html.ts` | 41 | `html\`\`` tagged template (auto-escaping) + `raw()` |
 | `src/content.ts` | 191 | Load posts/pages, split front matter (`Bun.YAML`), derive URL from filename, pair translations, filter drafts |
 | `src/markdown.ts` | 201 | markdown-it config: footnote→sidenote (+mobile toggle), `[^m:]`→margin note, image→figure, `:::` containers, `^^newthought^^`, marked-compatible heading ids |
-| `src/templates.ts` | 329 | layout/head (title, OG, Twitter, canonical, hreflang), index (TOC by year), post, standalone page, 404, redirect stub, i18n table, theme selector + pre-paint script |
+| `src/templates.ts` | 329 | layout/head (title, OG, Twitter, canonical, hreflang), index (TOC by year), post, standalone page, 404, redirect stub, i18n table, header theme toggle + pre-paint script |
 | `src/feeds.ts` | 70 | Atom per language + sitemap (hand-written, no deps) |
 | `src/build.ts` | 99 | Orchestrate: clean `out/`, copy `public/`, write pages + aliases + feeds |
 | `src/dev.ts` | 120 | Single-process build + watch + `Bun.serve` (Pages resolution) + SSE reload |
@@ -65,7 +65,7 @@ scripts, 3 deps), `tsconfig.json` rewritten for Bun, `.gitignore` updated
 ## Test results
 
 ```
-bun test → 110 pass, 0 fail (golden 22, urls 83, plus fixtures/draft + .md checks)
+bun test → 112 pass, 0 fail (golden 22, urls 83, cross-language links 2, plus fixtures/draft + .md checks)
 bun run build → 22 posts, 147 files in out/ (42 of them .md), ~30 ms
 bunx tsc --noEmit → clean
 bun install --frozen-lockfile → clean (CI-ready)
@@ -145,3 +145,20 @@ Full list with reasons in `test/golden/DIFFERENCES.md`. Summary:
   domain from settings; `public/CNAME` is also committed). Keep `master` as rollback.
 - First deploy briefly serves nothing if the workflow fails — do the Pages-source
   switch right after a green run, or flip back to `master` to roll back.
+
+## Review round 3 (follow-ups)
+
+- **Cross-language links now go both ways.** `layout()` takes an explicit
+  `translation?: { url }` instead of a truthy `translationPath` string, so the
+  Spanish index links back to the English home at `/` (a falsy path that was
+  being dropped). hreflang + `og:locale:alternate` are emitted for the root too.
+  Posts use the explicit `hasTranslation` flag; the about ⇄ acerca+de pair links
+  both ways; the 404 (no counterpart) shows no language link.
+  `test/templates.test.ts` guards the index and about pairs.
+- **Theme switch moved to the header.** The footer System/Light/Dark radios are
+  gone; a single icon `<button>` sits in the nav (moon in light, sun in dark, as
+  ~1em inline SVG with `currentColor`). It toggles `data-theme`, persists to
+  `localStorage["theme"]` (all access in try/catch), keeps the pre-paint head
+  script, updates its icon/aria-label on a system change while unset, is rendered
+  `hidden` (unhidden by JS) so with JS off CSS follows the system, and carries a
+  localized `aria-label` and a visible focus ring.

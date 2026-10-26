@@ -143,7 +143,7 @@ body {
 }
 /* On the index "Ruby Xocolatl" is the page title, not just a wayfinding mark. */
 .site-head--home .masthead { font-size: var(--step-3); }
-.site-nav { display: flex; gap: 1.2rem; }
+.site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.2rem; }
 .site-nav a {
   color: var(--ink-muted);
   font-variant-caps: all-small-caps;
@@ -151,6 +151,31 @@ body {
   text-decoration: none;
 }
 .site-nav a:hover { color: var(--accent); }
+
+/* Theme toggle: a nav-styled icon button (muted ink, accent on hover). */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-muted);
+  font-size: inherit;
+  line-height: 0;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--accent); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.theme-toggle .icon { width: 1em; height: 1em; }
+/* Default (light resolved): moon shows, sun hidden. */
+.theme-toggle .icon-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: inline; }
+}
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
 
 article, .index {
   position: relative;
@@ -305,7 +330,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 }
 .front-matter ol { list-style: none; padding-left: 0; }
 
-/* ---------- Footer / theme selector ---------- */
+/* ---------- Footer ---------- */
 .site-foot {
   max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
   margin: 4rem auto 2rem;
@@ -314,18 +339,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   color: var(--ink-muted);
   font-size: var(--step--1);
 }
-.theme-select {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1rem;
-  align-items: center;
-}
-.theme-select .legend {
-  font-variant-caps: all-small-caps;
-  letter-spacing: 0.08em;
-}
-.theme-select label { cursor: pointer; }
-.colophon { margin: 0.6rem 0 0; }
+.colophon { margin: 0; }
 .social { list-style: none; padding-left: 0; }
 
 /* ---------- Embeds ---------- */
