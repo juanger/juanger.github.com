@@ -14,7 +14,7 @@ aliases:
 <p>Yes, that’s right, I’ve been working in getting TextMate to love Blogger. Some time ago I realized that the Blogger <span class='caps'>API</span> is no longer compatible with the TextMate’s blogging bundle and I really wanted it to work.</p>
 <p>It’s still in a very incomplete state, but at least I can post to my blog from my favourite text editing program, preview my post and add categories to it.</p>
 <p>Now I can have a “blogged from TextMate” badge in blogger!!</p>
-<p>You can download the bundle from github: <a href='http://github.com/juanger/blogger.tmbundle'>blogger.tmbundle</a>.</p>
+<p>You can download the bundle from github: <a href='https://github.com/juanger/blogger.tmbundle'>blogger.tmbundle</a>.</p>
 <p>The extended post also works (if you have the hack for it):</p>
 
 <h3>Setup</h3>

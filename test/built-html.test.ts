@@ -29,6 +29,13 @@ test("no built page embeds a gist script (gist.github.com/<id>.js)", () => {
   expect(offenders).toEqual([]);
 });
 
+test("no built page loads an asset over http (mixed content)", () => {
+  // src="http://…" (images, scripts). href="http://…" is allowed for archived links.
+  const re = /\bsrc\s*=\s*"http:\/\//i;
+  const offenders = htmlFiles.filter((f) => re.test(f.text)).map((f) => f.rel);
+  expect(offenders).toEqual([]);
+});
+
 afterAll(async () => {
   await rm(OUT, { recursive: true, force: true });
 });
