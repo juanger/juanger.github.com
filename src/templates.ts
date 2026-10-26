@@ -8,7 +8,7 @@ import type { Lang, Post, Page } from "./content.ts";
 export const SITE = {
   origin: "https://blog.juanger.com",
   name: "Ruby Xocolatl",
-  ogImage: "/images/blog-og-image.png",
+  ogImage: "/og.png",
 };
 
 type Strings = {
@@ -92,7 +92,6 @@ export function layout(opts: {
   description: string;
   canonicalPath: string; // e.g. "/en/2008/03/macruby"
   ogType: "website" | "article" | "profile";
-  image?: string;
   // The other-language version, if one exists. Its presence (not a truthy
   // string) is the signal that a translation exists — the English home lives at
   // "/", a falsy path that must still count as a real translation target.
@@ -105,7 +104,8 @@ export function layout(opts: {
 }): string {
   const t = i18n[opts.lang];
   const canonical = SITE.origin + opts.canonicalPath;
-  const image = SITE.origin + (opts.image ?? SITE.ogImage);
+  // One default OpenGraph image for the whole site (no per-post images).
+  const image = SITE.origin + SITE.ogImage;
   const feed = opts.lang === "es" ? "/es/atom.xml" : "/atom.xml";
 
   const other: Lang = opts.lang === "en" ? "es" : "en";
@@ -141,7 +141,9 @@ ${opts.translation ? html`<meta property="og:locale:alternate" content="${i18n[o
 <meta name="twitter:image" content="${image}" />
 <link rel="alternate" type="application/atom+xml" title="${SITE.name}" href="${feed}" />
 ${opts.mdPath ? html`<link rel="alternate" type="text/markdown" href="${opts.mdPath}" />` : ""}
-<link rel="icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/fonts/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin />
 <link rel="stylesheet" href="/css/site.css" />
 <script>${raw(THEME_INIT)}</script>
@@ -287,7 +289,6 @@ export function postPage(post: Post, renderedBody: string, dev = false): string 
     description: post.description ?? t.subtitle,
     canonicalPath: `/${post.path}`,
     ogType: "article",
-    image: post.image,
     // Use the explicit pairing flag, not the truthiness of the path.
     translation: post.hasTranslation ? { url: `/${post.translationPath}` } : undefined,
     mdPath,

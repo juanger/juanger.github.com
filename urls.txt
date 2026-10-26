@@ -16,6 +16,9 @@
 # --- static assets ---
 /favicon.ico
 /favicon.png
+/favicon.svg
+/apple-touch-icon.png
+/og.png
 /CNAME
 /images/blog-og-image.png
 /stylesheets/css_buttons.css

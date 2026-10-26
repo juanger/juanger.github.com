@@ -81,13 +81,31 @@ Push to the `source` branch. `.github/workflows/pages.yml` runs `bun install
 Pages. The custom domain (`public/CNAME` → `blog.juanger.com`) is also set in the
 repo's Pages settings. The old `master` branch is left untouched as a rollback.
 
+## Favicon & social image
+
+The favicon (`public/favicon.svg`, `favicon.ico`, `favicon.png`), the
+`apple-touch-icon.png` and the default OpenGraph image (`public/og.png`,
+1200×630, used as `og:image`/`twitter:image` on **every** page) are generated
+from the self-hosted ET Book font by a one-off script:
+
+```sh
+bun run tools/make-icons.ts    # regenerate, then commit the files in public/
+```
+
+The script (opentype.js → SVG glyph paths, `@resvg/resvg-js` → PNG) is **not**
+part of `bun run build`; its deps are devDependencies. Re-run it only when the
+mark (the "RX" letters), the wordmark or the font changes, then commit the
+regenerated assets.
+
 ## Layout
 
 ```
 posts/{en,es}/*.md     posts (filename = URL date + slug)
 pages/*.md             standalone pages (about, acerca+de)
-public/                copied verbatim (favicon, images, fonts, css, CNAME, stylesheets)
+public/                copied verbatim (favicon, icons, og.png, images, fonts, css, CNAME, stylesheets)
 src/                   the generator (content, markdown, html, templates, feeds, build, dev)
+tools/                 one-off asset generators (make-icons.ts — favicon + og.png), not run by the build
+scripts/               CI helpers (check-urls.ts — post-deploy URL smoke check)
 test/                  golden render tests + URL inventory (urls.txt)
 urls.txt               every URL that must keep resolving
 ```
