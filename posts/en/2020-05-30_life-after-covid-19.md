@@ -42,7 +42,7 @@ As you can see in the following picture, the trend is similar in all countries, 
 
 The whole world doesn't have to stop until this is solved, but we'll have to still keep certain measures for a while until a vaccine is available for everyone.
 
-![COVID-19 deaths](/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png "Mexico, Brazil, India, Chile and Colombia seem to be in the same situation, deaths on the rise without a clear peak.")
+![COVID-19 deaths by country chart](/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png "Mexico, Brazil, India, Chile and Colombia seem to be in the same situation, deaths on the rise without a clear peak.")
 
 ## "The economy is collapsing, we have to go back to normal"
 
@@ -76,7 +76,7 @@ Go to work, but take care. If you lost your job, things are going to be more dif
 
 - Some epidemic models[^models] show that without a cure and permanent social distancing, COVID-19 will come in waves or at least with a new wave after lifting restrictions. I fear that we'll get a bad mutation in a country where restrictions are not followed and we'll be back to panic.
 
-[^models]: Modeling COVID site ![](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
+[^models]: Modeling COVID site ![Modeling COVID return-to-normal chart](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
 
 - Rich people will value isolation more, companies that offer products used in isolation will be backed by VCs.
 

@@ -40,7 +40,7 @@ Como podemos ver en la siguiente figura, el comportamiento de la curva es muy pa
 
 Eso no significa que el mundo se deba detener hasta que se resuelva, pero tendremos que seguir ciertas medidas por un tiempo hasta que una vacuna sea accesible para todos.
 
-![COVID-19 deaths](/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png "Mexico, Brazil, India, Chile y Colombia parecen estar en la misma situación, muertes al alza sin un pico aparente.")
+![COVID-19 deaths by country chart](/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png "Mexico, Brazil, India, Chile y Colombia parecen estar en la misma situación, muertes al alza sin un pico aparente.")
 
 ## "La economía está colapsando, tenemos que volver a la normalidad"
 
@@ -74,7 +74,7 @@ Ve a trabajar, pero toma precauciones. Si perdiste tu trabajo, la tendrás mucho
 
 - Algunos modelos[^models] muestran que sin una cura y un distanciamiento social permanente, COVID-19 vendrá en oleadas o al menos que vendrá una nueva ola al quitar restricciones. Temo que tengamos una mala mutación en un país donde las restricciones no puedan seguirse y que volvamos al pánico.
 
-[^models]: "Modeling COVID" ![](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
+[^models]: "Modeling COVID" ![Modeling COVID return-to-normal chart](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
 
 - Las personas ricas valorarán más el aislamiento, las empresas que ofrezcan productos utilizados de esa forma van a recibir fondos de capital.
 

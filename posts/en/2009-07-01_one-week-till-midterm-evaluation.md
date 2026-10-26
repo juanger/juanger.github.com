@@ -13,7 +13,7 @@ comments: false
 
 <p>So, for anyone wondering how does the MacPorts GUI application I'm working on looks like now here it is a little screenshot (click it to see it bigger):</p>
 
-<a href="/images/2009-07-01_one-week-till-midterm-evaluation/midterm.png"><img class="embeddedObject" src="/images/2009-07-01_one-week-till-midterm-evaluation/midterm.png" width="300" border="0" /></a>
+<a href="/images/2009-07-01_one-week-till-midterm-evaluation/midterm.png"><img src="/images/2009-07-01_one-week-till-midterm-evaluation/midterm.png" alt="MacPorts GUI app screenshot" width="300" /></a>
 
 <p>There's still a lot of work to be done (including some major changes in how the MacPorts framework sends notifications) but I hope to be releasing a usable app after the midterm week. I also made a weekly list of tasks and published here: <a href="http://juanger.heroku.com/gsoc-09">Tasks</a></p>
 

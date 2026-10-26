@@ -36,6 +36,19 @@ test("no built page loads an asset over http (mixed content)", () => {
   expect(offenders).toEqual([]);
 });
 
+test("every <img> in out/ has a non-empty alt", () => {
+  const imgRe = /<img\b[^>]*>/gi;
+  const altRe = /\balt\s*=\s*"([^"]*)"/i;
+  const offenders: string[] = [];
+  for (const f of htmlFiles) {
+    for (const tag of f.text.match(imgRe) ?? []) {
+      const m = tag.match(altRe);
+      if (!m || m[1].trim() === "") offenders.push(`${f.rel}: ${tag}`);
+    }
+  }
+  expect(offenders).toEqual([]);
+});
+
 afterAll(async () => {
   await rm(OUT, { recursive: true, force: true });
 });
