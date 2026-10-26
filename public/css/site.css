@@ -243,6 +243,10 @@ figcaption, .sidenote, .marginnote {
 }
 figcaption { margin-top: 0.5em; }
 .fullwidth { max-width: none; width: 100%; font-style: normal; }
+/* Pull-quotes keep the fullwidth upright face but stay within the body measure
+   so the quoted text lines up with the <hr> rules above and below it (both
+   capped at --measure, indented by blockquote's margin-inline). */
+blockquote.fullwidth { width: auto; max-width: var(--measure); }
 
 /* ---------- Sidenotes & margin notes ---------- */
 .sidenote-number { counter-increment: sidenote-counter; }

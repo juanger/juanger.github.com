@@ -79,6 +79,11 @@ const server = Bun.serve({
     const url = new URL(req.url);
 
     if (url.pathname === "/__reload") {
+      // This response stays open for the life of the page. Disable Bun's 10s
+      // idle timeout so the live-reload stream isn't cut out from under it.
+      // (The client only reloads on a `data: reload` event, so the `: connected`
+      // handshake sent on each reconnect never triggers a reload.)
+      server.timeout(req, 0);
       const stream = new ReadableStream<Uint8Array>({
         start(controller) {
           clients.add(controller);
@@ -116,8 +121,13 @@ function onChange() {
   if (timer) clearTimeout(timer);
   timer = setTimeout(() => rebuild("change"), 120);
 }
+const watched: string[] = [];
 for (const dir of ["posts", "public", "pages"]) {
-  if (existsSync(dir)) watch(dir, { recursive: true }, onChange);
+  if (existsSync(dir)) {
+    watch(dir, { recursive: true }, onChange);
+    watched.push(dir);
+  }
 }
 
-console.log(`dev server on http://localhost:${server.port}  (watching posts/, public/, pages/)`);
+const watchList = watched.map((d) => `${d}/`).join(", ");
+console.log(`dev server on http://localhost:${server.port}  (watching ${watchList})`);

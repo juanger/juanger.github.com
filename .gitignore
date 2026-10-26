@@ -3,6 +3,10 @@
 
 # build output
 /out/
+/.next/
+
+# old GitHub Pages deploy clone
+_deploy/
 
 # dev-server scratch build (test/urls.test.ts)
 /test/.urls-out/
