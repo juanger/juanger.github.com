@@ -141,6 +141,8 @@ body {
   -webkit-text-stroke: 0.025em currentColor;
   text-decoration: none;
 }
+/* On the index "Ruby Xocolatl" is the page title, not just a wayfinding mark. */
+.site-head--home .masthead { font-size: var(--step-3); }
 .site-nav { display: flex; gap: 1.2rem; }
 .site-nav a {
   color: var(--ink-muted);
@@ -150,7 +152,7 @@ body {
 }
 .site-nav a:hover { color: var(--accent); }
 
-article {
+article, .index {
   position: relative;
   max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
   margin-inline: auto;

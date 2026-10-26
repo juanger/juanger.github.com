@@ -53,7 +53,8 @@ Total generator source: **1054 lines**.
   converted to markdown figures so the captions open on tap too.
 - `aliases` front matter added to `html5-and-css3-buttons`, `blogger-bundle-for-textmate-13`,
   `lucecita-20` for their Octopress/Blogger URLs.
-- `posts/en/2099-01-01_draft-example.md` — a `draft: true` fixture for the test.
+- `test/fixtures/posts/en/2099-01-01_draft-example.md` — a `draft: true` fixture for the
+  draft tests, kept out of `posts/` so it never shows in the real build or dev index.
 
 ### Removed old stack
 `pages/*.tsx`, `pages/[lang]/…`, `components/`, `lib/`, `.themes/`, `.gitmodules`,

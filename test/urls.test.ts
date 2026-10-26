@@ -10,6 +10,10 @@ import { loadContent } from "../src/content.ts";
 
 const OUT = new URL("./.urls-out/", import.meta.url).pathname.replace(/\/$/, "");
 
+// Drafts live outside posts/ (so they never show in the real build or dev index);
+// the draft assertions load them from this fixture root instead.
+const FIXTURE_ROOT = new URL("./fixtures", import.meta.url).pathname;
+
 beforeAll(async () => {
   await build({ outDir: OUT });
 });
@@ -41,7 +45,7 @@ for (const url of urls) {
 }
 
 test("drafts exist as fixtures but never leak into out/", async () => {
-  const { drafts } = await loadContent({ includeDrafts: true });
+  const { drafts } = await loadContent({ includeDrafts: true, root: FIXTURE_ROOT });
   expect(drafts.length).toBeGreaterThan(0); // the draft-example fixture
   for (const d of drafts) {
     expect(existsSync(`${OUT}/${d.path}.html`)).toBe(false);
@@ -72,7 +76,7 @@ test("each legacy /blog/... English post also has a byte-identical .md alias", a
 });
 
 test("no draft .md is published", async () => {
-  const { drafts } = await loadContent({ includeDrafts: true });
+  const { drafts } = await loadContent({ includeDrafts: true, root: FIXTURE_ROOT });
   for (const d of drafts) {
     expect(existsSync(`${OUT}/${d.path}.md`)).toBe(false);
     if (d.lang === "en") {

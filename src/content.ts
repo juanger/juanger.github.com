@@ -2,6 +2,7 @@
 // derive URLs from the filename, pair translations and filter drafts.
 
 import { YAML } from "bun";
+import { existsSync } from "node:fs";
 
 export type Lang = "en" | "es";
 
@@ -87,8 +88,9 @@ function firstParagraph(body: string): string {
 }
 
 async function loadPostsForLang(dir: string, lang: Lang): Promise<Post[]> {
-  const glob = new Bun.Glob("*.md");
   const posts: Post[] = [];
+  if (!existsSync(dir)) return posts; // a root may hold only one language (e.g. draft fixtures)
+  const glob = new Bun.Glob("*.md");
   for await (const name of glob.scan({ cwd: dir })) {
     const file = `${dir}/${name}`;
     const source = await Bun.file(file).text();

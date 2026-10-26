@@ -102,6 +102,7 @@ export function layout(opts: {
   translationPath?: string; // path of the other-language version, if any
   mdPath?: string; // path to the markdown source (e.g. "/en/2008/03/macruby.md")
   indexLink: boolean; // show the Index link in the nav
+  home?: boolean; // the index page itself — enlarges the masthead to read as the title
   body: Raw;
   dev?: boolean;
 }): string {
@@ -152,7 +153,7 @@ ${opts.mdPath ? html`<link rel="alternate" type="text/markdown" href="${opts.mdP
 </head>`) +
     "\n<body>\n" +
     render(html`<div class="page-layout">
-<header class="site-head">
+<header class="site-head${opts.home ? " site-head--home" : ""}">
 <a class="masthead" href="${homeUrl(opts.lang)}">${SITE.name}</a>
 <nav class="site-nav">
 ${opts.indexLink ? html`<a href="${homeUrl(opts.lang)}">☰ ${t.index}</a>` : ""}
@@ -227,13 +228,17 @@ ${inYear.map(
 `;
   });
 
-  const body = html`<p class="subtitle">${t.subtitle}</p>
+  // Same centered column as a post <article>, so the masthead, subtitle and
+  // year headings share one left edge (see the `article, .index` rule in CSS).
+  const body = html`<div class="index">
+<p class="subtitle">${t.subtitle}</p>
 <nav class="front-matter">
 <h2>${t.frontMatter}</h2>
 <ol><li><a href="${t.aboutUrl}">${t.aboutLabel}</a></li></ol>
 </nav>
 <section id="TOC">
-${toc}</section>`;
+${toc}</section>
+</div>`;
 
   return layout({
     lang,
@@ -244,6 +249,7 @@ ${toc}</section>`;
     ogType: "website",
     translationPath: lang === "en" ? "es" : undefined,
     indexLink: false,
+    home: true,
     body,
     dev,
   });
