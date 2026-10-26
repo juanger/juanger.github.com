@@ -45,6 +45,9 @@ const CONTENT_TYPES: Record<string, string> = {
   woff: "font/woff",
   woff2: "font/woff2",
   txt: "text/plain; charset=utf-8",
+  // Serve markdown as plain text so browsers (incl. iOS WKWebView) display it
+  // inline instead of downloading it.
+  md: "text/plain; charset=utf-8",
 };
 
 function isFile(path: string): boolean {

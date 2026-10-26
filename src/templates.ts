@@ -27,6 +27,7 @@ type Strings = {
   light: string;
   dark: string;
   colophon: string;
+  viewSource: string;
 };
 
 export const i18n: Record<Lang, Strings> = {
@@ -46,6 +47,7 @@ export const i18n: Record<Lang, Strings> = {
     light: "Light",
     dark: "Dark",
     colophon: "Written by Juan Germán Castañeda Echevarría.",
+    viewSource: "View source (.md)",
   },
   es: {
     subtitle: "Picardías de mi no muy emocionante vida",
@@ -63,6 +65,7 @@ export const i18n: Record<Lang, Strings> = {
     light: "Claro",
     dark: "Oscuro",
     colophon: "Escrito por Juan Germán Castañeda Echevarría.",
+    viewSource: "Ver fuente (.md)",
   },
 };
 
@@ -97,6 +100,7 @@ export function layout(opts: {
   ogType: "website" | "article" | "profile";
   image?: string;
   translationPath?: string; // path of the other-language version, if any
+  mdPath?: string; // path to the markdown source (e.g. "/en/2008/03/macruby.md")
   indexLink: boolean; // show the Index link in the nav
   body: Raw;
   dev?: boolean;
@@ -140,6 +144,7 @@ ${opts.translationPath ? html`<meta property="og:locale:alternate" content="${i1
 <meta name="twitter:description" content="${opts.description}" />
 <meta name="twitter:image" content="${image}" />
 <link rel="alternate" type="application/atom+xml" title="${SITE.name}" href="${feed}" />
+${opts.mdPath ? html`<link rel="alternate" type="text/markdown" href="${opts.mdPath}" />` : ""}
 <link rel="icon" href="/favicon.ico" />
 <link rel="preload" href="/fonts/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin />
 <link rel="stylesheet" href="/css/site.css" />
@@ -247,11 +252,14 @@ ${toc}</section>`;
 // ---- post ----
 export function postPage(post: Post, renderedBody: string, dev = false): string {
   const t = i18n[post.lang];
+  const mdPath = `/${post.path}.md`;
   const body = html`<article lang="${post.lang}">
 <h1>${post.title}</h1>
 <p class="post-meta"><time datetime="${isoDate(post.date)}">${fullDate(post.lang, post.date)}</time></p>
 <section>${raw(renderedBody)}</section>
-<footer class="byline">${t.byline}</footer>
+<footer class="byline">${t.byline}
+<a class="view-source" href="${mdPath}">${t.viewSource}</a>
+</footer>
 </article>`;
 
   return layout({
@@ -263,6 +271,7 @@ export function postPage(post: Post, renderedBody: string, dev = false): string 
     ogType: "article",
     image: post.image,
     translationPath: post.translationPath,
+    mdPath,
     indexLink: true,
     body,
     dev,

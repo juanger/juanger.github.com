@@ -64,11 +64,37 @@ scripts, 3 deps), `tsconfig.json` rewritten for Bun, `.gitignore` updated
 ## Test results
 
 ```
-bun test → 107 pass, 0 fail (golden 22, urls 83, plus fixtures/draft check)
-bun run build → 22 posts, 101 files in out/, ~30 ms
+bun test → 110 pass, 0 fail (golden 22, urls 83, plus fixtures/draft + .md checks)
+bun run build → 22 posts, 147 files in out/ (42 of them .md), ~30 ms
 bunx tsc --noEmit → clean
 bun install --frozen-lockfile → clean (CI-ready)
 ```
+
+## .md serving
+
+Every post page also has its markdown source at the same URL + `.md`
+(`/en/2020/05/life-after-covid-19` → `…/life-after-covid-19.md`, same for `/es`).
+The `.md` is the source file **exactly as written** (front matter included),
+copied byte-for-byte into `out/<lang>/YYYY/MM/slug.md`. Images use root-relative
+`/images/…` paths, so the markdown stays valid at its new location — it is not
+rewritten. Drafts are never copied.
+
+- Each legacy `/blog/YYYY/MM/slug` English alias also gets a byte-identical
+  `.md` copy (a meta-refresh stub can't redirect plain text).
+- Each post `<head>` gets `<link rel="alternate" type="text/markdown" href="…/slug.md">`,
+  and the post footer gets a quiet "View source (.md)" link (`.view-source`,
+  styled with the muted footer ink; "Ver fuente (.md)" in Spanish).
+- **Dev server** serves `.md` with `Content-Type: text/plain; charset=utf-8` so
+  browsers (including iOS WKWebView) display it inline instead of downloading it.
+- **Production (GitHub Pages):** an empty `public/.nojekyll` (copied with the rest
+  of `public/`, dotfiles included) stops Jekyll from processing the `.md` files, so
+  they publish as files. Pages sets the content type itself and **may serve `.md` as
+  `text/markdown`, which some browsers download rather than display** — Juan should
+  check this after cutover; if it matters, a `_headers`/content-type override would
+  be the next step.
+- Tests (`test/urls.test.ts`): every non-draft post has a `.md` whose bytes equal
+  the source; the `.md` alias exists and matches for every `/blog/…` English post;
+  no draft `.md` is published.
 
 ## Golden differences accepted
 

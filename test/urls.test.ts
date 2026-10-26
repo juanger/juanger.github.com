@@ -48,6 +48,39 @@ test("drafts exist as fixtures but never leak into out/", async () => {
   }
 });
 
+test("every non-draft post has a byte-identical .md at its URL + .md", async () => {
+  const { posts } = await loadContent({});
+  expect(posts.length).toBeGreaterThan(0);
+  for (const p of posts) {
+    const mdPath = `${OUT}/${p.path}.md`;
+    expect(existsSync(mdPath)).toBe(true);
+    const source = await Bun.file(p.file).text();
+    expect(await Bun.file(mdPath).text()).toBe(source);
+  }
+});
+
+test("each legacy /blog/... English post also has a byte-identical .md alias", async () => {
+  const { posts } = await loadContent({});
+  const en = posts.filter((p) => p.lang === "en");
+  expect(en.length).toBeGreaterThan(0);
+  for (const p of en) {
+    const aliasPath = `${OUT}/blog/${p.year}/${p.month}/${p.slug}.md`;
+    expect(existsSync(aliasPath)).toBe(true);
+    const source = await Bun.file(p.file).text();
+    expect(await Bun.file(aliasPath).text()).toBe(source);
+  }
+});
+
+test("no draft .md is published", async () => {
+  const { drafts } = await loadContent({ includeDrafts: true });
+  for (const d of drafts) {
+    expect(existsSync(`${OUT}/${d.path}.md`)).toBe(false);
+    if (d.lang === "en") {
+      expect(existsSync(`${OUT}/blog/${d.year}/${d.month}/${d.slug}.md`)).toBe(false);
+    }
+  }
+});
+
 afterAll(async () => {
   await rm(OUT, { recursive: true, force: true });
 });

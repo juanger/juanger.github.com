@@ -15,6 +15,13 @@ async function write(outDir: string, relPath: string, contents: string): Promise
   await Bun.write(file, contents);
 }
 
+// Copy a source file to out/ byte-for-byte (used for the .md source copies).
+async function copy(outDir: string, relPath: string, srcFile: string): Promise<void> {
+  const file = `${outDir}/${relPath}`;
+  await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
+  await Bun.write(file, Bun.file(srcFile));
+}
+
 // Map a legacy URL path to the output file that GitHub Pages would serve for it.
 function aliasFile(urlPath: string): string {
   const p = urlPath.replace(/^\//, "");
@@ -51,12 +58,19 @@ export async function build(opts: { outDir?: string; dev?: boolean; includeDraft
     await write(outDir, `${p.path}.html`, postPage(p, body, dev));
     canonicalPaths.push(`/${p.path}`);
 
+    // Markdown source served at the same URL + ".md" (never for drafts). Images
+    // use root-relative paths, so the source stays valid at its new location.
+    if (!p.draft) await copy(outDir, `${p.path}.md`, p.file);
+
     if (p.lang === "en") {
       // /blog/YYYY/MM/slug and the trailing-slash form
       const legacy = `/blog/${p.year}/${p.month}/${p.slug}`;
       const stub = redirectStub(`/${p.path}`);
       await write(outDir, aliasFile(legacy), stub);
       await write(outDir, aliasFile(legacy + "/"), stub);
+      // A meta refresh can't redirect plain text, so the .md alias is a
+      // byte-identical copy of the source rather than a stub.
+      if (!p.draft) await copy(outDir, `blog/${p.year}/${p.month}/${p.slug}.md`, p.file);
     }
     // explicit aliases from front matter (Octopress/Blogger URLs)
     for (const alias of p.aliases) {

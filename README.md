@@ -32,6 +32,9 @@ posts/es/2021-04-16_on-remote-schools.md   ->  /es/2021/04/on-remote-schools
   exist they cross-link automatically and emit `hreflang`.
 - English posts also get `/blog/YYYY/MM/slug` redirect stubs (the old Octopress
   URLs). Add other legacy URLs with the `aliases` field below.
+- **The markdown source is served at the post URL + `.md`** (e.g.
+  `/en/2021/04/on-remote-schools.md`), a byte-identical copy of the source file;
+  the `/blog/…` alias gets one too. Drafts are never copied.
 
 ### Front matter (YAML)
 
