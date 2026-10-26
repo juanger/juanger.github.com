@@ -190,9 +190,12 @@ p { text-wrap: pretty; hyphens: auto; }
 h1, h2, h3 { font-weight: 400; line-height: var(--leading-tight); text-wrap: balance; }
 h1 { font-size: var(--step-3); margin: 0 0 0.4em; letter-spacing: -0.01em; }
 h2 { font-size: var(--step-2); font-style: italic; margin: 2.2em 0 0.6em; }
-.index h2 { margin-top: 1.2em; }
+/* Index headings (years + "Front matter"): ~1.2em of the h2's own size above,
+   ~0.4em down to the first post. The lists carry no margin (see .index ol), so
+   these two never stack with a list margin. */
+.index h2 { margin: 1.2em 0 0.4em; }
 h3 { font-size: var(--step-1); font-style: italic; margin: 1.8em 0 0.5em; }
-.subtitle { font-style: italic; color: var(--ink-muted); font-size: var(--step-1); margin: 0.2rem 0 2rem; }
+.subtitle { font-style: italic; color: var(--ink-muted); font-size: var(--step-1); margin: 0 0 1.2rem; }
 .post-meta {
   color: var(--ink-muted);
   font-variant-caps: all-small-caps;
@@ -340,9 +343,20 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   article { padding-block: 1.5rem 3rem; }
 }
 
+/* ---------- Index spacing ---------- */
+/* Trim the airy masthead→subtitle gap (was ~2rem of top padding). */
+.index { padding-top: 1.4rem; }
+/* Index lists carry no vertical margin, so the heading margins above fully
+   control the rhythm — no list margin adds on top of them. */
+.index ol { margin: 0; }
+/* The subtitle already sets the ~1.2rem gap down to "Front matter". */
+.front-matter h2 { margin-top: 0; }
+
 /* ---------- Index TOC ---------- */
 #TOC ol { list-style: none; padding-left: 0; }
 #TOC li { display: grid; grid-template-columns: 4.5rem auto; gap: 0.5rem; }
+/* Posts within a year: compact, just a hair on top of the line-height. */
+#TOC li + li { margin-top: 0.25rem; }
 #TOC time {
   color: var(--ink-muted);
   font-variant-caps: all-small-caps;

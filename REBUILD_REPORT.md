@@ -277,3 +277,22 @@ unknown-language fence is escaped with no spans; rendered code adds no `<script>
 `console` highlights commands only. The 7 posts with fenced code had their golden
 code blocks regenerated (prose byte-for-byte unchanged) — see
 `test/golden/DIFFERENCES.md`.
+
+### Item 2 — tighter index spacing
+
+Reworked the index rhythm in `site.css` (the `/` and `/es` indexes share one
+template, so this covers both). The old gaps came mostly from the lists' default
+margins stacking under the h2 margins; now `.index ol` carries no margin and the
+heading margins alone set the vertical rhythm — nothing adds up:
+
+- **Above each year heading:** `1.2em` of the h2's own size, measured from the last
+  post title (no list margin underneath it any more).
+- **Year heading → first post:** `0.4em` (h2 `margin-bottom`).
+- **Between posts in a year:** `#TOC li + li { margin-top: 0.25rem }` on top of the
+  line-height.
+- **Subtitle → "Front matter":** `1.2rem` (subtitle `margin-bottom`, with the
+  front-matter h2 top margin zeroed so they don't stack).
+- **Masthead → subtitle:** trimmed the index top padding `2rem → 1.4rem` (and the
+  subtitle's stray `0.2rem` top margin).
+
+Stays legible at 375px (all values are rem/em on the fluid scale).
