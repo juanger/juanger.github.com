@@ -1,0 +1,120 @@
+# Rebuild report — Bun + TypeScript generator
+
+Replaced the Next 9.4 / React 16 / jdown stack with a small Bun + TypeScript static
+generator and a new ET Book stylesheet. Posts, URLs and the authoring flow are kept.
+All work is on the `rebuild` branch (off `source`); `source`, `main` and `master`
+are untouched.
+
+## What was built
+
+### Generator (`src/`, 3 runtime deps: markdown-it, -footnote, -container)
+
+| File | Lines | Purpose |
+|------|------:|---------|
+| `src/html.ts` | 41 | `html\`\`` tagged template (auto-escaping) + `raw()` |
+| `src/content.ts` | 191 | Load posts/pages, split front matter (`Bun.YAML`), derive URL from filename, pair translations, filter drafts |
+| `src/markdown.ts` | 201 | markdown-it config: footnote→sidenote (+mobile toggle), `[^m:]`→margin note, image→figure, `:::` containers, `^^newthought^^`, marked-compatible heading ids |
+| `src/templates.ts` | 329 | layout/head (title, OG, Twitter, canonical, hreflang), index (TOC by year), post, standalone page, 404, redirect stub, i18n table, theme selector + pre-paint script |
+| `src/feeds.ts` | 70 | Atom per language + sitemap (hand-written, no deps) |
+| `src/build.ts` | 99 | Orchestrate: clean `out/`, copy `public/`, write pages + aliases + feeds |
+| `src/dev.ts` | 120 | Single-process build + watch + `Bun.serve` (Pages resolution) + SSE reload |
+| `src/types.d.ts` | 3 | Ambient decls for the untyped plugins |
+
+Total generator source: **1054 lines**.
+
+### Stylesheet + fonts
+- `public/css/site.css` — **331 lines**, replacing the ~450-line inlined Tufte fork.
+  ET Book body (self-hosted), IBM Plex Mono code, light/dark tokens, grana
+  cochinilla `#9b1b30` / cacao `#d69a6f` accents, fluid rem scale, 34em measure,
+  real underlines, A2 synthesized small caps, CSS-only sidenote toggle.
+- `public/fonts/` — 4 ET Book `.woff` (roman old-style, display italic old-style,
+  bold line, roman line) + 6 IBM Plex Mono `.woff2` (latin + latin-ext × 400/italic/600).
+
+### Tests
+- `test/golden.test.ts` (24) + `test/normalize.ts` (48) — per-post article HTML vs
+  the frozen baseline, normalized.
+- `test/urls.test.ts` (53) — builds into a scratch dir and asserts every line of
+  `urls.txt` (83 URLs) resolves via Pages resolution; also asserts no draft leaks.
+- `test/golden/` — 22 golden files + `DIFFERENCES.md`.
+
+### Other
+- `.github/workflows/pages.yml` (42) — push to `source` → install/test/build →
+  upload-pages-artifact → deploy-pages, all actions pinned to full tags.
+- `README.md` (90) — authoring cheat-sheet.
+- `urls.txt` (99) — URL inventory.
+- `pages/about.md`, `pages/es/acerca+de.md` — the TSX about pages as markdown.
+- `public/CNAME` (`blog.juanger.com`), restored `public/favicon.png`.
+
+### Content edits (markup only, prose unchanged)
+- Both COVID posts (en + es): sidenotes → `[^x]`, pull-quotes → `:::pullquote`,
+  figure → `![](… "caption")`. Each note now emits the `<label>`+`<input>`+`<span>`
+  toggle, so sidenotes open on tap on phones (the live site is missing the checkbox).
+- `new-features-in-rorgate-30-beta` (en): the three `shownote` figure captions
+  converted to markdown figures so the captions open on tap too.
+- `aliases` front matter added to `html5-and-css3-buttons`, `blogger-bundle-for-textmate-13`,
+  `lucecita-20` for their Octopress/Blogger URLs.
+- `posts/en/2099-01-01_draft-example.md` — a `draft: true` fixture for the test.
+
+### Removed old stack
+`pages/*.tsx`, `pages/[lang]/…`, `components/`, `lib/`, `.themes/`, `.gitmodules`,
+`.babelrc`, `next-env.d.ts`, `package-lock.json`. `package.json` rewritten (Bun
+scripts, 3 deps), `tsconfig.json` rewritten for Bun, `.gitignore` updated
+(`out/`, `node_modules/`, `test/.urls-out/`).
+
+## Test results
+
+```
+bun test → 107 pass, 0 fail (golden 22, urls 83, plus fixtures/draft check)
+bun run build → 22 posts, 101 files in out/, ~30 ms
+bunx tsc --noEmit → clean
+bun install --frozen-lockfile → clean (CI-ready)
+```
+
+## Golden differences accepted
+
+Full list with reasons in `test/golden/DIFFERENCES.md`. Summary:
+
+- **14 posts** compare byte-for-byte (after whitespace/entity normalization) against
+  the 2022-05-04 deploy.
+- **6 posts** changed in commit `8da6e7a` (image relinks, Liquid-tag removal) which
+  postdates the deploy; their golden is a fresh render of the current source. Diffs
+  verified to be only those image/Liquid changes.
+- **2 posts** (COVID en/es) were converted to the new sidenote syntax; their golden
+  is a fresh render. The only structural change is the added mobile-toggle markup.
+- Normalization decodes entities (`&#39;`↔`'`), collapses whitespace, and ignores
+  the trailing newline markdown-it adds inside `<pre><code>`. Heading `id`s are
+  reproduced (marked's slugger reimplemented) so `#anchor` links still resolve.
+
+## Deviations / judgment calls
+
+- **ET Book figures.** Design decision 1 lists `roman-line-figures` as a body face,
+  but decision 8 wants old-style figures in running text. ET Book has no OpenType
+  figure toggle (separate files), so the two can't both hold. I made the body roman
+  face `roman-old-style-figures` (decision 8 — the more specific instruction and the
+  one matching `oldstyle-nums`), and kept `roman-line-figures` as `"ET Book LF"` for
+  tables (lining/tabular numerals). All four files are downloaded and used.
+- **About pages** use a plain labelled link list, not the FontAwesome SVG icons from
+  the old TSX (which pulled a dependency). Worth a visual pass if Juan wants icons.
+- **Dev `src/` edits** need a manual restart. I kept `bun run dev` a single plain
+  process (no `bun --watch` self-restart) to honor "single process, no spawning
+  itself" unambiguously. Content edits hot-reload.
+
+## Not done (out of scope per the task) / for Juan
+
+- **Errata system** — intentionally skipped (no banners, 2026 notes, scorecards,
+  index labels or `/errata`). The extra front-matter fields are parsed but nothing
+  is rendered from them.
+- **Gist inlining** — the dead `<script src="http://gist.github.com/…">` embeds in
+  the HFS+ and screencast posts are left as-is (a separate content fix).
+- **No push/deploy performed** — no credentials; Juan cuts over himself.
+
+### Needs Juan's eye
+- **Visual check** of the new stylesheet on desktop and at ~375px, light and dark,
+  especially: ET Book sidenote legibility on low-density screens, the A2 small-caps
+  masthead weight, and the COVID post's margin notes/figure on a phone. I could not
+  render in a real browser here.
+- **At cutover**, in repo Settings → Pages: switch the source to **"GitHub Actions"**
+  and set the custom domain to **`blog.juanger.com`** (Actions deploys take the
+  domain from settings; `public/CNAME` is also committed). Keep `master` as rollback.
+- First deploy briefly serves nothing if the workflow fails — do the Pages-source
+  switch right after a green run, or flip back to `master` to roll back.
