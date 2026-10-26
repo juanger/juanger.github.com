@@ -54,8 +54,24 @@ These posts' golden was regenerated after the revival cleanups. The changes are
 link targets, image markup / alt text and inlined code embeds only — no prose
 change. Each is a fresh render of the current source.
 
-| Post | Reason |
+Some of these posts already appear in the tables above (8da6e7a image relinks,
+COVID sidenote conversion); the revival changes layer on top of that provenance.
+
+| Post | Revival change |
 |------|--------|
-| `en/2010/04/this-is-old-post-that-i-wrote-some` | Dead `<script src="http://gist.github.com/…js">` embeds (gists 489706/489709/489712/489715) inlined as fenced code blocks with a "Gist ↗" link. |
+| `en/2008/05/rtranscoder-jpeg-to-mpeg` | Dead `rubyforge.org` link → 2009 Wayback snapshot + `archived` marker. |
+| `en/2008/05/textmate-ssh-and-github` | Spam `sshkeychain.org` → 2008 Wayback snapshot + `archived`; `macromates.com` → https. |
+| `en/2008/05/freebsd-startup-script-with-ruby` | Dead `snippets.dzone.com` link → 2008 Wayback snapshot + `archived` marker. |
+| `en/2008/07/rorgate` | `github.com/…/tree/master` → https; image cruft stripped + alt; `blog.jasoncrystal.com` and `code.google.com/p/rorgate` → Wayback snapshots + `archived`. |
+| `en/2008/07/server-output-in-rorgate` | `tree/master%2F…?raw=true` href → `raw.githubusercontent.com`; image cruft stripped + alt + kept 400px width. |
+| `en/2008/07/new-features-in-rorgate-30-beta` | Alt text added to the three figure images. |
+| `en/2008/07/lucecita-rubycocoa-example` | `blog.juanger.com/…` → relative post URL; image cruft stripped + alt; dead `googlepages.com` download links → `dead-link` spans. |
+| `en/2008/10/lucecita-20` | Flickr + `github.com/juanger/lucecita` → https; DMG `tree/master%2F…?raw=true` → `raw.githubusercontent.com`. |
 | `en/2008/11/screencast-with-rubycocoa` | Dead gist 489722 inlined as a `ruby` fenced block with a "Gist ↗" link. |
-| `en/2008/05/textmate-ssh-and-github` | Spam `sshkeychain.org` link repointed at its 2008 Wayback snapshot with an `archived` marker; `macromates.com` upgraded to https. |
+| `en/2009/01/blogger-bundle-for-textmate-13` | `github.com/juanger/blogger.tmbundle` → https. |
+| `en/2009/04/accepted-into-gsoc` | Dead `googlepages.com` download link → `dead-link` span. |
+| `en/2009/07/one-week-till-midterm-evaluation` | Image cruft stripped + alt + kept 300px width; dead `juanger.heroku.com` link → `dead-link` span. |
+| `en/2010/04/this-is-old-post-that-i-wrote-some` | Dead gist `<script>` embeds (489706/489709/489712/489715) inlined as fenced code blocks with "Gist ↗" links. |
+| `en/2013/06/command-done-notification-with-zsh-and-growl` | `spoj.com` + `en.wikipedia.org` → https; dead `fightcodegame.com` and `getprismatic.com` → Wayback snapshots + `archived`. |
+| `en/2020/05/life-after-covid-19` | Image alt text added/updated (deaths-by-country and Modeling COVID charts). |
+| `es/2020/05/life-after-covid-19` | Image alt text added/updated (same two charts). |

@@ -36,6 +36,14 @@ test("no built page loads an asset over http (mixed content)", () => {
   expect(offenders).toEqual([]);
 });
 
+test("no built page links out over plain http", () => {
+  // Every external link is https, an https Wayback snapshot, or a dead-link
+  // span with no href. A bare href="http://…" means a dead link slipped back in.
+  const re = /\bhref\s*=\s*"http:\/\//i;
+  const offenders = htmlFiles.filter((f) => re.test(f.text)).map((f) => f.rel);
+  expect(offenders).toEqual([]);
+});
+
 test("every <img> in out/ has a non-empty alt", () => {
   const imgRe = /<img\b[^>]*>/gi;
   const altRe = /\balt\s*=\s*"([^"]*)"/i;

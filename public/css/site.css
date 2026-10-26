@@ -228,6 +228,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 }
 .archived::before { content: "\2009"; /* thin space */ }
 
+/* A link whose target is gone with no archive: keep the text, drop the href,
+   render it muted so it reads as inert. */
+.dead-link { color: var(--ink-muted); }
+
 /* ---------- Lists, quotes ---------- */
 ul, ol { padding-left: 1.4em; }
 li + li { margin-top: 0.3em; }

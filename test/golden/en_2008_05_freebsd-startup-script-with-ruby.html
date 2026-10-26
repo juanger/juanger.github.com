@@ -1,4 +1,4 @@
-<p>Since some days ago I&#39;ve been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:</p>
+<p>Since some days ago I've been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:</p>
 <blockquote>
 <p>Put your .sh script at /usr/local/etc/rc.d</p>
 </blockquote>
@@ -9,25 +9,25 @@
 <blockquote>
 <p>custom_require.rb:27: command not found: mongrel_rails</p>
 </blockquote>
-<p>First, here is my final code that was inspired by <a href="http://snippets.dzone.com/posts/show/2594">Tim Morgan&#39;s</a>:</p>
+<p>First, here is my final code that was inspired by <a href="https://web.archive.org/web/20080602152255/http://snippets.dzone.com:80/posts/show/2594" title="Original: http://snippets.dzone.com/posts/show/2594">Tim Morgan's</a><span class="archived">archived</span>:</p>
 <pre><code class="language-ruby">#!/usr/local/bin/ruby
 
 puts ENV[&quot;PATH&quot;] += &quot;:/usr/local/bin&quot;
-app_dir = &#39;/usr/local/www&#39;
+app_dir = '/usr/local/www'
 
 apps = [
   scielo_index = { :name =&gt; &quot;ScieloIndex&quot;,
-                   :path =&gt; &#39;index.scielo.unam.mx/current&#39;,
+                   :path =&gt; 'index.scielo.unam.mx/current',
                    :config =&gt; &quot;config/mongrel_cluster.yml&quot;,
                    :cluster =&gt; true },
 
   redmine = { :name =&gt; &quot;Redmine&quot;,
-              :path =&gt; &#39;dev.scielo.unam.mx/Redmine&#39;,
+              :path =&gt; 'dev.scielo.unam.mx/Redmine',
               :config =&gt; &quot;config/mongrel_8000.yml&quot;,
               :pid =&gt; &quot;log/mongrel.pid&quot; }
   ]
 
-if [&#39;stop&#39;, &#39;restart&#39;].include? ARGV.first
+if ['stop', 'restart'].include? ARGV.first
   apps.each do |app|
     path = File.join app_dir, app[:path]
     puts &quot;Stopping #{app[:name]}...&quot;
@@ -39,7 +39,7 @@ if [&#39;stop&#39;, &#39;restart&#39;].include? ARGV.first
   end
 end
 
-if [&#39;start&#39;, &#39;restart&#39;].include? ARGV.first
+if ['start', 'restart'].include? ARGV.first
   apps.each do |app|
     path = File.join app_dir, app[:path]
     puts &quot;Starting #{app[:name]}...&quot;
@@ -51,9 +51,10 @@ if [&#39;start&#39;, &#39;restart&#39;].include? ARGV.first
   end
 end
 
-unless [&#39;start&#39;, &#39;stop&#39;, &#39;restart&#39;].include? ARGV.first
+unless ['start', 'stop', 'restart'].include? ARGV.first
     puts &quot;Usage: mongrel {start|stop|restart}&quot;
     exit
-end</code></pre>
-<p>The key part is the <code>ENV[&quot;PATH&quot;]</code> setup, that line is needed as FreeBSD&#39;s PATH at startup is <code>&quot;/sbin:/bin:/usr/sbin:/usr/bin&quot;</code> and this also leads us to change the interpreter path from something like <code>&quot;#!/usr/bin/env ruby&quot;</code> to <code>&quot;#!/usr/local/bin/ruby&quot;</code>, i.e. its full path.</p>
-<p>That&#39;s all, now our ruby script really runs at startup time without complaining.</p>
+end
+</code></pre>
+<p>The key part is the <code>ENV[&quot;PATH&quot;]</code> setup, that line is needed as FreeBSD's PATH at startup is <code>&quot;/sbin:/bin:/usr/sbin:/usr/bin&quot;</code> and this also leads us to change the interpreter path from something like <code>&quot;#!/usr/bin/env ruby&quot;</code> to <code>&quot;#!/usr/local/bin/ruby&quot;</code>, i.e. its full path.</p>
+<p>That's all, now our ruby script really runs at startup time without complaining.</p>

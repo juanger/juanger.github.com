@@ -31,4 +31,4 @@ After a lot of attempts, my code got like this:
 
 As you can see, instead of doing something like `mencoder.mf = "fps=25:type=jpg"` (my error) you have to do it with `mencoder.mf.fps` and `mencoder.mf.type` respectively, the same with lavc and everytime you need to pass an argument with suboptions separated by ":".
 
-Here is the page of <a href="http://rtranscoder.rubyforge.org/">Rtranscoder</a>.</div>
+Here is the page of <a href="https://web.archive.org/web/20090101041307/http://rtranscoder.rubyforge.org:80/" title="Original: http://rtranscoder.rubyforge.org/">Rtranscoder</a><span class="archived">archived</span>.</div>

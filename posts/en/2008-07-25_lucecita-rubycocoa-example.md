@@ -12,7 +12,7 @@ categories:
 
 <p><span style="font-weight:bold;">UPDATE:</span> Version 2.0 of Lucecita is out. <a href="/en/2008/10/lucecita-20">Lucecita 2.0</a></p>
 
-<p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a>.</p>
+<p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <span class="dead-link" title="Link no longer available">Lucecita.app</span>.</p>
 
 <p>
   <img src="/images/2008-07-25_lucecita-rubycocoa-example/LucecitaInAction.png" alt="Lucecita in action" />
@@ -164,7 +164,7 @@ class LuzController < OSX::NSObject
 end
 ```
 
-<p>And the application is here: <a href="http://juanger.googlepages.com/Lucecita.zip">Lucecita.app</a></p>
+<p>And the application is here: <span class="dead-link" title="Link no longer available">Lucecita.app</span></p>
 
 <p>You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.</p>
 

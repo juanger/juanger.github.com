@@ -19,7 +19,7 @@ And since I like ruby, I began to code my script with it and the problems came:
 
 > custom_require.rb:27: command not found: mongrel_rails
 
-First, here is my final code that was inspired by <a href="http://snippets.dzone.com/posts/show/2594">Tim Morgan's</a>:
+First, here is my final code that was inspired by <a href="https://web.archive.org/web/20080602152255/http://snippets.dzone.com:80/posts/show/2594" title="Original: http://snippets.dzone.com/posts/show/2594">Tim Morgan's</a><span class="archived">archived</span>:
 
 ```ruby
 #!/usr/local/bin/ruby
