@@ -8,8 +8,9 @@
 # old GitHub Pages deploy clone
 _deploy/
 
-# dev-server scratch build (test/urls.test.ts)
+# scratch builds from the test suite
 /test/.urls-out/
+/test/.built-out/
 
 # misc
 .DS_Store
