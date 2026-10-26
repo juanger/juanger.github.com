@@ -162,3 +162,94 @@ Full list with reasons in `test/golden/DIFFERENCES.md`. Summary:
   script, updates its icon/aria-label on a system change while unset, is rendered
   `hidden` (unhidden by JS) so with JS off CSS follows the system, and carries a
   localized `aria-label` and a visible focus ring.
+
+## Revival cleanups
+
+A batch of eight link/markup/asset fixes on `rebuild` (one commit per item).
+Juan's prose is unchanged throughout — only link targets, markup, alt text, code
+embeds and generated assets changed. `bun test` and `bun run build` pass at every
+commit. Golden files for touched posts were regenerated from the current source
+(see `test/golden/DIFFERENCES.md`).
+
+**0. Thinner theme icons.** The header moon/sun are now outline icons (`fill:none`,
+`stroke:currentColor`, 1.25 stroke in a 24 viewBox, round caps/joins) — a slim
+crescent and a small sun with short rays, to match ET Book's thin strokes.
+
+**1. Inlined the dead gists.** The HFS+ post (gists 489706/489709/489712/489715)
+and the screencast post (489722) embedded `<script src="http://gist.github.com/…js">`,
+which browsers block as mixed content. Each is now a fenced code block (console /
+ruby) with a small "Gist ↗" link to the gist page. Fetched once at edit time; no
+network at build. `test/built-html.test.ts` asserts no built page embeds a gist
+`.js`.
+
+**2. Removed the spam link.** `www.sshkeychain.org` (now redirects to spam) points
+at its 2008-05-12 Wayback snapshot, as an archived link (see item 5).
+
+**3. https where it works.** Upgraded links whose host serves the same page over
+https (each checked with `curl -sIL`). The two GitHub `tree/master%2F…?raw=true`
+download URLs became working `raw.githubusercontent.com` URLs; the old
+`blog.juanger.com/2008/10/lucecita-20.html` self-reference became the relative post
+URL. `test/built-html.test.ts` asserts no built page has `src="http://…"` (and, as
+a stronger guard, no bare `href="http://…"` either).
+
+**4. Old Blogger image markup.** Stripped inline `style`, `border`, `cursor`,
+`id="BLOGGER_PHOTO_ID_…"` and the dead `deselectBloggerImageGracefully` `onblur`
+from post `<img>`/`<a>` tags; dropped the fixed heights that squashed images on
+phones (the stylesheet's `max-width:100%; height:auto` now sizes them). Deliberate
+small widths (497/400/300 px) kept as plain `width` attributes. Every image got a
+short factual `alt`. `test/built-html.test.ts` asserts every `<img>` in `out/` has a
+non-empty `alt`. No image exceeds the text column at 375 px (the global
+`max-width:100%` is not overridden).
+
+**5. Dead links → Wayback.** See the table below.
+
+**6. Post-deploy URL check.** A new `check-urls` job runs after `deploy-pages` and
+requests every path in `urls.txt` against the deployed site, using the deploy
+step's `page_url` output (exposed as a job output) rather than a hardcoded domain.
+The logic is `scripts/check-urls.ts` (Bun): `curl -sIL` per URL with a CDN warm-up
+wait and per-URL retries, fails the job on any non-2xx/3xx, and writes a pass/fail
+table to the job summary.
+
+**7. Favicon + social image.** `tools/make-icons.ts` (opentype.js → SVG paths,
+`@resvg/resvg-js` → PNG; devDependencies, never run by the build) generates the "RX"
+mark in `#9b1b30` on `#fbf8f1` as `public/favicon.svg`, `favicon.ico`, `favicon.png`
+(32 px) and `apple-touch-icon.png` (180 px), plus `public/og.png` (1200×630:
+"Ruby Xocolatl" in synthesized small caps, subtitle in italic muted ink). The head
+links the SVG icon first; `og.png` is the single `og:image`/`twitter:image` for
+every page (no per-post images). README documents regeneration.
+
+### Item 5 — links changed (old → new)
+
+| Post | Original link | New target |
+|------|---------------|-----------|
+| rtranscoder-jpeg-to-mpeg | `http://rtranscoder.rubyforge.org/` | Wayback `20090101041307` + `archived` |
+| freebsd-startup-script-with-ruby | `http://snippets.dzone.com/posts/show/2594` | Wayback `20080602152255` + `archived` |
+| rorgate | `http://blog.jasoncrystal.com/?p=7` | Wayback `20080705060925` + `archived` |
+| rorgate | `http://code.google.com/p/rorgate/` | Wayback `20080705131540` + `archived` |
+| command-done…growl | `http://fightcodegame.com/` | Wayback `20130602015440` + `archived` |
+| command-done…growl | `http://getprismatic.com` | Wayback `20130612191539` + `archived` |
+| lucecita-rubycocoa-example | `http://juanger.googlepages.com/Lucecita.zip` (×2) | no snapshot → `dead-link` span |
+| accepted-into-gsoc | `http://juanger.googlepages.com/Porton-app.zip` | no snapshot → `dead-link` span |
+| one-week-till-midterm-evaluation | `http://juanger.heroku.com/gsoc-09` | no snapshot → `dead-link` span |
+
+(Item 2's `www.sshkeychain.org` → Wayback `20080512090802` is the same archived
+pattern.) All Wayback links use the `https://web.archive.org/` host (verified 200),
+so none is a mixed-content or bare-`http` link. Archived markers are styled
+`.archived` (small caps, `--ink-muted`, thin space before); Spanish posts would use
+"archivado" (none occur here). Dead links are `.dead-link` muted spans with a
+`title`.
+
+### Couldn't do / for Juan's eye
+
+- **spoj.com** answers `403` to automated `HEAD`/`GET` over both http and https
+  (bot protection); the http URL already redirects to https, so https is the correct
+  same-page target and was used. A link checker may still report 403 for it.
+- **No Wayback snapshot** exists for the three `googlepages.com` download files or
+  `juanger.heroku.com/gsoc-09`, so those are muted `dead-link` spans, per the spec.
+- **Favicon at 16 px.** The "RX" mark is crisp at 32 px and 180 px; a real 16-px
+  check on device is worth a glance (the spec allowed falling back to "R" — I judged
+  "RX" readable).
+- **`@resvg/resvg-js`** ships a platform-specific native binary; the lockfile pins
+  the linux-x64 build CI uses. It is a devDependency and never runs in the build, so
+  a missing binary on another platform would not affect `bun run build`.
+- The earlier report's "Gist inlining" under *Not done* is now **done** (item 1).
