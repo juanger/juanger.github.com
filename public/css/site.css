@@ -134,15 +134,10 @@ body {
 }
 .masthead {
   color: var(--accent);
-  font-size: var(--step-2);
-  font-variant-caps: all-small-caps;
-  letter-spacing: 0.08em;
-  font-synthesis: small-caps;
-  -webkit-text-stroke: 0.025em currentColor;
+  font-size: 3em;
+  line-height: 1.1;
   text-decoration: none;
 }
-/* On the index "Ruby Xocolatl" is the page title, not just a wayfinding mark. */
-.site-head--home .masthead { font-size: var(--step-3); }
 .site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.2rem; }
 .site-nav a {
   color: var(--ink-muted);
@@ -193,6 +188,7 @@ p { text-wrap: pretty; hyphens: auto; }
 h1, h2, h3 { font-weight: 400; line-height: var(--leading-tight); text-wrap: balance; }
 h1 { font-size: var(--step-3); margin: 0 0 0.4em; letter-spacing: -0.01em; }
 h2 { font-size: var(--step-2); font-style: italic; margin: 2.2em 0 0.6em; }
+.index h2 { margin-top: 1.2em; }
 h3 { font-size: var(--step-1); font-style: italic; margin: 1.8em 0 0.5em; }
 .subtitle { font-style: italic; color: var(--ink-muted); font-size: var(--step-1); margin: 0.2rem 0 2rem; }
 .post-meta {
