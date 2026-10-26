@@ -132,12 +132,13 @@ body {
   max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
   margin-inline: auto;
 }
-.masthead {
+.masthead, .masthead:link, .masthead:visited {
   color: var(--accent);
   font-size: 3em;
   line-height: 1.1;
   text-decoration: none;
 }
+.masthead:hover { color: var(--accent); text-decoration: none; }
 .site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.2rem; }
 .site-nav a {
   color: var(--ink-muted);
