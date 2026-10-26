@@ -47,3 +47,14 @@ sidenotes open on tap on phones (the live site is missing the toggle checkbox):
 |------|--------|
 | `en/2020/05/life-after-covid-19` | 3 sidenotes → `[^x]`, 1 figure → `![](… "caption")`, 3 pull-quotes → `:::pullquote`. Each note now emits the Tufte `<label>`+`<input>`+`<span>` triple. Prose unchanged. |
 | `es/2020/05/life-after-covid-19` | Same conversion as the English version. |
+
+## Revival cleanups (golden regenerated from current source)
+
+These posts' golden was regenerated after the revival cleanups. The changes are
+link targets, image markup / alt text and inlined code embeds only — no prose
+change. Each is a fresh render of the current source.
+
+| Post | Reason |
+|------|--------|
+| `en/2010/04/this-is-old-post-that-i-wrote-some` | Dead `<script src="http://gist.github.com/…js">` embeds (gists 489706/489709/489712/489715) inlined as fenced code blocks with a "Gist ↗" link. |
+| `en/2008/11/screencast-with-rubycocoa` | Dead gist 489722 inlined as a `ruby` fenced block with a "Gist ↗" link. |
