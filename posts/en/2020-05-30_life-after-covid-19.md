@@ -14,17 +14,23 @@ I'm going to list some phrases we've heard over these months and give my opinion
 
 ## "Flu kills more people, why panic?"
 
-I think it is very evident now that COVID-19 is a very deadly disease, just look at the alarming news in 2018 about 80k deaths from flu in USA during winter and compare it to what COVID-19 did during spring, <label for="flu-deaths" class="margin-toggle sidenote-number"></label><span class="sidenote">CNN: https://www.cnn.com/2018/09/26/health/flu-deaths-2017--2018-cdc-bn/index.html</span> but I think the most important part of it, and why a lot of people in government and upper class panicked is that it can kill anyone.
+I think it is very evident now that COVID-19 is a very deadly disease, just look at the alarming news in 2018 about 80k deaths from flu in USA during winter and compare it to what COVID-19 did during spring,[^flu-deaths] but I think the most important part of it, and why a lot of people in government and upper class panicked is that it can kill anyone.
 
-<blockquote class="fullwidth">
-<hr/>Rich people can survive a lot of things that take a lot of lives every day worldwide, but this is a new disease and they cannot pay for immunity (yet).<hr/></blockquote>
+[^flu-deaths]: CNN: https://www.cnn.com/2018/09/26/health/flu-deaths-2017--2018-cdc-bn/index.html
+
+:::pullquote
+Rich people can survive a lot of things that take a lot of lives every day worldwide, but this is a new disease and they cannot pay for immunity (yet).
+:::
 
 ## "The government of X country is doing very bad"
 
-Last flu epidemic in 2009 had a faster response from USA and the world because it started very close, in Mexico. <label for="cruise" class="margin-toggle sidenote-number"></label><span class="sidenote">Even the cruise companies acted faster in 2009. <a href="https://web.archive.org/web/20090630144402/http://www.sdbj.com/industry_article.asp?aID=47999878.5516779.1777724.4325329.569692.256&aID2=136739">Web Archive</a></span> I think the world assumed that it was China's problem and that distance was protecting everyone.
+Last flu epidemic in 2009 had a faster response from USA and the world because it started very close, in Mexico.[^cruise] I think the world assumed that it was China's problem and that distance was protecting everyone.
 
-<blockquote class="fullwidth">
-<hr/>Any response from governments was more like an experiment and some might have worked better but replace X with any name and the phrase in the title will be true for almost 95% of countries.<hr/></blockquote>
+[^cruise]: Even the cruise companies acted faster in 2009. [Web Archive](https://web.archive.org/web/20090630144402/http://www.sdbj.com/industry_article.asp?aID=47999878.5516779.1777724.4325329.569692.256&aID2=136739)
+
+:::pullquote
+Any response from governments was more like an experiment and some might have worked better but replace X with any name and the phrase in the title will be true for almost 95% of countries.
+:::
 
 This crisis is something that no one could be prepared for (because it requires a lot of money and planning) but it is very important to figure out what the best plan is for a new contagious disease in the future.
 
@@ -36,10 +42,7 @@ As you can see in the following picture, the trend is similar in all countries, 
 
 The whole world doesn't have to stop until this is solved, but we'll have to still keep certain measures for a while until a vaccine is available for everyone.
 
-<figure>
-<span class="marginnote">Mexico, Brazil, India, Chile and Colombia seem to be in the same situation, deaths on the rise without a clear peak.</span>
-<img alt="COVID-19 deaths" src="/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png"/>
-</figure>
+![COVID-19 deaths](/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png "Mexico, Brazil, India, Chile and Colombia seem to be in the same situation, deaths on the rise without a clear peak.")
 
 ## "The economy is collapsing, we have to go back to normal"
 
@@ -47,9 +50,9 @@ Anyone is at risk of contracting the virus, and some will tell you that there is
 
 I translate that as: trust is no longer a given. When you shake hands, buy a meal, board a plane or train, share a car, etc, do you trust the other people to not have a contagious disease? It sounds paranoid, but when your life is at stake, there's no such thing as taking too many precautions.
 
-<blockquote class="fullwidth">
-<hr/>Over time, if we get a cure, we'll not think as much about it but once a new disease comes, trust will be the first global casualty.
-<hr/></blockquote>
+:::pullquote
+Over time, if we get a cure, we'll not think as much about it but once a new disease comes, trust will be the first global casualty.
+:::
 
 The economy will also suffer from trust issues because people will start thinking twice before acquiring anything, be it because of fear or because they may need that money for healthcare.
 
@@ -71,7 +74,9 @@ Go to work, but take care. If you lost your job, things are going to be more dif
 
 - A better mask design is needed for people to wear for long periods, we will see new designs for both healthcare providers (who need maximum protection since they are for sure in contact with the virus) and normal people.
 
-- Some epidemic models <label for="models" class="margin-toggle sidenote-number"></label><span class="sidenote">Modeling COVID site<img src="/images/2020-05-30_life-after-covid-19/Return to normal.png"> <a href="https://modelingcovid.com/state/CA">https://modelingcovid.com/state/CA</a></span> show that without a cure and permanent social distancing, COVID-19 will come in waves or at least with a new wave after lifting restrictions. I fear that we'll get a bad mutation in a country where restrictions are not followed and we'll be back to panic.
+- Some epidemic models[^models] show that without a cure and permanent social distancing, COVID-19 will come in waves or at least with a new wave after lifting restrictions. I fear that we'll get a bad mutation in a country where restrictions are not followed and we'll be back to panic.
+
+[^models]: Modeling COVID site ![](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
 
 - Rich people will value isolation more, companies that offer products used in isolation will be backed by VCs.
 

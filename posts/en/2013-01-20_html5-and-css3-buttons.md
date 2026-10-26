@@ -5,6 +5,9 @@ date: 2012-06-20 11:42
 comments: true
 categories: html5 sass compass css3
 colors: ["grey", "black", "blue"]
+aliases:
+  - /blog/2012/06/html5-and-css3-buttons/
+  - /2012/06/html5-and-css3-buttons.html
 ---
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/css_buttons.css">

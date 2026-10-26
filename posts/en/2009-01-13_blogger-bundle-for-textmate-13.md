@@ -6,6 +6,9 @@ comments: false
 categories:
   - TextMate
   - blogger.tmbundle
+aliases:
+  - /blog/2009/01/blogger-bundle-for-textmate_13/
+  - /2009/01/blogger-bundle-for-textmate_13.html
 ---
 
 <p>Yes, that’s right, I’ve been working in getting TextMate to love Blogger. Some time ago I realized that the Blogger <span class='caps'>API</span> is no longer compatible with the TextMate’s blogging bundle and I really wanted it to work.</p>
