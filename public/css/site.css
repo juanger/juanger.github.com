@@ -1,0 +1,331 @@
+/* Ruby Xocolatl — a lean Tufte-flavoured stylesheet.
+   Body: ET Book (self-hosted). Code: IBM Plex Mono. Light/dark via tokens.
+   Replaces the ~450-line inlined Tufte fork. */
+
+/* ---------- Fonts (self-hosted) ---------- */
+/* ET Book ships separate files for line vs. old-style figures (no OpenType
+   toggle), so the body roman face is the old-style cut: old-style figures in
+   running text, in sidenote numbers and in dates. Tables use the line-figure
+   cut for lining/tabular numerals. */
+@font-face {
+  font-family: "ET Book"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/et-book-roman-old-style-figures.woff") format("woff");
+}
+@font-face {
+  font-family: "ET Book"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("/fonts/et-book-display-italic-old-style-figures.woff") format("woff");
+}
+@font-face {
+  font-family: "ET Book"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("/fonts/et-book-bold-line-figures.woff") format("woff");
+}
+@font-face {
+  font-family: "ET Book LF"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/et-book-roman-line-figures.woff") format("woff");
+}
+
+/* IBM Plex Mono — latin + latin-ext, regular / italic / semibold */
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-400-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-ext-400-italic.woff2") format("woff2");
+  unicode-range: U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-ext-600-normal.woff2") format("woff2");
+  unicode-range: U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: light dark;
+  --font-serif: "ET Book", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-serif-lf: "ET Book LF", var(--font-serif);
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* fluid scale: ~360px -> ~1280px viewport */
+  --step--1: clamp(0.9rem, 0.86rem + 0.2vw, 1rem);        /* notes, captions */
+  --step-0:  clamp(1.0625rem, 0.97rem + 0.42vw, 1.25rem); /* body */
+  --step-1:  clamp(1.25rem, 1.12rem + 0.6vw, 1.55rem);    /* h3 */
+  --step-2:  clamp(1.5rem, 1.27rem + 1vw, 2.1rem);        /* h2 */
+  --step-3:  clamp(2.1rem, 1.6rem + 2.2vw, 3.4rem);       /* h1 / title */
+
+  --leading: 1.55;
+  --leading-tight: 1.15;
+  --leading-note: 1.4;
+  --flow: 1.1em;
+  --measure: 34em;
+  --note-w: clamp(12rem, 22vw, 17rem);
+  --note-gap: 2.5rem;
+  --gutter: 1rem;
+
+  /* light: warm cotton paper, grana cochinilla accent */
+  --paper: #fbf8f1;
+  --ink: #1f1b16;
+  --ink-muted: #5c5248;
+  --rule: #e3dccf;
+  --code-bg: #f3eee3;
+  --accent: #9b1b30;
+  --link-line: #b9ad9c;
+  --selection: #ecdcc8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #17130f; --ink: #e8e1d6; --ink-muted: #a89c8e; --rule: #3a322a;
+    --code-bg: #211b16; --accent: #d69a6f; --link-line: #6e6254; --selection: #4a3626;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #17130f; --ink: #e8e1d6; --ink-muted: #a89c8e; --rule: #3a322a;
+  --code-bg: #211b16; --accent: #d69a6f; --link-line: #6e6254; --selection: #4a3626;
+}
+:root[data-theme="light"] {
+  --paper: #fbf8f1; --ink: #1f1b16; --ink-muted: #5c5248; --rule: #e3dccf;
+  --code-bg: #f3eee3; --accent: #9b1b30; --link-line: #b9ad9c; --selection: #ecdcc8;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: var(--step-0);
+  line-height: var(--leading);
+  font-kerning: normal;
+  counter-reset: sidenote-counter;
+}
+::selection { background: var(--selection); }
+
+.page-layout { max-width: 72rem; margin-inline: auto; padding-inline: var(--gutter); }
+
+/* masthead / nav */
+.site-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1.6rem 0;
+  max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
+  margin-inline: auto;
+}
+.masthead {
+  color: var(--accent);
+  font-size: var(--step-2);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
+  font-synthesis: small-caps;
+  -webkit-text-stroke: 0.025em currentColor;
+  text-decoration: none;
+}
+.site-nav { display: flex; gap: 1.2rem; }
+.site-nav a {
+  color: var(--ink-muted);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--accent); }
+
+article {
+  position: relative;
+  max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
+  margin-inline: auto;
+  padding-block: 2rem 5rem;
+}
+article > section, article > .post-meta, article > .byline,
+.subtitle, .front-matter, #TOC { max-width: var(--measure); }
+article > section > * { margin-block: 0; }
+article > section > * + * { margin-top: var(--flow); }
+p { text-wrap: pretty; hyphens: auto; }
+
+/* ---------- Headings ---------- */
+h1, h2, h3 { font-weight: 400; line-height: var(--leading-tight); text-wrap: balance; }
+h1 { font-size: var(--step-3); margin: 0 0 0.4em; letter-spacing: -0.01em; }
+h2 { font-size: var(--step-2); font-style: italic; margin: 2.2em 0 0.6em; }
+h3 { font-size: var(--step-1); font-style: italic; margin: 1.8em 0 0.5em; }
+.subtitle { font-style: italic; color: var(--ink-muted); font-size: var(--step-1); margin: 0.2rem 0 2rem; }
+.post-meta {
+  color: var(--ink-muted);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.06em;
+  margin: 0 0 2.5rem;
+}
+.byline { color: var(--ink-muted); font-style: italic; margin-top: 3rem; }
+.newthought { font-variant-caps: all-small-caps; letter-spacing: 0.04em; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; max-width: var(--measure); }
+
+/* ---------- Links ---------- */
+a { color: inherit; }
+a:link, a:visited {
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-line);
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: auto;
+}
+a:hover { color: var(--accent); text-decoration-color: currentColor; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+/* ---------- Lists, quotes ---------- */
+ul, ol { padding-left: 1.4em; }
+li + li { margin-top: 0.3em; }
+blockquote { margin-inline: 1.5em 0; padding: 0; font-style: italic; }
+blockquote footer { font-style: normal; text-align: right; font-size: var(--step--1); color: var(--ink-muted); }
+.epigraph blockquote { font-style: italic; }
+.epigraph blockquote footer cite { font-style: italic; }
+
+/* ---------- Code ---------- */
+code, kbd, pre {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+:not(pre) > code {
+  font-size: 0.82em;
+  background: var(--code-bg);
+  padding: 0.08em 0.3em;
+  border-radius: 3px;
+}
+pre {
+  font-size: var(--step--1);
+  line-height: 1.5;
+  background: var(--code-bg);
+  border-left: 2px solid var(--rule);
+  padding: 0.9rem 1.1rem;
+  overflow-x: auto;
+  tab-size: 2;
+  border-radius: 0 3px 3px 0;
+}
+pre code { font-size: inherit; background: none; padding: 0; }
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  font-family: var(--font-serif-lf);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: var(--step--1);
+}
+th, td { padding: 0.35em 0.8em 0.35em 0; border-bottom: 1px solid var(--rule); text-align: left; }
+.table-wrapper { overflow-x: auto; }
+
+/* ---------- Figures ---------- */
+img, video { max-width: 100%; height: auto; }
+figure { margin: 2em 0; }
+figcaption, .sidenote, .marginnote {
+  font-size: 0.8rem;
+  line-height: var(--leading-note);
+  color: var(--ink-muted);
+}
+figcaption { margin-top: 0.5em; }
+.fullwidth { max-width: none; width: 100%; font-style: normal; }
+
+/* ---------- Sidenotes & margin notes ---------- */
+.sidenote-number { counter-increment: sidenote-counter; }
+.sidenote-number::after, .sidenote::before {
+  color: var(--accent);
+  font-size: 0.72em;
+  line-height: 0;
+  vertical-align: super;
+}
+.sidenote-number::after { content: counter(sidenote-counter); padding-left: 0.08em; }
+.sidenote::before { content: counter(sidenote-counter) "\00a0"; }
+input.margin-toggle { display: none; }
+label.margin-toggle:not(.sidenote-number) { display: none; }
+
+/* wide: notes live in the right margin */
+@media (min-width: 62rem) {
+  .sidenote, .marginnote {
+    float: right;
+    clear: right;
+    width: var(--note-w);
+    margin: 0.15em calc(-1 * (var(--note-w) + var(--note-gap))) 1em 0;
+    position: relative;
+  }
+  figure > figcaption {
+    float: right; clear: right; width: var(--note-w);
+    margin: 0 calc(-1 * (var(--note-w) + var(--note-gap))) 0 0;
+  }
+  .fullwidth { width: calc(100% + var(--note-gap) + var(--note-w)); }
+}
+
+/* narrow: notes collapse behind their number / ⊕, expand inline on tap */
+@media (max-width: 61.99rem) {
+  .sidenote, .marginnote { display: none; }
+  label.margin-toggle:not(.sidenote-number) { display: inline; color: var(--accent); }
+  label.margin-toggle { cursor: pointer; padding: 0 0.15em; }
+  .margin-toggle:checked + .sidenote,
+  .margin-toggle:checked + .marginnote {
+    display: block;
+    margin: 0.6em 0 0.8em 0.25em;
+    padding-left: 0.8em;
+    border-left: 2px solid var(--rule);
+  }
+  article { padding-block: 1.5rem 3rem; }
+}
+
+/* ---------- Index TOC ---------- */
+#TOC ol { list-style: none; padding-left: 0; }
+#TOC li { display: grid; grid-template-columns: 4.5rem auto; gap: 0.5rem; }
+#TOC time {
+  color: var(--ink-muted);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.04em;
+  font-size: 0.85em;
+}
+.front-matter ol { list-style: none; padding-left: 0; }
+
+/* ---------- Footer / theme selector ---------- */
+.site-foot {
+  max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
+  margin: 4rem auto 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+.theme-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  align-items: center;
+}
+.theme-select .legend {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
+}
+.theme-select label { cursor: pointer; }
+.colophon { margin: 0.6rem 0 0; }
+.social { list-style: none; padding-left: 0; }
+
+/* ---------- Embeds ---------- */
+.iframe-wrapper { position: relative; aspect-ratio: 16 / 9; }
+.iframe-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img { filter: brightness(0.92); }
+}
+:root[data-theme="dark"] img { filter: brightness(0.92); }
