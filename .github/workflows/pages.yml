@@ -37,6 +37,22 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4.0.5
+
+  # Smoke-test every URL in urls.txt against the site we just deployed. Uses the
+  # deploy step's page_url, so it works before the custom domain is set.
+  check-urls:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: oven-sh/setup-bun@v2.0.2
+        with:
+          bun-version: 1.3.14
+      - run: bun run scripts/check-urls.ts
+        env:
+          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
