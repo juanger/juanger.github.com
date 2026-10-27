@@ -190,10 +190,10 @@ p { text-wrap: pretty; hyphens: auto; }
 h1, h2, h3 { font-weight: 400; line-height: var(--leading-tight); text-wrap: balance; }
 h1 { font-size: var(--step-3); margin: 0 0 0.4em; letter-spacing: -0.01em; }
 h2 { font-size: var(--step-2); font-style: italic; margin: 2.2em 0 0.6em; }
-/* Index headings (years + "Front matter"): ~1.2em of the h2's own size above,
+/* Index headings (years + "Front matter"): ~0.8em of the h2's own size above,
    ~0.4em down to the first post. The lists carry no margin (see .index ol), so
-   these two never stack with a list margin. */
-.index h2 { margin: 1.2em 0 0.4em; }
+   this top margin never stacks with a list margin below the previous year. */
+.index h2 { margin: 0.8em 0 0.4em; }
 h3 { font-size: var(--step-1); font-style: italic; margin: 1.8em 0 0.5em; }
 .subtitle { font-style: italic; color: var(--ink-muted); font-size: var(--step-1); margin: 0 0 1.2rem; }
 .post-meta {
@@ -366,15 +366,18 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 .front-matter ol { list-style: none; padding-left: 0; }
 
 /* ---------- Footer ---------- */
+/* Shown on the index/about/404 pages (posts sign off with their own byline and
+   suppress this). Its box must share the article's left edge: --measure is in
+   `em`, so the box has to resolve em at the body size the article uses — the
+   smaller note font goes on .colophon instead, not on the width-defining box. */
 .site-foot {
   max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
   margin: 4rem auto 2rem;
   padding-top: 1.2rem;
   border-top: 1px solid var(--rule);
   color: var(--ink-muted);
-  font-size: var(--step--1);
 }
-.colophon { margin: 0; }
+.colophon { margin: 0; font-size: var(--step--1); }
 .social { list-style: none; padding-left: 0; }
 
 /* ---------- Embeds ---------- */

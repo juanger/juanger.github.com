@@ -99,6 +99,10 @@ export function layout(opts: {
   mdPath?: string; // path to the markdown source (e.g. "/en/2008/03/macruby.md")
   indexLink: boolean; // show the Index link in the nav
   home?: boolean; // the index page itself — enlarges the masthead to read as the title
+  // The site-foot colophon. On by default; post pages turn it off because they
+  // carry their own italic byline (see postPage) and the colophon would repeat
+  // the author's name right below it.
+  colophon?: boolean;
   body: Raw;
   dev?: boolean;
 }): string {
@@ -161,7 +165,7 @@ ${raw(themeToggle(opts.lang))}
 <main>
 ${opts.body}
 </main>
-${raw(footer(opts.lang))}
+${opts.colophon === false ? "" : raw(footer(opts.lang))}
 </div>
 <script>${raw(THEME_TOGGLE)}</script>`) +
     (opts.dev ? `\n<script>${DEV_RELOAD}</script>` : "") +
@@ -293,6 +297,10 @@ export function postPage(post: Post, renderedBody: string, dev = false): string 
     translation: post.hasTranslation ? { url: `/${post.translationPath}` } : undefined,
     mdPath,
     indexLink: true,
+    // The post's byline already signs it; drop the colophon so the name isn't
+    // repeated. This also means the only footer on a post is the byline, which
+    // lives inside <article> and so tracks the text column (see CSS .byline).
+    colophon: false,
     body,
     dev,
   });

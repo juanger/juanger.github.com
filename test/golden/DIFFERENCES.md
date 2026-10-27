@@ -83,7 +83,7 @@ COVID sidenote conversion); the revival changes layer on top of that provenance.
 
 | Post | Revival change |
 |------|--------|
-| `en/2008/05/rtranscoder-jpeg-to-mpeg` | Dead `rubyforge.org` link → 2009 Wayback snapshot + `archived` marker. |
+| `en/2008/05/rtranscoder-jpeg-to-mpeg` | Dead `rubyforge.org` link → 2009 Wayback snapshot + `archived` marker. Also removed a stray unmatched `</div>` at the end of the body (leftover HTML cruft) that closed `.page-layout` early in the browser, ejecting the byline and footer to the viewport edge. |
 | `en/2008/05/textmate-ssh-and-github` | Spam `sshkeychain.org` → 2008 Wayback snapshot + `archived`; `macromates.com` → https. |
 | `en/2008/05/freebsd-startup-script-with-ruby` | Dead `snippets.dzone.com` link → 2008 Wayback snapshot + `archived` marker. |
 | `en/2008/07/rorgate` | `github.com/…/tree/master` → https; image cruft stripped + alt; `blog.jasoncrystal.com` and `code.google.com/p/rorgate` → Wayback snapshots + `archived`. |
