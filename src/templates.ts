@@ -24,7 +24,6 @@ type Strings = {
   locale: string;
   themeToDark: string; // aria-label when the click switches to the dark theme
   themeToLight: string; // aria-label when the click switches to the light theme
-  colophon: string;
   viewSource: string;
 };
 
@@ -42,7 +41,6 @@ export const i18n: Record<Lang, Strings> = {
     locale: "en_US",
     themeToDark: "Switch to dark theme",
     themeToLight: "Switch to light theme",
-    colophon: "Written by Juan Germán Castañeda Echevarría.",
     viewSource: "View source (.md)",
   },
   es: {
@@ -58,7 +56,6 @@ export const i18n: Record<Lang, Strings> = {
     locale: "es_MX",
     themeToDark: "Cambiar a tema oscuro",
     themeToLight: "Cambiar a tema claro",
-    colophon: "Escrito por Juan Germán Castañeda Echevarría.",
     viewSource: "Ver fuente (.md)",
   },
 };
@@ -99,10 +96,6 @@ export function layout(opts: {
   mdPath?: string; // path to the markdown source (e.g. "/en/2008/03/macruby.md")
   indexLink: boolean; // show the Index link in the nav
   home?: boolean; // the index page itself — enlarges the masthead to read as the title
-  // The site-foot colophon. On by default; post pages turn it off because they
-  // carry their own italic byline (see postPage) and the colophon would repeat
-  // the author's name right below it.
-  colophon?: boolean;
   body: Raw;
   dev?: boolean;
 }): string {
@@ -165,7 +158,6 @@ ${raw(themeToggle(opts.lang))}
 <main>
 ${opts.body}
 </main>
-${opts.colophon === false ? "" : raw(footer(opts.lang))}
 </div>
 <script>${raw(THEME_TOGGLE)}</script>`) +
     (opts.dev ? `\n<script>${DEV_RELOAD}</script>` : "") +
@@ -179,13 +171,6 @@ const render = render_to_string;
 // @media(prefers-color-scheme) still drives the theme.
 const THEME_INIT =
   `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}`;
-
-function footer(lang: Lang): string {
-  const t = i18n[lang];
-  return render(html`<footer class="site-foot">
-<p class="colophon">${t.colophon}</p>
-</footer>`);
-}
 
 // The header theme toggle. Rendered `hidden` and unhidden by THEME_TOGGLE, so
 // with JS off it stays out of the way and CSS @media(prefers-color-scheme)
@@ -297,10 +282,6 @@ export function postPage(post: Post, renderedBody: string, dev = false): string 
     translation: post.hasTranslation ? { url: `/${post.translationPath}` } : undefined,
     mdPath,
     indexLink: true,
-    // The post's byline already signs it; drop the colophon so the name isn't
-    // repeated. This also means the only footer on a post is the byline, which
-    // lives inside <article> and so tracks the text column (see CSS .byline).
-    colophon: false,
     body,
     dev,
   });

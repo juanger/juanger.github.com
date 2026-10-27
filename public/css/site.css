@@ -120,7 +120,7 @@ body {
 }
 ::selection { background: var(--selection); }
 
-.page-layout { max-width: 72rem; margin-inline: auto; padding-inline: var(--gutter); }
+.page-layout { max-width: 72rem; margin-inline: auto; padding-inline: var(--gutter); padding-bottom: 4rem; }
 
 /* masthead / nav */
 .site-head {
@@ -364,21 +364,6 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   font-size: 0.85em;
 }
 .front-matter ol { list-style: none; padding-left: 0; }
-
-/* ---------- Footer ---------- */
-/* Shown on the index/about/404 pages (posts sign off with their own byline and
-   suppress this). Its box must share the article's left edge: --measure is in
-   `em`, so the box has to resolve em at the body size the article uses — the
-   smaller note font goes on .colophon instead, not on the width-defining box. */
-.site-foot {
-  max-width: calc(var(--measure) + var(--note-gap) + var(--note-w));
-  margin: 4rem auto 2rem;
-  padding-top: 1.2rem;
-  border-top: 1px solid var(--rule);
-  color: var(--ink-muted);
-}
-.colophon { margin: 0; font-size: var(--step--1); }
-.social { list-style: none; padding-left: 0; }
 
 /* ---------- Embeds ---------- */
 .iframe-wrapper { position: relative; aspect-ratio: 16 / 9; }

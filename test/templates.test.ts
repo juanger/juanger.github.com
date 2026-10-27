@@ -32,12 +32,10 @@ test("about and acerca+de pages link to each other", async () => {
   expect(navLink(acercaHtml, "/about", i18n.es.toOther)).toBe(true);
 });
 
-// Signature: a post signs off with the italic byline only — the site-foot
-// colophon (which repeats the author's name) is dropped, so the name never
-// appears twice. The byline must live inside <article> so it tracks the text
-// column; anywhere else it escapes the centered column (a stray close tag once
-// ejected it to the viewport edge).
-test("post page has the byline inside <article> and no colophon", async () => {
+// Signature: a post signs off with the italic byline only. The byline must live
+// inside <article> so it tracks the text column; anywhere else it escapes the
+// centered column (a stray close tag once ejected it to the viewport edge).
+test("post page has the byline inside <article>", async () => {
   const { posts } = await loadContent({});
   const post = posts[0] as Post;
   const html = postPage(post, "<p>body</p>");
@@ -47,16 +45,25 @@ test("post page has the byline inside <article> and no colophon", async () => {
   const articleEnd = html.indexOf("</article>");
   expect(bylineAt).toBeGreaterThan(-1);
   expect(articleEnd).toBeGreaterThan(bylineAt);
-
-  // the only footer is the byline — no site-foot colophon on a post
-  expect(html).not.toContain('class="site-foot"');
-  expect(html).not.toContain(i18n[post.lang].colophon);
 });
 
-// The index/about/404 pages carry no byline, so they keep the colophon.
-test("index and standalone pages keep the colophon", async () => {
+// The footer (and its colophon) was removed from every page: Juan decided the
+// colophon was the footer's only content, so no page carries a .site-foot.
+test("no page has a site-foot footer or colophon", async () => {
   const { pages } = await loadContent({});
   const about = pages.find((p) => p.lang === "en") as Page;
-  expect(indexPage("en", [])).toContain(i18n.en.colophon);
-  expect(standalonePage(about, "")).toContain(i18n.en.colophon);
+  const { posts } = await loadContent({});
+  const post = posts[0] as Post;
+
+  for (const html of [
+    indexPage("en", []),
+    indexPage("es", []),
+    standalonePage(about, ""),
+    postPage(post, "<p>body</p>"),
+  ]) {
+    expect(html).not.toContain('class="site-foot"');
+    expect(html).not.toContain('class="colophon"');
+    expect(html).not.toContain("Written by");
+    expect(html).not.toContain("Escrito por");
+  }
 });

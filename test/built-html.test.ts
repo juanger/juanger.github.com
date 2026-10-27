@@ -4,7 +4,28 @@
 
 import { test, expect, beforeAll, afterAll } from "bun:test";
 import { rm } from "node:fs/promises";
+import { parse } from "parse5";
 import { build } from "../src/build.ts";
+
+// --- tiny parse5 helpers: walk the real parsed tree, not the source string ---
+type P5Node = { nodeName: string; tagName?: string; attrs?: { name: string; value: string }[]; childNodes?: P5Node[]; parentNode?: P5Node | null };
+
+function attr(node: P5Node, name: string): string | undefined {
+  return node.attrs?.find((a) => a.name === name)?.value;
+}
+
+// Every element with class `cls` anywhere in the tree.
+function findAll(node: P5Node, cls: string, out: P5Node[] = []): P5Node[] {
+  if (node.attrs && (attr(node, "class") ?? "").split(/\s+/).includes(cls)) out.push(node);
+  for (const c of node.childNodes ?? []) findAll(c, cls, out);
+  return out;
+}
+
+// Is any ancestor a <tag>? parse5 sets parentNode on the default tree.
+function hasAncestor(node: P5Node, tag: string): boolean {
+  for (let n = node.parentNode; n; n = n.parentNode) if (n.tagName === tag) return true;
+  return false;
+}
 
 const OUT = new URL("./.built-out/", import.meta.url).pathname.replace(/\/$/, "");
 
@@ -52,6 +73,25 @@ test("every <img> in out/ has a non-empty alt", () => {
     for (const tag of f.text.match(imgRe) ?? []) {
       const m = tag.match(altRe);
       if (!m || m[1].trim() === "") offenders.push(`${f.rel}: ${tag}`);
+    }
+  }
+  expect(offenders).toEqual([]);
+});
+
+// Stray markup in a post can eject the byline out of <article> once the browser
+// corrects the tree (a stray </div> once pushed it to the viewport edge). Parse
+// every built post with a real HTML5 parser and assert the byline stays inside
+// <article>. A post is any built page carrying a <footer class="byline">.
+test("every built post keeps its byline inside <article>", () => {
+  const posts = htmlFiles.filter((f) => f.text.includes('<footer class="byline">'));
+  // EN + ES posts — guard against the filter silently matching nothing.
+  expect(posts.length).toBeGreaterThan(20);
+
+  const offenders: string[] = [];
+  for (const f of posts) {
+    const bylines = findAll(parse(f.text) as unknown as P5Node, "byline");
+    if (bylines.length !== 1 || !hasAncestor(bylines[0], "article")) {
+      offenders.push(f.rel);
     }
   }
   expect(offenders).toEqual([]);
