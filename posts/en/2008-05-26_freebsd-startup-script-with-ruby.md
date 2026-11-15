@@ -3,15 +3,25 @@ layout: post
 title: "FreeBSD startup script with ruby"
 date: 2008-05-26
 comments: false
+status: obsolete
+reviewed: 2026-10
+status_note: >
+  Mongrel has been dead for more than a decade, and this script skips FreeBSD's
+  own rc.subr framework. The PATH lesson below still holds. Everything else I'd
+  do differently today.
 categories:
   - ruby
   - FreeBSD
   - code
 ---
 
-Since some days ago I've been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:
+Since some days ago I've been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel[^2026-mongrel] but then I wanted my mongrel instances to be run at startup and what I found was this message:
 
-> Put your .sh script at /usr/local/etc/rc.d
+[^2026-mongrel]: Mongrel stopped being maintained around 2010. Puma has been the default Rails server since Rails 5, and nginx and Capistrano are both still around.
+
+> Put your .sh script at /usr/local/etc/rc.d[^2026-rcd]
+
+[^2026-rcd]: The proper way is a small sh script that loads rc.subr, so `service myapp start` and `sysrc myapp_enable=YES` work like for any other service. My Ruby script went around all of that.
 
 And since I like ruby, I began to code my script with it and the problems came:
 
@@ -69,6 +79,35 @@ unless ['start', 'stop', 'restart'].include? ARGV.first
 end
 ```
 
-The key part is the `ENV["PATH"]` setup, that line is needed as FreeBSD's PATH at startup is `"/sbin:/bin:/usr/sbin:/usr/bin"` and this also leads us to change the interpreter path from something like `"#!/usr/bin/env ruby"` to `"#!/usr/local/bin/ruby"`, i.e. its full path.
+The key part is the `ENV["PATH"]` setup,[^2026m-path] that line is needed as FreeBSD's PATH at startup is `"/sbin:/bin:/usr/sbin:/usr/bin"` and this also leads us to change the interpreter path from something like `"#!/usr/bin/env ruby"` to `"#!/usr/local/bin/ruby"`, i.e. its full path.
+
+[^2026m-path]: This part is still true. rc scripts start with a minimal PATH, so use full paths or set PATH yourself.
 
 That's all, now our ruby script really runs at startup time without complaining.
+
+:::today
+
+An untested sketch, check it on FreeBSD 14 first. The real way is a small rc.subr script, so `service myapp start` and `sysrc myapp_enable=YES` just work:
+
+```sh
+#!/bin/sh
+#
+# PROVIDE: myapp
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=myapp
+rcvar=myapp_enable
+load_rc_config $name
+: ${myapp_enable:=NO}
+
+pidfile=/var/run/${name}.pid
+command=/usr/sbin/daemon
+command_args="-f -P ${pidfile} -u www /bin/sh -c 'cd /usr/local/www/myapp && exec bundle exec puma -e production'"
+
+run_rc_command "$1"
+```
+
+:::

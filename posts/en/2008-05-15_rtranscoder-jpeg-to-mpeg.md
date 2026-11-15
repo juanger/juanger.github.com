@@ -3,6 +3,11 @@ layout: post
 title: "RTranscoder: jpeg to mpeg"
 date: 2008-05-15
 comments: false
+status: obsolete
+reviewed: 2026-10
+status_note: >
+  RubyForge closed in 2014, and ffmpeg won over MEncoder a long time ago. Today
+  I'd skip the Ruby wrapper and call ffmpeg directly, see the end of the post.
 categories:
   - ruby
   - code
@@ -32,3 +37,13 @@ After a lot of attempts, my code got like this:
 As you can see, instead of doing something like `mencoder.mf = "fps=25:type=jpg"` (my error) you have to do it with `mencoder.mf.fps` and `mencoder.mf.type` respectively, the same with lavc and everytime you need to pass an argument with suboptions separated by ":".
 
 Here is the page of <a href="https://web.archive.org/web/20090101041307/http://rtranscoder.rubyforge.org:80/" title="Original: http://rtranscoder.rubyforge.org/">Rtranscoder</a><span class="archived">archived</span>.
+
+:::today
+
+One line of ffmpeg does what the whole Ruby block does. The `-pix_fmt yuv420p` part is what makes the video play in QuickTime and browsers.
+
+```sh
+ffmpeg -framerate 25 -pattern_type glob -i '*.jpg' -c:v libx264 -pix_fmt yuv420p out.mp4
+```
+
+:::

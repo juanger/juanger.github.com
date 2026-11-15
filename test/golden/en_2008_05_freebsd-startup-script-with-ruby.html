@@ -1,6 +1,6 @@
-<p>Since some days ago I've been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel but then I wanted my mongrel instances to be run at startup and what I found was this message:</p>
+<p>Since some days ago I've been using FreeBSD in a Rails deployment server configuring it to use Capistrano, nginx and mongrel<label for="e26-2026-mongrel" class="margin-toggle errata-number"></label><input type="checkbox" id="e26-2026-mongrel" class="margin-toggle"/><span class="sidenote errata"><span class="errata-year">2026</span>Mongrel stopped being maintained around 2010. Puma has been the default Rails server since Rails 5, and nginx and Capistrano are both still around.</span> but then I wanted my mongrel instances to be run at startup and what I found was this message:</p>
 <blockquote>
-<p>Put your .sh script at /usr/local/etc/rc.d</p>
+<p>Put your .sh script at /usr/local/etc/rc.d<label for="e26-2026-rcd" class="margin-toggle errata-number"></label><input type="checkbox" id="e26-2026-rcd" class="margin-toggle"/><span class="sidenote errata"><span class="errata-year">2026</span>The proper way is a small sh script that loads rc.subr, so <code>service myapp start</code> and <code>sysrc myapp_enable=YES</code> work like for any other service. My Ruby script went around all of that.</span></p>
 </blockquote>
 <p>And since I like ruby, I began to code my script with it and the problems came:</p>
 <blockquote>
@@ -56,5 +56,28 @@ apps = [
     exit
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>The key part is the <code>ENV[&quot;PATH&quot;]</code> setup, that line is needed as FreeBSD's PATH at startup is <code>&quot;/sbin:/bin:/usr/sbin:/usr/bin&quot;</code> and this also leads us to change the interpreter path from something like <code>&quot;#!/usr/bin/env ruby&quot;</code> to <code>&quot;#!/usr/local/bin/ruby&quot;</code>, i.e. its full path.</p>
+<p>The key part is the <code>ENV[&quot;PATH&quot;]</code> setup,<label for="e26-2026m-path" class="margin-toggle">⊕</label><input type="checkbox" id="e26-2026m-path" class="margin-toggle"/><span class="marginnote errata"><span class="errata-year">2026</span>This part is still true. rc scripts start with a minimal PATH, so use full paths or set PATH yourself.</span> that line is needed as FreeBSD's PATH at startup is <code>&quot;/sbin:/bin:/usr/sbin:/usr/bin&quot;</code> and this also leads us to change the interpreter path from something like <code>&quot;#!/usr/bin/env ruby&quot;</code> to <code>&quot;#!/usr/local/bin/ruby&quot;</code>, i.e. its full path.</p>
 <p>That's all, now our ruby script really runs at startup time without complaining.</p>
+<details class="errata-today">
+<summary><span class="errata-year">2026</span> · How I'd do this today</summary>
+<p>An untested sketch, check it on FreeBSD 14 first. The real way is a small rc.subr script, so <code>service myapp start</code> and <code>sysrc myapp_enable=YES</code> just work:</p>
+<pre><code class="language-sh"><span class="hljs-meta">#!/bin/sh</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># PROVIDE: myapp</span>
+<span class="hljs-comment"># REQUIRE: LOGIN</span>
+<span class="hljs-comment"># KEYWORD: shutdown</span>
+
+. /etc/rc.subr
+
+name=myapp
+rcvar=myapp_enable
+load_rc_config <span class="hljs-variable">$name</span>
+: <span class="hljs-variable">${myapp_enable:=NO}</span>
+
+pidfile=/var/run/<span class="hljs-variable">${name}</span>.pid
+<span class="hljs-built_in">command</span>=/usr/sbin/daemon
+command_args=<span class="hljs-string">&quot;-f -P <span class="hljs-variable">${pidfile}</span> -u www /bin/sh -c &#x27;cd /usr/local/www/myapp &amp;&amp; exec bundle exec puma -e production&#x27;&quot;</span>
+
+run_rc_command <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+</code></pre>
+</details>

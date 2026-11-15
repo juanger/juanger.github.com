@@ -3,6 +3,12 @@ layout: post
 title: "Screencast with RubyCocoa"
 date: 2008-11-12
 comments: false
+status: obsolete
+reviewed: 2026-10
+status_note: >
+  The code below uses QTKit, which Apple deprecated in 2013 in favour of
+  AVFoundation. It's here as a 2008 snapshot, and you can record your screen
+  today without writing any code.
 categories:
   - ruby
   - MacRuby
@@ -12,7 +18,19 @@ categories:
   - RubyCocoa
 ---
 
-<p>I know I promised a screencast about Lucecita, but that will be in the Holydays, now I post a little code that captures the screen and creates a video.</p><p>The not so good thing is that the frame rate isn't controlled by my code and it is very slow, but maybe with MacRuby and some threads we could make that code very fast and even parallelize the capturing and the creation of the movie (the other option is to use Objective-C) but MacRuby is under development and it doesn't have all the things we need.</p><p>What do you think? Can we improve it with a ruby/cocoa hack?</p><p>Leave any idea or comment, the code is in the full post:</p>
+I know I promised a screencast about Lucecita, but that will be in the Holydays,[^2026m-holydays] now I post a little code that captures the screen and creates a video.
+
+[^2026m-holydays]: It wasn't.
+
+The not so good thing is that the frame rate isn't controlled by my code and it is very slow, but maybe with MacRuby and some threads we could make that code very fast[^2026-screencapture] and even parallelize the capturing and the creation of the movie (the other option is to use Objective-C) but MacRuby is under development and it doesn't have all the things we need.
+
+[^2026-screencapture]: MacRuby never got there. Today `screencapture -v out.mov` records the screen from the terminal, and ScreenCaptureKit (macOS 12.3 and later) is the API if you want to do it in code.
+
+What do you think? Can we improve it with a ruby/cocoa hack?
+
+Leave any idea or comment, the code is in the full post:[^2026m-fullpost]
+
+[^2026m-fullpost]: And now it really is, see above.
 
 ```ruby
 require 'osx/cocoa'
@@ -56,4 +74,6 @@ end
   puts "Done!!"
 ```
 
-<small>[Gist ↗](https://gist.github.com/juanger/489722)</small>
+<small>[Gist ↗](https://gist.github.com/juanger/489722)</small>[^2026r-gist]
+
+[^2026r-gist]: Restored in 2026 from gist 489722, the embed stopped rendering when the blog moved.

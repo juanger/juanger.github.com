@@ -99,3 +99,36 @@ COVID sidenote conversion); the revival changes layer on top of that provenance.
 | `en/2013/06/command-done-notification-with-zsh-and-growl` | `spoj.com` + `en.wikipedia.org` → https; dead `fightcodegame.com` and `getprismatic.com` → Wayback snapshots + `archived`. |
 | `en/2020/05/life-after-covid-19` | Image alt text added/updated (deaths-by-country and Modeling COVID charts). |
 | `es/2020/05/life-after-covid-19` | Image alt text added/updated (same two charts). |
+
+## 2026 errata notes (golden regenerated from current source)
+
+These posts' golden was regenerated after the 2026 errata pass. The only changes
+are **inserted** 2026 annotations — `[^2026-…]` / `[^2026m-…]` / `[^2026!-…]` /
+`[^2026r-…]` footnote references and their definitions, one `del`/`ins` word fix
+(MacRuby), `:::today` blocks, and the status line (rendered from front matter,
+not in the body). For every post below, the 2022 baseline (prior golden) is a
+**subsequence** of the new render — i.e. the generator only added note markup and
+altered no prose. Juan's words are byte-identical apart from the inserted
+references and the single MacRuby `MRV`→`MRI` del/ins.
+
+A few posts had prose wrapped in raw `<p>`/`<ul>` HTML blocks, which markdown-it
+does not inline-parse, so a 2026 footnote reference placed inside would not
+render. For those, the specific paragraphs receiving a note were unwrapped to
+markdown (the `<p>` tags removed; markdown-it re-wraps them in `<p>`). This is a
+markup change only — the text between the tags is unchanged, and the ADC
+"Snow Leopard???" note (inside a `<ul>`) was written as a raw inline sidenote so
+the list was left as raw HTML.
+
+| Post | 2026 notes added |
+|------|--------|
+| `en/2008/03/macruby` | status (obsolete); `MRV`→`MRI` del/ins + sidenote; GC, POSIX-threads sidenotes; "looks promising" margin note. |
+| `en/2008/05/rtranscoder-jpeg-to-mpeg` | status (obsolete); `:::today` ffmpeg one-liner. |
+| `en/2008/05/textmate-ssh-and-github` | status (obsolete); TextMate-2 margin note; SSH sidenote; spam-link `always` sidenote; `:::today` ed25519 + keychain. |
+| `en/2008/05/freebsd-startup-script-with-ruby` | status (obsolete); Mongrel, rc.d sidenotes; PATH margin note; `:::today` rc.subr sketch (labelled untested). |
+| `en/2008/07/rorgate` | status (historical); "Gate" sidenote. |
+| `en/2008/07/server-output-in-rorgate` | status (historical); stdout-buffering sidenote. |
+| `en/2008/07/new-features-in-rorgate-30-beta` | status (historical); "0.3 not 3.0" sidenote; Web Inspector margin note. |
+| `en/2008/07/lucecita-rubycocoa-example` | status (obsolete); zip-gone sidenote; event-tap sidenote; "screencast never happened" margin note. |
+| `en/2008/10/lucecita-20` | status (historical); universal-binary (`ppc`/`i386`, verified) sidenote. |
+| `en/2008/11/adc-student-member` | status (historical); ADC-membership sidenote; "Snow Leopard" sidenote (raw inline, inside `<ul>`); Developer-DVD margin note. |
+| `en/2008/11/screencast-with-rubycocoa` | status (obsolete); Holydays + full-post margin notes; screencapture sidenote; muted `[^2026r-…]` gist-restore note. |

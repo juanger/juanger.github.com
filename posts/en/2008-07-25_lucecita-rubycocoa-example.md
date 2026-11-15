@@ -3,6 +3,12 @@ layout: post
 title: "Lucecita: RubyCocoa example"
 date: 2008-07-25
 comments: false
+status: obsolete
+reviewed: 2026-10
+status_note: >
+  RubyCocoa hasn't been maintained in more than a decade, and these zip links
+  died with Google Page Creator. The code is still on GitHub, but the app won't
+  run on a modern Mac.
 categories:
   - ruby
   - Lucecita
@@ -12,7 +18,9 @@ categories:
 
 <p><span style="font-weight:bold;">UPDATE:</span> Version 2.0 of Lucecita is out. <a href="/en/2008/10/lucecita-20">Lucecita 2.0</a></p>
 
-<p>There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <span class="dead-link" title="Link no longer available">Lucecita.app</span>.</p>
+There are some applications like Mouseposé, OmniDazzle or RemoteBuddy that allow you to have a rally nice light effect with your mouse. But as I have stated before, I am a poor student :) and since  I am saving money to buy a new laptop(by the way, please support me with the ads and with donations!!) I have written a little app called "Lucecita". For the impatient: <span class="dead-link" title="Link no longer available">Lucecita.app</span>.[^2026-lucecita-zip]
+
+[^2026-lucecita-zip]: googlepages.com shut down and took this zip with it, and there's no archived copy. The code and the 2.0 DMG live at [github.com/juanger/lucecita](https://github.com/juanger/lucecita).
 
 <p>
   <img src="/images/2008-07-25_lucecita-rubycocoa-example/LucecitaInAction.png" alt="Lucecita in action" />
@@ -166,6 +174,10 @@ end
 
 <p>And the application is here: <span class="dead-link" title="Link no longer available">Lucecita.app</span></p>
 
-<p>You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.</p>
+You can activate it with the menu or with ctrl-Button3Click or ctrl-Button4Click if you have a three button mouse or a Mighty Mouse.[^2026-tap]
 
-<p>I am preparing a screencast to show yo how I coded it but that will be later, until then you can see inside the app package and check  the ruby code.</p>
+[^2026-tap]: A global event tap like the one in LightController now needs the Accessibility permission in System Settings, and without it the app would fail without saying anything. A Swift port is maybe 80 lines, a nice afternoon exercise (or a job for an agent).
+
+I am preparing a screencast to show yo how I coded it but that will be later,[^2026m-screencast] until then you can see inside the app package and check  the ruby code.
+
+[^2026m-screencast]: Spoiler, that screencast never happened. See Lucecita 2.0 and the screencast post.
