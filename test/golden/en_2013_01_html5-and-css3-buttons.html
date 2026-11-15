@@ -27,9 +27,9 @@
 <p>Just because. Consider this piece of code as leisure programming.</p>
 <h2 id="what-is-the-problem-with-images">What is the problem with images?</h2>
 <p>Well, metainformation can be tracked in a very efficient way with a version control system, it can be generated programatically, your html code is cleaner and you don't have to send another asset to your clients.</p>
-<p>CSS can be generated with compass making the source code much more manageable and you can even create animations and effects that were once only doable with Flash.</p>
+<p>CSS can be generated with compass making the source code much more manageable and you can even create animations and effects that were once only doable with Flash.<label for="e26-2026m-flash" class="margin-toggle">⊕</label><input type="checkbox" id="e26-2026m-flash" class="margin-toggle"/><span class="marginnote errata"><span class="errata-year">2026</span>Flash itself was switched off at the end of 2020.</span></p>
 <h2 id="code">Code</h2>
-<p>The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.</p>
+<p>The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements<label for="e26-2026-appearance" class="margin-toggle errata-number"></label><input type="checkbox" id="e26-2026-appearance" class="margin-toggle"/><span class="sidenote errata"><span class="errata-year">2026</span>Today <code>appearance: none</code> removes the native look properly, and <code>accent-color</code> alone recolors checkboxes, radios and range inputs without any pseudo-element tricks.</span> and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css<label for="e26-2026-select" class="margin-toggle errata-number"></label><input type="checkbox" id="e26-2026-select" class="margin-toggle"/><span class="sidenote errata"><span class="errata-year">2026</span>Still mostly true, but it's finally changing. <code>appearance: base-select</code> lets you style the whole select and its options. Chrome shipped it first, so check support before using it.</span> because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.</p>
 <p>The interesting part of the code is when I create the before and after pseudo-elements and style them to create the buttons. If you use the code remember to follow the structure of the html (input next to span, both inside the label).</p>
 <p>If you want to add more themes, you can do so by creating a new button style with the mixin and change each input type style as you need like this ones:</p>
 <div>
@@ -108,7 +108,7 @@
 </label>
 </div>
 <p>The full source is also in <a href="https://gist.github.com/juanger/4582253">this gist</a>.</p>
-<h3 id="buttonscss">button.scss</h3>
+<h3 id="buttonscss">button.scss<label for="e26-2026m-mixins" class="margin-toggle">⊕</label><input type="checkbox" id="e26-2026m-mixins" class="margin-toggle"/><span class="marginnote errata"><span class="errata-year">2026</span>All the Compass mixins here (border-radius, box-shadow, background-image) only added vendor prefixes. Browsers have supported the plain properties for years, and CSS has native nesting since 2023.</span></h3>
 <pre><code class="language-scss"><span class="hljs-keyword">@mixin</span> button(<span class="hljs-variable">$bg-image</span>,
               <span class="hljs-variable">$color</span>,
               <span class="hljs-variable">$border-color</span>,
@@ -268,3 +268,21 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 </code></pre>
+<details class="errata-today">
+<summary><span class="errata-year">2026</span> · How I'd do this today</summary>
+<p>Compass is gone and the mixins were only vendor prefixes. <code>:has()</code> lets the label react to its own input, which was impossible in 2012, and <code>accent-color</code> recolors the controls with one line:</p>
+<pre><code class="language-scss"><span class="hljs-selector-class">.btn-grey</span> {
+  <span class="hljs-attribute">appearance</span>: none;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#bebdbd</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">#f7f7f7</span>, <span class="hljs-number">#dfdfdf</span>);
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">2px</span> <span class="hljs-number">#555</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#555454</span>;
+  &amp;<span class="hljs-selector-pseudo">:hover</span> { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">#e8e8e8</span>, <span class="hljs-number">#d1cfcf</span>) }
+  &amp;<span class="hljs-selector-pseudo">:disabled</span> { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">#cacaca</span>, <span class="hljs-number">#ababab</span>); <span class="hljs-attribute">color</span>: <span class="hljs-number">#eee</span>; <span class="hljs-attribute">cursor</span>: default }
+}
+
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=checkbox]</span>, <span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=radio]</span> { <span class="hljs-attribute">accent-color</span>: <span class="hljs-number">#555454</span> }
+<span class="hljs-selector-tag">label</span><span class="hljs-selector-pseudo">:has</span>(input:checked) <span class="hljs-selector-tag">span</span> { <span class="hljs-attribute">font-weight</span>: bold }
+</code></pre>
+</details>

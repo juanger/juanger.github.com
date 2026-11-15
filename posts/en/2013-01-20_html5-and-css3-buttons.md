@@ -3,6 +3,11 @@ layout: post
 title: "CSS3 styled buttons with compass"
 date: 2012-06-20 11:42
 comments: true
+status: obsolete
+reviewed: 2026-10
+status_note: >
+  Compass was retired years ago, and almost every trick below is now plain CSS.
+  The demo still works. A modern version is at the end.
 categories: html5 sass compass css3
 colors: ["grey", "black", "blue"]
 aliases:
@@ -46,11 +51,17 @@ Just because. Consider this piece of code as leisure programming.
 
 Well, metainformation can be tracked in a very efficient way with a version control system, it can be generated programatically, your html code is cleaner and you don't have to send another asset to your clients.
 
-CSS can be generated with compass making the source code much more manageable and you can even create animations and effects that were once only doable with Flash.
+CSS can be generated with compass making the source code much more manageable and you can even create animations and effects that were once only doable with Flash.[^2026m-flash]
+
+[^2026m-flash]: Flash itself was switched off at the end of 2020.
 
 ## Code
 
-The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.
+The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements[^2026-appearance] and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css[^2026-select] because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.
+
+[^2026-appearance]: Today `appearance: none` removes the native look properly, and `accent-color` alone recolors checkboxes, radios and range inputs without any pseudo-element tricks.
+
+[^2026-select]: Still mostly true, but it's finally changing. `appearance: base-select` lets you style the whole select and its options. Chrome shipped it first, so check support before using it.
 
 The interesting part of the code is when I create the before and after pseudo-elements and style them to create the buttons. If you use the code remember to follow the structure of the html (input next to span, both inside the label).
 
@@ -136,7 +147,9 @@ If you want to add more themes, you can do so by creating a new button style wit
 
 The full source is also in [this gist](https://gist.github.com/juanger/4582253).
 
-### button.scss
+### button.scss[^2026m-mixins]
+
+[^2026m-mixins]: All the Compass mixins here (border-radius, box-shadow, background-image) only added vendor prefixes. Browsers have supported the plain properties for years, and CSS has native nesting since 2023.
 
 ```scss
 @mixin button($bg-image,
@@ -304,3 +317,25 @@ select {
   </select>
 </label>
 ```
+
+:::today
+
+Compass is gone and the mixins were only vendor prefixes. `:has()` lets the label react to its own input, which was impossible in 2012, and `accent-color` recolors the controls with one line:
+
+```scss
+.btn-grey {
+  appearance: none;
+  border: 1px solid #bebdbd;
+  border-radius: 5px;
+  background: linear-gradient(#f7f7f7, #dfdfdf);
+  box-shadow: 0 1px 2px #555;
+  color: #555454;
+  &:hover { background: linear-gradient(#e8e8e8, #d1cfcf) }
+  &:disabled { background: linear-gradient(#cacaca, #ababab); color: #eee; cursor: default }
+}
+
+input[type=checkbox], input[type=radio] { accent-color: #555454 }
+label:has(input:checked) span { font-weight: bold }
+```
+
+:::
