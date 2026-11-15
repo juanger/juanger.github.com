@@ -44,6 +44,14 @@ test("built site has pages", () => {
   expect(htmlFiles.length).toBeGreaterThan(20);
 });
 
+test("no built page leaks a literal footnote reference (e.g. in a meta description)", () => {
+  // Footnote refs ([^x], [^2026-x]) must render to sidenote markup, never survive
+  // as text — a leak means a ref reached a meta description, title or feed verbatim.
+  const re = /\[\^[0-9a-zA-Z!m:_-]+\]/;
+  const offenders = htmlFiles.filter((f) => re.test(f.text)).map((f) => f.rel);
+  expect(offenders).toEqual([]);
+});
+
 test("no built page embeds a gist script (gist.github.com/<id>.js)", () => {
   const re = /gist\.github\.com\/[^"'\s)]*\.js/;
   const offenders = htmlFiles.filter((f) => re.test(f.text)).map((f) => f.rel);

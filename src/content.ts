@@ -80,11 +80,15 @@ function normalizeDate(value: unknown, fallback: string): string {
 }
 
 function firstParagraph(body: string): string {
-  // crude: first non-empty, non-html, non-heading line block
+  // crude: first non-empty, non-html, non-heading, non-footnote-definition block
   for (const block of body.split(/\r?\n\r?\n/)) {
     const t = block.trim();
-    if (!t || t.startsWith("#") || t.startsWith("<") || t.startsWith(":::")) continue;
-    return t.replace(/\s+/g, " ").replace(/[*_`]/g, "").trim();
+    if (!t || t.startsWith("#") || t.startsWith("<") || t.startsWith(":::") || t.startsWith("[^")) continue;
+    return t
+      .replace(/\[\^[^\]]+\]/g, "") // drop inline footnote references (sidenotes, verdicts)
+      .replace(/\s+/g, " ")
+      .replace(/[*_`]/g, "")
+      .trim();
   }
   return "";
 }
