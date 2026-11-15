@@ -93,6 +93,19 @@ function wrapTable(summary: string, head: string, rows: string[]): string {
   );
 }
 
+// `exclude:` and `xFrom:` drop rows before anything is drawn, so the SVG and
+// the data table always show the same data.
+function selectRows(spec: ChartSpec, table: Table): Table {
+  const out = new Set(spec.exclude ?? []);
+  const from = spec.xFrom;
+  const before = (v: string): boolean =>
+    from !== undefined && (spec.xUnit === "date" ? v < from : Number(v) < Number(from));
+  const rows = table.rows.filter(
+    (r) => !(spec.series && out.has(r[spec.series])) && !before(r[spec.x]),
+  );
+  return { columns: table.columns, rows };
+}
+
 // --- public render ------------------------------------------------------
 export function renderChart(body: string, opts: { size: FigSize; lang: Lang; id: string }): ChartRender {
   const spec = parseChartFence(body);
@@ -102,7 +115,7 @@ export function renderChart(body: string, opts: { size: FigSize; lang: Lang; id:
   if (spec.type !== "line") {
     throw new Error(`unsupported chart type: ${spec.type}`);
   }
-  const table = readData(spec.data);
+  const table = selectRows(spec, readData(spec.data));
 
   const warn = (ws: string[]): void => {
     for (const w of ws) console.warn(`[viz] ${spec.data}: ${w}`);

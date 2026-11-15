@@ -69,6 +69,8 @@ xUnit: day
 series: country
 focus: [Brazil, India, Chile, Colombia]
 highlight: Mexico
+# China's 17 Apr 2020 revision added 1,290 deaths in one day and draws a 7-day box at day 83-89.
+exclude: [China]
 yTicks: [10, 100, 1000]
 xTickStep: 20
 yTitle: deaths per day · 7-day average · log scale
@@ -126,6 +128,8 @@ Go to work, but take care. If you lost your job, things are going to be more dif
   y: rt
   scale: linear
   xUnit: date
+  # 11-13 Feb are model warm-up spikes (R_t 37, 13, 6), not estimates.
+  xFrom: 2020-02-15
   yMin: 0
   yMax: 4
   yTicks: [1, 2, 3]

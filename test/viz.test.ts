@@ -150,3 +150,15 @@ test("main charts ship a wide and a narrow SVG variant", () => {
   expect(deaths.media).toContain('viewBox="0 0 680 330"');
   expect(deaths.media).toContain('viewBox="0 0 360 300"');
 });
+
+test("exclude: drops a series from the lines and the data table", () => {
+  const without = renderChart(DEATHS + "exclude: [China]\n", { size: "main", lang: "en", id: "f" });
+  expect(deaths.media).toContain("<title>China");
+  expect(without.media).not.toContain("<title>China");
+});
+
+test("xFrom: drops rows before a date, so the warm-up spikes never reach the axis", () => {
+  const from = renderChart(RT + "xFrom: 2020-02-15\n", { size: "margin", lang: "en", id: "f" });
+  expect(rt.table).toContain("2020-02-04");
+  expect(from.table).not.toContain("2020-02-04");
+});

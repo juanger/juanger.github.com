@@ -502,7 +502,10 @@ figure.main > .viz-wrap, figure.full > .viz-wrap, figure .hscroll { order: 0; }
     position: absolute; top: 0; left: calc(100% + var(--note-gap));
     width: var(--note-w); margin: 0; order: 0;
   }
-  figure.margin { float: right; clear: right; width: var(--note-w); margin: 0.3rem 0 1rem 0; max-width: none; }
+  figure.margin {
+    float: right; clear: right; width: var(--note-w); max-width: none;
+    margin: 0.3rem calc(-1 * (var(--note-w) + var(--note-gap))) 1rem 0;
+  }
 }
 @media (max-width: 61.99rem) { figure.margin { max-width: 22rem; } }
 

@@ -11,6 +11,7 @@ export interface ChartSpec {
   xUnit?: "day" | "date";
   series?: string; // grouping column for a multi-series line
   focus?: string[]; // ink focus series
+  exclude?: string[]; // series left out entirely
   highlight?: string; // the single accent series
   ref?: number; // reference line y value (R = 1)
   refLabel?: string;
@@ -23,6 +24,7 @@ export interface ChartSpec {
   yMin?: number;
   yMax?: number;
   xMax?: number;
+  xFrom?: string; // drop rows before this x (a number or a YYYY-MM-DD date)
   xTickStep?: number;
   xTitle?: string;
   yTitle?: string;
@@ -73,6 +75,7 @@ export function parseChartFence(body: string): ChartSpec {
     xUnit: str("xUnit") === "date" ? "date" : str("xUnit") === "day" ? "day" : undefined,
     series: str("series"),
     focus: list("focus"),
+    exclude: list("exclude"),
     highlight: str("highlight"),
     ref: num("ref"),
     refLabel: str("refLabel"),
@@ -85,6 +88,7 @@ export function parseChartFence(body: string): ChartSpec {
     yMin: num("yMin"),
     yMax: num("yMax"),
     xMax: num("xMax"),
+    xFrom: str("xFrom"),
     xTickStep: num("xTickStep"),
     xTitle: str("xTitle"),
     yTitle: str("yTitle"),
