@@ -58,7 +58,29 @@ As you can see in the following picture, the trend is similar in all countries, 
 
 The whole world doesn't have to stop until this is solved, but we'll have to still keep certain measures for a while until a vaccine is available for everyone.
 
-![COVID-19 deaths by country chart](/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png "Mexico, Brazil, India, Chile and Colombia seem to be in the same situation, deaths on the rise without a clear peak.")
+:::figure main #fig-deaths
+```chart
+type: line
+data: 2020-05-30/covid-deaths.csv
+x: day
+y: deaths
+scale: log
+xUnit: day
+series: country
+focus: [Brazil, India, Chile, Colombia]
+highlight: Mexico
+yTicks: [10, 100, 1000]
+xTickStep: 20
+yTitle: deaths per day · 7-day average · log scale
+xTitle: days since 5 daily deaths first reported
+note: past their peak: US, UK, France, Italy, Spain …
+alt: Daily COVID-19 deaths by country on a log scale: Brazil, Mexico, India, Chile and Colombia were still rising at day 50–66, while the US, UK, France, Italy, Spain and most of Europe had passed their peaks.
+```
+
+Daily confirmed COVID-19 deaths, aligned by the day each country first reported five. Mexico, Brazil, India, Chile and Colombia seem to be in the same situation, deaths on the rise without a clear peak.
+
+Source: European CDC via Our World in Data, data to 30 May 2020, CC BY.
+:::
 
 ## "The economy is collapsing, we have to go back to normal"
 
@@ -96,13 +118,39 @@ Go to work, but take care. If you lost your job, things are going to be more dif
 
 - Some epidemic models[^models] show that without a cure and permanent social distancing, COVID-19 will come in waves or at least with a new wave after lifting restrictions. I fear that we'll get a bad mutation in a country where restrictions are not followed and we'll be back to panic.[^2026m-mutation]
 
+  :::figure margin #fig-rt
+  ```chart
+  type: line
+  data: 2020-05-30/ca-rt.csv
+  x: date
+  y: rt
+  scale: linear
+  xUnit: date
+  yMin: 0
+  yMax: 4
+  yTicks: [1, 2, 3]
+  band: [p10, p90]
+  split: 2020-05-16
+  markerAt: 2020-05-20
+  markerLabel: reopening
+  ref: 1
+  refLabel: R = 1
+  peak: true
+  yTitle: R_t
+  alt: Modelled reproduction number for California: near 1.1 through May, then a projected rebound to a peak of 2.4 after reopening in June under the return-to-normal scenario.
+  ```
+  California's modelled R<sub>t</sub> under the "return to normal" scenario, as projected on 16 May 2020. The band is the model's 10–90% range.
+
+  Source: Modeling COVID, modelingcovid.com (run of 16 May 2020; the post's original screenshot came from a slightly later run).
+  :::
+
 [^2026m-tourism]: partly: True that summer and the next one. By 2024, UN Tourism counted international arrivals back at 99% of 2019.
 
 [^2026m-masks]: partly: Better masks did spread (N95, KN95), but they were old designs that just got easier to buy. I didn't see a new design take over.
 
 [^2026m-mutation]: held: Waves came after reopenings, and Delta (2021) and Omicron (late 2021) brought the panic back. Variants showed up wherever the virus spread a lot, not only where rules were ignored.
 
-[^models]: Modeling COVID site ![Modeling COVID return-to-normal chart](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
+[^models]: Modeling COVID site <https://modelingcovid.com/state/CA>
 
 - Rich people will value isolation more, companies that offer products used in isolation will be backed by VCs.[^2026m-vcs]
 

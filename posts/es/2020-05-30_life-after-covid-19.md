@@ -57,7 +57,29 @@ Como podemos ver en la siguiente figura, el comportamiento de la curva es muy pa
 
 Eso no significa que el mundo se deba detener hasta que se resuelva, pero tendremos que seguir ciertas medidas por un tiempo hasta que una vacuna sea accesible para todos.
 
-![COVID-19 deaths by country chart](/images/2020-05-30_life-after-covid-19/COVID-19_deaths.png "Mexico, Brazil, India, Chile y Colombia parecen estar en la misma situación, muertes al alza sin un pico aparente.")
+:::figure main #fig-deaths
+```chart
+type: line
+data: 2020-05-30/covid-deaths.csv
+x: day
+y: deaths
+scale: log
+xUnit: day
+series: country
+focus: [Brazil, India, Chile, Colombia]
+highlight: Mexico
+yTicks: [10, 100, 1000]
+xTickStep: 20
+yTitle: muertes por día · promedio de 7 días · escala log
+xTitle: días desde las primeras 5 muertes diarias
+note: ya pasaron su pico: US, UK, France, Italy, Spain …
+alt: Muertes diarias confirmadas por COVID-19 por país en escala logarítmica: Brazil, Mexico, India, Chile y Colombia seguían subiendo hacia el día 50–66, mientras que US, UK, France, Italy, Spain y casi toda Europa ya habían pasado su pico.
+```
+
+Muertes diarias confirmadas por COVID-19, alineadas por el día en que cada país reportó cinco por primera vez. Mexico, Brazil, India, Chile y Colombia parecen estar en la misma situación, muertes al alza sin un pico aparente.
+
+Fuente: European CDC vía Our World in Data, datos al 30 de mayo de 2020, CC BY.
+:::
 
 ## "La economía está colapsando, tenemos que volver a la normalidad"
 
@@ -95,13 +117,39 @@ Ve a trabajar, pero toma precauciones. Si perdiste tu trabajo, la tendrás mucho
 
 - Algunos modelos[^models] muestran que sin una cura y un distanciamiento social permanente, COVID-19 vendrá en oleadas o al menos que vendrá una nueva ola al quitar restricciones. Temo que tengamos una mala mutación en un país donde las restricciones no puedan seguirse y que volvamos al pánico.[^2026m-mutation]
 
+  :::figure margin #fig-rt
+  ```chart
+  type: line
+  data: 2020-05-30/ca-rt.csv
+  x: date
+  y: rt
+  scale: linear
+  xUnit: date
+  yMin: 0
+  yMax: 4
+  yTicks: [1, 2, 3]
+  band: [p10, p90]
+  split: 2020-05-16
+  markerAt: 2020-05-20
+  markerLabel: reapertura
+  ref: 1
+  refLabel: R = 1
+  peak: true
+  yTitle: R_t
+  alt: Número reproductivo modelado para California: cerca de 1.1 durante mayo, y luego un rebote proyectado hasta un pico de 2.4 tras la reapertura en junio bajo el escenario de regreso a la normalidad.
+  ```
+  El R<sub>t</sub> modelado de California bajo el escenario de "regreso a la normalidad", según la proyección del 16 de mayo de 2020. La banda es el rango del 10 al 90 % del modelo.
+
+  Fuente: Modeling COVID, modelingcovid.com (corrida del 16 de mayo de 2020; la captura original del texto venía de una corrida un poco posterior).
+  :::
+
 [^2026m-tourism]: partly: Cierto ese verano y el siguiente. Para 2024, ONU Turismo contó las llegadas internacionales de vuelta al 99% de 2019.
 
 [^2026m-masks]: partly: Los mejores cubrebocas sí se volvieron comunes (N95, KN95), pero eran diseños viejos que solo se volvieron más fáciles de conseguir. No vi que se impusiera un diseño nuevo.
 
 [^2026m-mutation]: held: Llegaron olas después de las reaperturas, y Delta (2021) y Ómicron (finales de 2021) regresaron el pánico. Las variantes aparecieron donde el virus se propagó mucho, no solo donde no se seguían las reglas.
 
-[^models]: "Modeling COVID" ![Modeling COVID return-to-normal chart](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
+[^models]: "Modeling COVID" <https://modelingcovid.com/state/CA>
 
 - Las personas ricas valorarán más el aislamiento, las empresas que ofrezcan productos utilizados de esa forma van a recibir fondos de capital.[^2026m-vcs]
 

@@ -148,3 +148,25 @@ the list was left as raw HTML.
 `partly` (Juan's call per the review checklist), giving 6 held / 3 partly / 1 missed.
 
 **Typo pass (2026-11-15):** Juan approved 31 typo and grammar fixes in his original prose across 19 posts and the About page (misspellings, missing words, capitalized proper names, a space before parentheses, MacRuby's Objective-C sample without commas, the "The world is better than you think" pseudo-title dropped, two console blocks dedented). The subsequence property above no longer holds for those posts; the goldens were re-rendered and each diff checked to be only those fixes. The heading slugger now also strips "¡", so the Spanish COVID post keeps its 2020 `#aplanamos-la-curva` anchor.
+
+## COVID chart redraw (2026-11-15, both goldens regenerated)
+
+The two `life-after-covid-19` goldens (EN + ES) were regenerated after the chart
+work. The only changes are the two figures:
+
+- The `COVID-19_deaths.png` screenshot (the "flattened the curve" image) became a
+  `:::figure main #fig-deaths` with an inline `chart` fence (focus/context/highlight
+  line, log y, range frame). Juan's 2020 image-title text is now the caption's
+  second sentence, verbatim; a `Source:` line was added.
+- The "Return to normal" modelingcovid screenshot, which sat inside the `[^models]`
+  footnote, became a `:::figure margin #fig-rt` (R_t line, fit/projection split,
+  p10–p90 wash band, R = 1 reference, a "reopening" hairline and a labelled 2.4
+  peak) placed inside the "Some epidemic models" list item. The footnote keeps its
+  link text and URL; only the image was dropped from it.
+
+Both figures are build-time inline SVG from `src/viz` plus a collapsed
+`<details class="data">` table. No prose was changed. The two PNGs stay in
+`public/images/` (unreferenced). Because these goldens now contain language-
+dependent labels ("Figura"/"Fuente" in the ES post), `golden.test.ts` renders each
+post with `{ lang: p.lang }`; every other golden is language-independent, so none
+of them changed.
