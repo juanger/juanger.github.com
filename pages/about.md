@@ -15,7 +15,7 @@ music (although I'm not very good), play futbol (soccer), nature and enjoying li
 as much as possible.
 
 My blog's name is Ruby Xocolatl because at the begining I wrote about using Ruby to
-create Mac OS X applications. Cocoa is the name apple chose for their application
+create Mac OS X applications. Cocoa is the name Apple chose for their application
 development libraries and being mexican, I chose to use the aztec name for
 chocolate, xocolatl, instead of cocoa, the name of the beans used to manufacture
 chocolate.
