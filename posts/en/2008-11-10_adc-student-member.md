@@ -11,7 +11,7 @@ categories:
   - Mac OS X
 ---
 
-I should have a new laptop now but awful things happen, specially in economy. Projects get cancelled and in contrast to the Mexican Peso a lot of things gain value, making me poorer and poorer(as I live in Mexico). But not everything is bad news.
+I should have a new laptop now but awful things happen, especially in the economy. Projects get cancelled and in contrast to the Mexican Peso a lot of things gain value, making me poorer and poorer (as I live in Mexico). But not everything is bad news.
 
 Last week, my ADC Orientation Kit arrived,[^2026-adc] I bought it three weeks ago at the Apple Online Store Mexico but the bad thing is that I haven't received any response to all my e-mails in which I ask for directions to use my hardware discount.
 
@@ -27,7 +27,7 @@ The good and cool things are:
 <li>I <strike>supposedly</strike> have a discount at the Apple Online Store</li>
 </ul>
 
-The other thing that they send is the Monthly Developer DVD[^2026m-dvd] but it's not the big reason to get the membership, anything inside the DVD is downloadable from ADC site.
+The other thing that they sent is the Monthly Developer DVD[^2026m-dvd] but it's not the big reason to get the membership, anything inside the DVD is downloadable from the ADC site.
 
 [^2026m-dvd]: A monthly DVD. In the mail.
 

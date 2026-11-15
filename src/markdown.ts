@@ -218,8 +218,9 @@ export function createMarkdown(): MarkdownIt {
   md.renderer.rules.newthought_close = () => "</span>";
 
   // ---- heading ids, matching marked 0.7's slugger (so old #anchors survive) ----
+  // Plus ¡ (added in 2026), so "¡Aplanamos la curva!" keeps its 2020 #aplanamos-la-curva. ¿ stays, like marked kept it.
   const SLUG_STRIP =
-    /[ -⁯⸀-⹿\\'!"#$%&()*+,./:;<=>?@[\]^`{|}~]/g;
+    /[ -⁯⸀-⹿\\'!"#$%&()*+,./:;<=>?@[\]^`{|}~¡]/g;
   function slug(value: string, seen: Record<string, number>): string {
     let s = value.toLowerCase().trim().replace(SLUG_STRIP, "").replace(/\s/g, "-");
     if (Object.prototype.hasOwnProperty.call(seen, s)) {

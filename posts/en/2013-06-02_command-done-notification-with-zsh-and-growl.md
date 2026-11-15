@@ -17,7 +17,7 @@ The little banner in bottom of the screen in this image shows what I see when a 
 
 Most of the time I find myself running commands that take 1-5 minutes to complete and you know, I am not going to just stare at the screen waiting for it to finish! Then my mind starts wandering in other things that may be productive but also take my focus out of the problem I'm solving at that moment.
 
-You know what I'm talking about, you start looking at your emails, other tickets, problems in [SPOJ](https://www.spoj.com/), your score(and possibly taking revenge) at <a href="https://web.archive.org/web/20130602015440/http://fightcodegame.com/" title="Original: http://fightcodegame.com/">Fight Code</a><span class="archived">archived</span> or my favorite: <a href="https://web.archive.org/web/20130612191539/http://getprismatic.com:80/?" title="Original: http://getprismatic.com">Prismatic</a><span class="archived">archived</span>[^2026-prismatic] (no, no one looks at his facebook while working, right?).
+You know what I'm talking about, you start looking at your emails, other tickets, problems in [SPOJ](https://www.spoj.com/), your score (and possibly taking revenge) at <a href="https://web.archive.org/web/20130602015440/http://fightcodegame.com/" title="Original: http://fightcodegame.com/">Fight Code</a><span class="archived">archived</span> or my favorite: <a href="https://web.archive.org/web/20130612191539/http://getprismatic.com:80/?" title="Original: http://getprismatic.com">Prismatic</a><span class="archived">archived</span>[^2026-prismatic] (no, no one looks at his Facebook while working, right?).
 
 [^2026-prismatic]: Prismatic shut down in 2015, and its domain now goes to an unrelated site. The list of tabs would have different names today, but the same problem.
 
@@ -25,7 +25,7 @@ So, tired of finding out that the command I ran <strike>one hour ago</strike> ha
 
 [^2026-hooks]: It hooks into zsh's `preexec` and `precmd`, which run right before and right after each command. The 2026 version below uses the same two hooks. (The link still works, it's my old oh-my-zsh fork.)
 
-And I can customize the style of the growl notification when it fails:[^2026-notif]
+And I can customize the style of the Growl notification when it fails:[^2026-notif]
 
 [^2026-notif]: Notification Center won't let you style the banner, but you can change the title. iTerm2 and Ghostty also understand an escape sequence (`printf '\e]9;%s\a' "done"`) that posts a notification with no AppleScript at all.
 

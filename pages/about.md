@@ -11,11 +11,11 @@ description: Juan Germán Castañeda Echevarría — programming, cycling, music
 </ul>
 
 My name is Juan Germán Castañeda Echevarría, I love programming, cycling, playing
-music (although I'm not very good), play futbol (soccer), nature and enjoying life
+music (although I'm not very good), playing futbol (soccer), nature and enjoying life
 as much as possible.
 
-My blog's name is Ruby Xocolatl because at the begining I wrote about using Ruby to
+My blog's name is Ruby Xocolatl because at the beginning I wrote about using Ruby to
 create Mac OS X applications. Cocoa is the name Apple chose for their application
-development libraries and being mexican, I chose to use the aztec name for
+development libraries and being Mexican, I chose to use the Aztec name for
 chocolate, xocolatl, instead of cocoa, the name of the beans used to manufacture
 chocolate.

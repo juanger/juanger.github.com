@@ -17,7 +17,7 @@ aliases:
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/css_buttons.css">
 
-**These input tags were styled entirely with css.**
+**These input tags were styled entirely with CSS.**
 
 <label class="text">
   <span>Text Field:</span><input type="text" class="btn-grey" value="Edit me"/>
@@ -49,7 +49,7 @@ Just because. Consider this piece of code as leisure programming.
 
 ## What is the problem with images?
 
-Well, metainformation can be tracked in a very efficient way with a version control system, it can be generated programatically, your html code is cleaner and you don't have to send another asset to your clients.
+Well, metainformation can be tracked in a very efficient way with a version control system, it can be generated programmatically, your HTML code is cleaner and you don't have to send another asset to your clients.
 
 CSS can be generated with compass making the source code much more manageable and you can even create animations and effects that were once only doable with Flash.[^2026m-flash]
 
@@ -57,13 +57,13 @@ CSS can be generated with compass making the source code much more manageable an
 
 ## Code
 
-The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements[^2026-appearance] and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with css[^2026-select] because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.
+The code may look huge because I had to do some tricks to get it working, like hiding the browser's original input images and replacing them with pseudo-elements[^2026-appearance] and styling them to make them look like checkboxes and radio buttons. The select tag cannot be styled very well just with CSS[^2026-select] because of how the browser displays it and because if you try to hide the original, then you can't see the selected option.
 
 [^2026-appearance]: Today `appearance: none` removes the native look properly, and `accent-color` alone recolors checkboxes, radios and range inputs without any pseudo-element tricks.
 
 [^2026-select]: Still mostly true, but it's finally changing. `appearance: base-select` lets you style the whole select and its options. Chrome shipped it first, so check support before using it.
 
-The interesting part of the code is when I create the before and after pseudo-elements and style them to create the buttons. If you use the code remember to follow the structure of the html (input next to span, both inside the label).
+The interesting part of the code is when I create the before and after pseudo-elements and style them to create the buttons. If you use the code remember to follow the structure of the HTML (input next to span, both inside the label).
 
 If you want to add more themes, you can do so by creating a new button style with the mixin and change each input type style as you need like this ones:
 

@@ -89,6 +89,9 @@ test("historical posts get no status line even with a note", () => {
 test("index shows the status as a muted small-caps word", () => {
   const html = indexPage("en", [post({ status: "partly-wrong" })]);
   expect(html).toContain('<span class="post-status">partly wrong</span>');
+  // labelled statuses use their label, not the raw key
+  const fixed = indexPage("en", [post({ status: "fixed" })]);
+  expect(fixed).toContain('<span class="post-status">fixed now</span>');
   // no label for a post without a status
   const plain = indexPage("en", [post({})]);
   expect(plain).not.toContain("post-status");

@@ -223,7 +223,7 @@ export function indexPage(lang: Lang, posts: Post[], dev = false): string {
     return html`<h2>${year}</h2>
 <ol>
 ${inYear.map(
-      (p) => html`<li><time datetime="${p.year}-${p.month}-${p.day}"><span>${t.months[Number(p.month) - 1]}</span> <span>${p.day}</span></time> <span><a href="/${p.path}">${p.title}</a>${p.status ? html`<span class="post-status">${p.status.replace("-", " ")}</span>` : ""}</span></li>
+      (p) => html`<li><time datetime="${p.year}-${p.month}-${p.day}"><span>${t.months[Number(p.month) - 1]}</span> <span>${p.day}</span></time> <span><a href="/${p.path}">${p.title}</a>${p.status ? html`<span class="post-status">${(STATUS_LABELS[p.status] ?? p.status.replace("-", " ")).toLowerCase()}</span>` : ""}</span></li>
 `,
     )}</ol>
 `;
@@ -263,6 +263,8 @@ ${toc}</section>
 // post with no `status_note` gets nothing, regardless of status.
 const STATUS_LABELS: Record<string, string> = {
   obsolete: "Obsolete",
+  // Right when written, solved since. `partly-wrong` is only for posts that were wrong.
+  fixed: "Fixed now",
   "partly-wrong": "Partly wrong",
   scored: "Scored",
   revisited: "Revisited",

@@ -22,7 +22,7 @@ I'm going to list some phrases we've heard over these months and give my opinion
 
 ## "Flu kills more people, why panic?"
 
-I think it is very evident now that COVID-19 is a very deadly disease, just look at the alarming news in 2018 about 80k deaths from flu in USA during winter and compare it to what COVID-19 did during spring,[^flu-deaths][^2026-excess] but I think the most important part of it, and why a lot of people in government and upper class panicked is that it can kill anyone.
+I think it is very evident now that COVID-19 is a very deadly disease, just look at the alarming news in 2018 about 80k deaths from flu in the USA during winter and compare it to what COVID-19 did during spring,[^flu-deaths][^2026-excess] but I think the most important part of it, and why a lot of people in government and upper class panicked is that it can kill anyone.
 
 [^flu-deaths]: CNN: https://www.cnn.com/2018/09/26/health/flu-deaths-2017--2018-cdc-bn/index.html
 
@@ -34,7 +34,7 @@ Rich people can survive a lot of things that take a lot of lives every day world
 
 ## "The government of X country is doing very bad"
 
-Last flu epidemic in 2009 had a faster response from USA and the world because it started very close, in Mexico.[^cruise] I think the world assumed that it was China's problem and that distance was protecting everyone.
+Last flu epidemic in 2009 had a faster response from the USA and the world because it started very close, in Mexico.[^cruise] I think the world assumed that it was China's problem and that distance was protecting everyone.
 
 [^cruise]: Even the cruise companies acted faster in 2009. [Web Archive](https://web.archive.org/web/20090630144402/http://www.sdbj.com/industry_article.asp?aID=47999878.5516779.1777724.4325329.569692.256&aID2=136739)
 
@@ -52,7 +52,7 @@ More diseases will come and we have to be prepared.[^2026m-morediseases]
 
 ## "We have flattened the curve!"
 
-As you can see in the following picture, the trend is similar in all countries, some have been able to slow it down and in others deaths are still on the rise. Stay at home orders haven't had the same success in all countries due to socio-economical differences but we are in the same boat and we can't assume we can go back to normal because our country, state or county is doing better. We'll have to wait until the whole world's death rate is close to zero.[^2026m-deathrate]
+As you can see in the following picture, the trend is similar in all countries, some have been able to slow it down and in others deaths are still on the rise. Stay at home orders haven't had the same success in all countries due to socio-economic differences but we are in the same boat and we can't assume we can go back to normal because our country, state or county is doing better. We'll have to wait until the whole world's death rate is close to zero.[^2026m-deathrate]
 
 [^2026m-deathrate]: missed: Most countries dropped their restrictions in 2021 and 2022, long before vaccines reached everyone. The WHO ended the emergency in May 2023 with people still dying.
 
@@ -112,13 +112,13 @@ All these are just my opinions, but I think the greatest social distancing will 
 
 [^2026m-kshape]: held: "K-shaped recovery" became the name for it. The World Bank estimated about 70 million people fell into extreme poverty in 2020, the biggest one-year jump since it started counting in 1990.
 
-I know books like "Factfulness" or "The world is better than you think" present statistics on how, things are better over time. But for me, that is just a symptom of globalization.[^2026-globalization]
+I know books like "Factfulness" present statistics on how things are better over time. But for me, that is just a symptom of globalization.[^2026-globalization]
 
 [^2026-globalization]: Both things turned out to be true. Extreme poverty had been falling for decades, and then in 2020 it rose for the first time in a generation.
 
 Countries' numbers are more alike first world countries now, but averages make it look like poor countries are less and less over time while the difference between the poor people and the rich is still big and a crisis like this one exacerbates that gap and makes it more apparent.
 
-Life goes on, and it is short. I hope we get out of this problem in the forseeable future and that we start fixing so many things that are wrong in our world.
+Life goes on, and it is short. I hope we get out of this problem in the foreseeable future and that we start fixing so many things that are wrong in our world.
 
 ---
 

@@ -18,7 +18,7 @@ categories:
   - RubyCocoa
 ---
 
-I know I promised a screencast about Lucecita, but that will be in the Holydays,[^2026m-holydays] now I post a little code that captures the screen and creates a video.
+I know I promised a screencast about Lucecita, but that will be in the Holidays,[^2026m-holydays] now I post a little code that captures the screen and creates a video.
 
 [^2026m-holydays]: It wasn't.
 

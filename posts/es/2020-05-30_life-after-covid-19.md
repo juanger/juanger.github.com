@@ -23,7 +23,7 @@ Voy a enumerar algunas frases que hemos escuchado durante estos meses con mis op
 
 ### "La gripe mata a más personas, ¿por qué el pánico?"
 
-Creo que es muy evidente ahora que COVID-19 es una enfermedad con alta mortandad, solo falta ver las noticias alarmantes del 2018 sobre 80 mil muertes por influenza durante el invierno y compararlas con los números de la COVID-19 durante la primavera,[^flu-deaths][^2026-excess] pero creo que la parte más importante de esto, y por qué mucha gente en el gobierno y la clase alta en pánico es que puede matar a cualquiera.
+Creo que es muy evidente ahora que COVID-19 es una enfermedad con alta mortalidad, solo falta ver las noticias alarmantes del 2018 sobre 80 mil muertes por influenza durante el invierno y compararlas con los números de la COVID-19 durante la primavera,[^flu-deaths][^2026-excess] pero creo que la parte más importante de esto, y por qué mucha gente en el gobierno y la clase alta entró en pánico, es que puede matar a cualquiera.
 
 [^flu-deaths]: CNN: https://www.cnn.com/2018/09/26/health/flu-deaths-2017--2018-cdc-bn/index.html
 
@@ -49,9 +49,9 @@ Vendrán más enfermedades pero tenemos que estar preparados.[^2026m-moredisease
 
 [^2026m-morediseases]: held: La viruela símica se declaró emergencia global en 2022 y otra vez en 2024, y la gripe aviar H5N1 llegó a las vacas lecheras de Estados Unidos en 2024.
 
-## "Aplanamos la curva!"
+## "¡Aplanamos la curva!"
 
-Como podemos ver en la siguiente figura, el comportamiento de la curva es muy parecido en todos los países, algunos han podido ralentizarlo y en otros las muertes siguen al alza. Las medidas de "quédate en casa" no han tenido el mismo efecto en todos los países por diferencias socio económicas pero estamos en el mismo barco y no podemos asumir que podemos regresar a la normalidad porque nuestro país, estado o municipio ya está mejor. Tendremos que esperar hasta que la taza de mortalidad sea cercana a cero.[^2026m-deathrate]
+Como podemos ver en la siguiente figura, el comportamiento de la curva es muy parecido en todos los países, algunos han podido ralentizarlo y en otros las muertes siguen al alza. Las medidas de "quédate en casa" no han tenido el mismo efecto en todos los países por diferencias socioeconómicas pero estamos en el mismo barco y no podemos asumir que podemos regresar a la normalidad porque nuestro país, estado o municipio ya está mejor. Tendremos que esperar hasta que la tasa de mortalidad sea cercana a cero.[^2026m-deathrate]
 
 [^2026m-deathrate]: missed: La mayoría de los países quitaron sus restricciones en 2021 y 2022, mucho antes de que las vacunas llegaran a todos. La OMS terminó la emergencia en mayo de 2023 con gente que seguía muriendo.
 
@@ -111,13 +111,13 @@ Todo esto son solo mis opiniones, pero creo que el mayor distanciamiento social 
 
 [^2026m-kshape]: held: "Recuperación en K" fue el nombre que le pusieron. El Banco Mundial estimó que cerca de 70 millones de personas cayeron en pobreza extrema en 2020, el mayor salto en un año desde que empezó a contar en 1990.
 
-Se que en libros como "Factfulness" o "The world is better than you think" ("El mundo es mejor de lo que piensas") se presentan estadísticas sobre cómo las cosas han ido mejorando. Pero para mí, eso es solo un síntoma de la globalización.[^2026-globalization]
+Sé que en libros como "Factfulness" se presentan estadísticas sobre cómo las cosas han ido mejorando. Pero para mí, eso es solo un síntoma de la globalización.[^2026-globalization]
 
 [^2026-globalization]: Las dos cosas resultaron ciertas. La pobreza extrema venía bajando por décadas, y en 2020 subió por primera vez en una generación.
 
 Los números de todos los países son más parecidos a los del primer mundo, los promedios hacen que parezca que los países pobres son cada vez menos con el tiempo, pero la diferencia entre los pobres y los ricos sigue siendo grande y una crisis como esta agrava esa brecha y la hace más aparente.
 
-La vida sigue, y es corta. Espero que salgamos de éste problema en un futuro cercano y que comencemos a arreglar tantas cosas que están mal en nuestro mundo.
+La vida sigue, y es corta. Espero que salgamos de este problema en un futuro cercano y que comencemos a arreglar tantas cosas que están mal en nuestro mundo.
 
 ---
 
