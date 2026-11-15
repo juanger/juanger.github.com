@@ -7,6 +7,7 @@ import MarkdownIt from "markdown-it";
 import footnote from "markdown-it-footnote";
 import container from "markdown-it-container";
 import type Token from "markdown-it/lib/token.mjs";
+import { renderChart, type FigSize, type Lang } from "./viz/index.ts";
 import hljs from "highlight.js/lib/core";
 import ruby from "highlight.js/lib/languages/ruby";
 import scss from "highlight.js/lib/languages/scss";
@@ -37,6 +38,68 @@ function mdEscape(s: string): string {
 
 function slugifyLabel(label: string): string {
   return label.replace(/[^a-zA-Z0-9_-]/g, "-");
+}
+
+// ---- :::figure helpers (see the figure_* core rules) --------------------
+const FIG_SOURCE_RE = /^(Source|Credit|Fuente)\b\s*:?\s*/i;
+
+function parseFigureInfo(info: string): { type: FigSize; id?: string } {
+  const m = /^figure(?:\s+(main|margin|full))?(?:\s+#([\w-]+))?/.exec(info.trim());
+  return { type: (m?.[1] as FigSize) || "main", id: m?.[2] };
+}
+
+// Plain text of an inline token's children (for classifying source lines).
+function inlinePlainText(tok: Token): string {
+  return (tok.children ?? [])
+    .map((c) => (c.type === "text" || c.type === "code_inline" ? c.content : c.type === "softbreak" ? " " : ""))
+    .join("");
+}
+
+// The sole image in an inline token, or null if it holds anything else.
+function singleImage(tok: Token): Token | null {
+  const kids = (tok.children ?? []).filter(
+    (c) => !(c.type === "text" && c.content.trim() === "") && c.type !== "softbreak",
+  );
+  return kids.length === 1 && kids[0].type === "image" ? kids[0] : null;
+}
+
+type FigMedia =
+  | { kind: "chart"; body: string }
+  | { kind: "svg"; html: string }
+  | { kind: "image"; img: Token }
+  | null;
+
+function findFigureClose(toks: Token[], open: number): number {
+  // Figures do not nest, so the next close token is ours.
+  for (let j = open + 1; j < toks.length; j++) if (toks[j].type === "container_figure_close") return j;
+  return -1;
+}
+
+// Split a figure's inner tokens into its media, caption and source parts.
+function classifyFigure(toks: Token[], open: number, close: number): { media: FigMedia; caption: Token | null; source: Token | null } {
+  let media: FigMedia = null;
+  let caption: Token | null = null;
+  let source: Token | null = null;
+  for (let i = open + 1; i < close; i++) {
+    const t = toks[i];
+    if (t.type === "fence" && t.info.trim() === "chart") {
+      if (!media) media = { kind: "chart", body: t.content };
+    } else if (t.type === "html_block" && /^\s*<svg\b/i.test(t.content)) {
+      if (!media) media = { kind: "svg", html: t.content };
+    } else if (t.type === "paragraph_open") {
+      const inline = toks[i + 1];
+      if (inline && inline.type === "inline") {
+        const img = singleImage(inline);
+        if (img && !media) media = { kind: "image", img };
+        else {
+          const text = inlinePlainText(inline).trim();
+          if (FIG_SOURCE_RE.test(text)) source = inline;
+          else if (!caption) caption = inline;
+        }
+      }
+    }
+  }
+  return { media, caption, source };
 }
 
 // Build-time syntax highlighting (ships no client JS). Returns the inner HTML for
@@ -181,6 +244,13 @@ export function createMarkdown(): MarkdownIt {
     },
   });
 
+  // ---- :::figure [main|margin|full] [#id] — numbered figures (spec §3) ----
+  // The container only marks the block; `figure_assemble` (a core rule) does the
+  // real work: numbering, caption markup, chart rendering and the data table.
+  // The default validate accepts it ("figure" is the first word); its render is
+  // never reached because the core rule replaces the tokens before render.
+  md.use(container, "figure", { render: () => "" });
+
   // ---- :::today — a collapsed "how I'd do this today" block (code only) ----
   md.use(container, "today", {
     render(tokens: Token[], idx: number, _opts: unknown, env: Record<string, unknown>) {
@@ -318,6 +388,124 @@ export function createMarkdown(): MarkdownIt {
         start = -1;
         i = start;
       }
+    }
+  });
+
+  // ---- :::figure numbering (pass 1): assign "Figure N" in document order ----
+  // Only figures with a caption are numbered; the id→number map is stashed on
+  // env for the reference pass. Runs after footnotes are inlined and before the
+  // bare-image `tufte_figure` rule, so a :::figure is assembled as one unit.
+  md.core.ruler.push("figure_number", (state) => {
+    const env = state.env as Record<string, unknown>;
+    const toks = state.tokens;
+    const numbers: Record<string, number> = {};
+    let count = 0;
+    for (let i = 0; i < toks.length; i++) {
+      if (toks[i].type !== "container_figure_open") continue;
+      const close = findFigureClose(toks, i);
+      if (close < 0) continue;
+      const { type, id } = parseFigureInfo(toks[i].info);
+      const { caption } = classifyFigure(toks, i, close);
+      let num = 0;
+      if (caption) {
+        num = ++count;
+        if (id) numbers[id] = num;
+      }
+      (toks[i] as Token & { meta: Record<string, unknown> }).meta = { figType: type, figId: id, figNum: num };
+    }
+    env.figNumbers = numbers;
+  });
+
+  // ---- [@fig-id] references (pass 2): "Figure N" linked to #fig-id ----
+  md.core.ruler.push("figure_refs", (state) => {
+    const env = state.env as Record<string, unknown>;
+    const numbers = (env.figNumbers as Record<string, number>) ?? {};
+    const label = env.lang === "es" ? "Figura" : "Figure";
+    for (const tok of state.tokens) {
+      if (tok.type !== "inline" || !tok.children) continue;
+      const out: Token[] = [];
+      for (const child of tok.children) {
+        const re = /\[@([\w-]+)\]/g;
+        if (child.type !== "text" || !re.test(child.content)) {
+          out.push(child);
+          continue;
+        }
+        re.lastIndex = 0;
+        let last = 0;
+        let m: RegExpExecArray | null;
+        while ((m = re.exec(child.content))) {
+          if (m.index > last) {
+            const t = new state.Token("text", "", 0);
+            t.content = child.content.slice(last, m.index);
+            out.push(t);
+          }
+          const n = numbers[m[1]];
+          const h = new state.Token("html_inline", "", 0);
+          // A non-breaking space keeps "Figure 2" from wrapping across a line.
+          h.content = n ? `<a href="#${m[1]}" class="fig-ref">${label} ${n}</a>` : `${label} ?`;
+          out.push(h);
+          last = m.index + m[0].length;
+        }
+        if (last < child.content.length) {
+          const t = new state.Token("text", "", 0);
+          t.content = child.content.slice(last);
+          out.push(t);
+        }
+      }
+      tok.children = out;
+    }
+  });
+
+  // ---- :::figure assembly (pass 3): caption markup, chart SVG, data table ----
+  md.core.ruler.push("figure_assemble", (state) => {
+    const env = state.env as Record<string, unknown>;
+    const lang: Lang = env.lang === "es" ? "es" : "en";
+    const figLabel = lang === "es" ? "Figura" : "Figure";
+    const toks = state.tokens;
+    let autoId = 0;
+    for (let i = 0; i < toks.length; i++) {
+      if (toks[i].type !== "container_figure_open") continue;
+      const close = findFigureClose(toks, i);
+      if (close < 0) continue;
+      const meta = (toks[i] as Token & { meta?: Record<string, unknown> }).meta ?? {};
+      const type = (meta.figType as FigSize) ?? "main";
+      const id = meta.figId as string | undefined;
+      const num = (meta.figNum as number) ?? 0;
+      const { media, caption, source } = classifyFigure(toks, i, close);
+
+      let figcaption = "";
+      if (caption) {
+        const capHtml = state.md.renderer.renderInline(caption.children!, state.md.options, state.env);
+        let srcHtml = "";
+        if (source) {
+          const s = state.md.renderer.renderInline(source.children!, state.md.options, state.env);
+          srcHtml = `<span class="fig-source">` + s.replace(FIG_SOURCE_RE, (_mm, w: string) => `<span class="sc">${w}</span> `) + `</span>`;
+        }
+        const labelSpan = num ? `<span class="fig-label">${figLabel} ${num}</span>` : "";
+        figcaption = `<figcaption>${labelSpan}<span class="fig-text">${capHtml}</span>${srcHtml}</figcaption>`;
+      }
+
+      let mediaHtml = "";
+      let tableHtml = "";
+      const chartId = id ?? `fig-${num || "a" + ++autoId}`;
+      if (media?.kind === "chart") {
+        const r = renderChart(media.body, { size: type as FigSize, lang, id: chartId });
+        mediaHtml = r.media;
+        tableHtml = r.table;
+      } else if (media?.kind === "svg") {
+        mediaHtml = media.html.trim();
+      } else if (media?.kind === "image") {
+        const src = media.img.attrGet("src") ?? "";
+        const alt = media.img.content ?? "";
+        mediaHtml = `<img src="${state.md.utils.escapeHtml(src)}" alt="${state.md.utils.escapeHtml(alt)}" loading="lazy" decoding="async"/>`;
+      }
+
+      const idAttr = id ? ` id="${state.md.utils.escapeHtml(id)}"` : "";
+      const html = `<figure class="${type}"${idAttr}>\n${figcaption}${mediaHtml}${tableHtml}\n</figure>`;
+      const tok = new state.Token("html_block", "", 0);
+      tok.content = html + "\n";
+      tok.block = true;
+      toks.splice(i, close - i + 1, tok);
     }
   });
 
