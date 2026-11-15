@@ -469,7 +469,12 @@ details.errata-today[open] summary { margin-bottom: 0.6rem; }
 .iframe-wrapper { position: relative; aspect-ratio: 16 / 9; }
 .iframe-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
+/* Dark mode dims photos only — never screenshots, charts or diagrams, whose
+   colours are evidence (see the viz style spec §4.1). A blanket `img` filter
+   used to grey out the screenshots and chart PNGs too. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) img { filter: brightness(0.92); }
+  :root:not([data-theme="light"]) figure.photo img,
+  :root:not([data-theme="light"]) img.photo { filter: brightness(0.88) contrast(1.04); }
 }
-:root[data-theme="dark"] img { filter: brightness(0.92); }
+:root[data-theme="dark"] figure.photo img,
+:root[data-theme="dark"] img.photo { filter: brightness(0.88) contrast(1.04); }
