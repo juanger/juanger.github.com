@@ -138,3 +138,11 @@ the list was left as raw HTML.
 | `en/2010/04/this-is-old-post-that-i-wrote-some` | status (partly-wrong); MacRoman, NFD, precomposeunicode, UFS (Lion, verified), Cocoa-NFC sidenotes; "won't be solved" **missed** verdict; muted gist-restore note (`[^2026r-…]`). Raw inline notes, since the anchors sit in packed `<p>`/`<ul>` HTML. |
 | `en/2013/01/html5-and-css3-buttons` | status (obsolete); Flash and Compass-mixins margin notes; `appearance`/`accent-color` and `base-select` sidenotes; `:::today` modern-CSS block. |
 | `en/2013/06/command-done-notification-with-zsh-and-growl` | status (obsolete); Prismatic, preexec/precmd, Notification-Center sidenotes; `:::today` Growl-free zsh snippet (marked "tested on macOS ___"). |
+| `en/2020/05/time-flies-when-you-are-having-fun` | status (historical); "revive this blog" **missed** verdict; Spanish-promise margin note. |
+| `es/2020/05/time-flies-when-you-are-having-fun` | Same two notes, mirrored in Mexican Spanish (draft; verdict word kept in English). |
+| `en/2020/05/life-after-covid-19` | status (scored); 10 verdict margin notes; excess-deaths, "no one prepared", globalization sidenotes; `:::scorecard` with a computed 6 held / 3 partly / 1 missed tally and a results table. Verdict definitions were grouped after the "Wild guesses" bullet list (not between items) so the loose list markup is unchanged. |
+| `es/2020/05/life-after-covid-19` | Same notes and scorecard, mirrored in Mexican Spanish (draft; verdict words and tally kept in English). |
+| `en/2021/04/on-remote-schools` | status (revisited); school-closure, self-regulated-learning, "not only fun" sidenotes; "remote learning will never work" **held** verdict; phone-tab margin note. |
+
+**Disputed verdicts (COVID):** "tourism" and "better mask design" are both scored
+`partly` (Juan's call per the review checklist), giving 6 held / 3 partly / 1 missed.

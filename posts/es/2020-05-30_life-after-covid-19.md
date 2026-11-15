@@ -3,20 +3,31 @@ layout: post
 title: "La vida después de la COVID-19"
 date: 2020-05-30 12:00
 comments: true
+status: scored
+reviewed: 2026-10
+status_note: >
+  Calificado en octubre de 2026. Dejé el texto de 2020 tal cual y marqué cada
+  predicción en el margen, con el conteo al final. Más aciertos que errores, y el
+  error fue ser demasiado optimista sobre cuánto tiempo el mundo mantendría la
+  guardia.
 categories:
   - opinion
   - COVID-19
 ---
 
-La COVID-19 está aquí para quedarse, incluso si la erradicamos, sus efectos permanecerán en nuestro mundo y en nuestras mentes durante años.
+La COVID-19 está aquí para quedarse, incluso si la erradicamos,[^2026m-stays] sus efectos permanecerán en nuestro mundo y en nuestras mentes durante años.
+
+[^2026m-stays]: held: Nunca se erradicó. Ahora es endémica, con vacunas anuales como la influenza, y sus efectos sí duraron años.
 
 Voy a enumerar algunas frases que hemos escuchado durante estos meses con mis opiniones acerca de ellas.
 
 ### "La gripe mata a más personas, ¿por qué el pánico?"
 
-Creo que es muy evidente ahora que COVID-19 es una enfermedad con alta mortandad, solo falta ver las noticias alarmantes del 2018 sobre 80 mil muertes por influenza durante el invierno y compararlas con los números de la COVID-19 durante la primavera,[^flu-deaths] pero creo que la parte más importante de esto, y por qué mucha gente en el gobierno y la clase alta en pánico es que puede matar a cualquiera.
+Creo que es muy evidente ahora que COVID-19 es una enfermedad con alta mortandad, solo falta ver las noticias alarmantes del 2018 sobre 80 mil muertes por influenza durante el invierno y compararlas con los números de la COVID-19 durante la primavera,[^flu-deaths][^2026-excess] pero creo que la parte más importante de esto, y por qué mucha gente en el gobierno y la clase alta en pánico es que puede matar a cualquiera.
 
 [^flu-deaths]: CNN: https://www.cnn.com/2018/09/26/health/flu-deaths-2017--2018-cdc-bn/index.html
+
+[^2026-excess]: Los números finales fueron mucho peores de lo que podía ver en mayo de 2020. La OMS estimó cerca de 14.9 millones de muertes en exceso en el mundo solo en 2020 y 2021.
 
 :::pullquote
 Las personas ricas pueden sobrevivir a muchas cosas que cobran muchas vidas todos los días en todo el mundo, pero esta es una enfermedad nueva y no pueden pagar por inmunidad (aún).
@@ -30,13 +41,19 @@ La epidemia de influenza en 2009 tuvo una respuesta más rápida de los Estados 
 
 [^cruise]: Incluso las compañías de cruceros comenzaron a tomar precauciones muy rápido en 2009. [Web Archive (en inglés)](https://web.archive.org/web/20090630144402/http://www.sdbj.com/industry_article.asp?aID=47999878.5516779.1777724.4325329.569692.256&aID2=136739)
 
-Esta crisis es algo para lo que nadie podría haber estado preparado (porque requiere mucho dinero y planificación), pero es muy importante descubrir cuál es el mejor plan para cuando llegue una nueva enfermedad contagiosa en el futuro.
+Esta crisis es algo para lo que nadie podría haber estado preparado[^2026-prepared] (porque requiere mucho dinero y planificación), pero es muy importante descubrir cuál es el mejor plan para cuando llegue una nueva enfermedad contagiosa en el futuro.
 
-Vendrán más enfermedades pero tenemos que estar preparados.
+[^2026-prepared]: Hoy lo diría con más cuidado. Taiwán y Corea del Sur tenían planes desde el SARS y el MERS y les fue mucho mejor al principio, y mi propio ejemplo de 2009 justo arriba apunta a lo mismo.
+
+Vendrán más enfermedades pero tenemos que estar preparados.[^2026m-morediseases]
+
+[^2026m-morediseases]: held: La viruela símica se declaró emergencia global en 2022 y otra vez en 2024, y la gripe aviar H5N1 llegó a las vacas lecheras de Estados Unidos en 2024.
 
 ## "Aplanamos la curva!"
 
-Como podemos ver en la siguiente figura, el comportamiento de la curva es muy parecido en todos los países, algunos han podido ralentizarlo y en otros las muertes siguen al alza. Las medidas de "quédate en casa" no han tenido el mismo efecto en todos los países por diferencias socio económicas pero estamos en el mismo barco y no podemos asumir que podemos regresar a la normalidad porque nuestro país, estado o municipio ya está mejor. Tendremos que esperar hasta que la taza de mortalidad sea cercana a cero.
+Como podemos ver en la siguiente figura, el comportamiento de la curva es muy parecido en todos los países, algunos han podido ralentizarlo y en otros las muertes siguen al alza. Las medidas de "quédate en casa" no han tenido el mismo efecto en todos los países por diferencias socio económicas pero estamos en el mismo barco y no podemos asumir que podemos regresar a la normalidad porque nuestro país, estado o municipio ya está mejor. Tendremos que esperar hasta que la taza de mortalidad sea cercana a cero.[^2026m-deathrate]
+
+[^2026m-deathrate]: missed: La mayoría de los países quitaron sus restricciones en 2021 y 2022, mucho antes de que las vacunas llegaran a todos. La OMS terminó la emergencia en mayo de 2023 con gente que seguía muriendo.
 
 Eso no significa que el mundo se deba detener hasta que se resuelva, pero tendremos que seguir ciertas medidas por un tiempo hasta que una vacuna sea accesible para todos.
 
@@ -49,10 +66,14 @@ Cualquier persona está en riesgo de contraer el virus, y algunos le dirán que 
 Traduzco eso como: la confianza ya no es un hecho. Cuando se da la mano, compra una comida, sube a un avión o tren, comparte un automóvil, etc., ¿confía en que las otras personas no tengan una enfermedad contagiosa?
 
 :::pullquote
-Con el tiempo, si conseguimos una cura, no pensaremos tanto en ello, pero una vez que llegue una nueva enfermedad, la confianza será la primera víctima global.
+Con el tiempo, si conseguimos una cura, no pensaremos tanto en ello, pero una vez que llegue una nueva enfermedad, la confianza será la primera víctima global.[^2026m-trust]
 :::
 
-La economía también sufrirá problemas de confianza porque las personas comenzarán a pensar dos veces antes de adquirir algo, ya sea por miedo o porque necesitan ese dinero para atención médica.
+[^2026m-trust]: held: Pew encontró que la proporción de estadounidenses con mucha confianza en los científicos cayó de 39% a finales de 2020 a 23% en 2023.
+
+La economía también sufrirá problemas de confianza porque las personas comenzarán a pensar dos veces antes de adquirir algo,[^2026m-thinktwice] ya sea por miedo o porque necesitan ese dinero para atención médica.
+
+[^2026m-thinktwice]: partly: Cierto por unos meses, cuando el ahorro en Estados Unidos subió en 2020. Después la gente volvió a gastar, y en 2021 y 2022 la preocupación pasó a ser la inflación.
 
 ### "Pero necesito trabajar"
 
@@ -68,20 +89,55 @@ Ve a trabajar, pero toma precauciones. Si perdiste tu trabajo, la tendrás mucho
 
 ## Suposiciones
 
-- El verano ya está aquí, pero el turismo no será el mismo, mucha gente no viajará por miedo y muchos países sufrirán, económica y socialmente.
+- El verano ya está aquí, pero el turismo no será el mismo, mucha gente no viajará por miedo y muchos países sufrirán, económica y socialmente.[^2026m-tourism]
 
-- Se necesita un mejor diseño de máscara cubrebocas, veremos nuevos diseños para uso prolongado.
+- Se necesita un mejor diseño de máscara cubrebocas, veremos nuevos diseños para uso prolongado.[^2026m-masks]
 
-- Algunos modelos[^models] muestran que sin una cura y un distanciamiento social permanente, COVID-19 vendrá en oleadas o al menos que vendrá una nueva ola al quitar restricciones. Temo que tengamos una mala mutación en un país donde las restricciones no puedan seguirse y que volvamos al pánico.
+- Algunos modelos[^models] muestran que sin una cura y un distanciamiento social permanente, COVID-19 vendrá en oleadas o al menos que vendrá una nueva ola al quitar restricciones. Temo que tengamos una mala mutación en un país donde las restricciones no puedan seguirse y que volvamos al pánico.[^2026m-mutation]
+
+[^2026m-tourism]: partly: Cierto ese verano y el siguiente. Para 2024, ONU Turismo contó las llegadas internacionales de vuelta al 99% de 2019.
+
+[^2026m-masks]: partly: Los mejores cubrebocas sí se volvieron comunes (N95, KN95), pero eran diseños viejos que solo se volvieron más fáciles de conseguir. No vi que se impusiera un diseño nuevo.
+
+[^2026m-mutation]: held: Llegaron olas después de las reaperturas, y Delta (2021) y Ómicron (finales de 2021) regresaron el pánico. Las variantes aparecieron donde el virus se propagó mucho, no solo donde no se seguían las reglas.
 
 [^models]: "Modeling COVID" ![Modeling COVID return-to-normal chart](</images/2020-05-30_life-after-covid-19/Return to normal.png>) <https://modelingcovid.com/state/CA>
 
-- Las personas ricas valorarán más el aislamiento, las empresas que ofrezcan productos utilizados de esa forma van a recibir fondos de capital.
+- Las personas ricas valorarán más el aislamiento, las empresas que ofrezcan productos utilizados de esa forma van a recibir fondos de capital.[^2026m-vcs]
 
-Todo esto son solo mis opiniones, pero creo que el mayor distanciamiento social no serán los 2 metros de distancia a otras personas, sino la división entre las clases sociales con los pobres falleciendo más y los ricos tratando de alejarse más del contacto riesgoso con potenciales portadores.
+[^2026m-vcs]: held: Peloton, Zoom y las apps de entrega crecieron mucho en 2020 y 2021, y Peloton después perdió casi todo su valor.
 
-Se que en libros como "Factfulness" o "The world is better than you think" ("El mundo es mejor de lo que piensas") se presentan estadísticas sobre cómo las cosas han ido mejorando. Pero para mí, eso es solo un síntoma de la globalización.
+Todo esto son solo mis opiniones, pero creo que el mayor distanciamiento social no serán los 2 metros de distancia a otras personas, sino la división entre las clases sociales con los pobres falleciendo más y los ricos tratando de alejarse más del contacto riesgoso con potenciales portadores.[^2026m-kshape]
+
+[^2026m-kshape]: held: "Recuperación en K" fue el nombre que le pusieron. El Banco Mundial estimó que cerca de 70 millones de personas cayeron en pobreza extrema en 2020, el mayor salto en un año desde que empezó a contar en 1990.
+
+Se que en libros como "Factfulness" o "The world is better than you think" ("El mundo es mejor de lo que piensas") se presentan estadísticas sobre cómo las cosas han ido mejorando. Pero para mí, eso es solo un síntoma de la globalización.[^2026-globalization]
+
+[^2026-globalization]: Las dos cosas resultaron ciertas. La pobreza extrema venía bajando por décadas, y en 2020 subió por primera vez en una generación.
 
 Los números de todos los países son más parecidos a los del primer mundo, los promedios hacen que parezca que los países pobres son cada vez menos con el tiempo, pero la diferencia entre los pobres y los ricos sigue siendo grande y una crisis como esta agrava esa brecha y la hace más aparente.
 
 La vida sigue, y es corta. Espero que salgamos de éste problema en un futuro cercano y que comencemos a arreglar tantas cosas que están mal en nuestro mundo.
+
+---
+
+:::scorecard
+
+## Predicciones, calificadas en 2026
+
+| Lo que dije en mayo de 2020 | Veredicto | Lo que pasó |
+|---|---|---|
+| La COVID-19 llegó para quedarse | held | Endémica, vacunas anuales |
+| Vendrán más enfermedades | held | Emergencias de viruela símica 2022 y 2024, H5N1 en ganado 2024 |
+| Esperar a que la mortalidad mundial sea casi cero | missed | Restricciones fuera en 2021 y 2022, emergencia de la OMS terminó en mayo de 2023 |
+| La confianza será la primera víctima | held | Pew: "mucha" confianza en los científicos 39% a 23% (2020 a 2023) |
+| La gente lo pensará dos veces antes de comprar | partly | Breve pico de ahorro, luego auge del gasto e inflación |
+| El turismo no será el mismo | partly | Dos años a la baja, 99% de 2019 para 2024 |
+| Se necesitan mejores cubrebocas | partly | N95 y KN95 se volvieron comunes, sin diseño nuevo |
+| Olas y una mala mutación | held | Delta, Ómicron |
+| Los fondos respaldarán productos de aislamiento | held | Auge de Peloton y Zoom, luego caída |
+| Los pobres morirán más | held | Recuperación en K, unos 70M en pobreza extrema en 2020 |
+
+Fuentes: OMS muertes en exceso (mayo 2022), Pew Research (nov 2023), ONU Turismo (ene 2025), Banco Mundial Poverty and Shared Prosperity 2022.
+
+:::
