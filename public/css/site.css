@@ -399,6 +399,7 @@ ins.errata { text-decoration: none; color: var(--accent); }
 /* Status line under the post date: framed by two hairlines, smaller type, always
    visible (it's the warning). Rendered from front matter, inside the text column. */
 aside.errata-status {
+  max-width: var(--measure);
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   margin: 0 0 2.5rem;

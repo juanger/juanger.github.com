@@ -8,15 +8,19 @@
 <p>Ain't it cool?</p>
 <details class="errata-today">
 <summary><span class="errata-year">2026</span> · How I'd do this today</summary>
-<p>Growl is gone, so post to Notification Center through <code>osascript</code>. Same two zsh hooks, no Growl. Tested on macOS ___ (to be filled in once run):</p>
+<p>Growl is gone, so post to Notification Center through <code>osascript</code>. Same two zsh hooks, no Growl. Tested on macOS 27. The first time, macOS asks to allow notifications from Script Editor.</p>
 <pre><code class="language-zsh"><span class="hljs-built_in">zmodload</span> zsh/datetime
 <span class="hljs-built_in">autoload</span> -Uz add-zsh-hook
 
 <span class="hljs-function"><span class="hljs-title">_cd_pre</span></span>() { _cd_start=<span class="hljs-variable">$EPOCHSECONDS</span>; _cd_cmd=<span class="hljs-variable">$1</span> }
 <span class="hljs-function"><span class="hljs-title">_cd_post</span></span>() {
-  <span class="hljs-built_in">local</span> elapsed=$(( EPOCHSECONDS - <span class="hljs-variable">${_cd_start:-<span class="hljs-variable">$EPOCHSECONDS</span>}</span> ))
+  (( <span class="hljs-variable">${+_cd_start}</span> )) || <span class="hljs-built_in">return</span>
+  <span class="hljs-built_in">local</span> elapsed=$(( EPOCHSECONDS - _cd_start ))
+  <span class="hljs-built_in">unset</span> _cd_start
   (( elapsed &lt; <span class="hljs-number">5</span> )) &amp;&amp; <span class="hljs-built_in">return</span>
-  osascript -e <span class="hljs-string">&quot;display notification \&quot;<span class="hljs-variable">${_cd_cmd}</span>\&quot; with title \&quot;Command done (<span class="hljs-variable">${elapsed}</span>s)\&quot;&quot;</span>
+  osascript -e <span class="hljs-string">&#x27;on run argv&#x27;</span> \
+    -e <span class="hljs-string">&#x27;display notification (item 1 of argv) with title (&quot;Command done (&quot; &amp; (item 2 of argv) &amp; &quot;s)&quot;)&#x27;</span> \
+    -e <span class="hljs-string">&#x27;end run&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$_cd_cmd</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$elapsed</span>&quot;</span>
 }
 add-zsh-hook preexec _cd_pre
 add-zsh-hook precmd _cd_post

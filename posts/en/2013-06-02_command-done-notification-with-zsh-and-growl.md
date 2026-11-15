@@ -35,7 +35,7 @@ Ain't it cool?
 
 :::today
 
-Growl is gone, so post to Notification Center through `osascript`. Same two zsh hooks, no Growl. Tested on macOS ___ (to be filled in once run):
+Growl is gone, so post to Notification Center through `osascript`. Same two zsh hooks, no Growl. Tested on macOS 27. The first time, macOS asks to allow notifications from Script Editor.
 
 ```zsh
 zmodload zsh/datetime
@@ -43,9 +43,13 @@ autoload -Uz add-zsh-hook
 
 _cd_pre() { _cd_start=$EPOCHSECONDS; _cd_cmd=$1 }
 _cd_post() {
-  local elapsed=$(( EPOCHSECONDS - ${_cd_start:-$EPOCHSECONDS} ))
+  (( ${+_cd_start} )) || return
+  local elapsed=$(( EPOCHSECONDS - _cd_start ))
+  unset _cd_start
   (( elapsed < 5 )) && return
-  osascript -e "display notification \"${_cd_cmd}\" with title \"Command done (${elapsed}s)\""
+  osascript -e 'on run argv' \
+    -e 'display notification (item 1 of argv) with title ("Command done (" & (item 2 of argv) & "s)")' \
+    -e 'end run' "$_cd_cmd" "$elapsed"
 }
 add-zsh-hook preexec _cd_pre
 add-zsh-hook precmd _cd_post
