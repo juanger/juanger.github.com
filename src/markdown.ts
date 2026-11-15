@@ -62,11 +62,17 @@ function highlightCode(code: string, lang: string): string {
   return mdEscape(code);
 }
 
+// The small-caps "2026" stamp that opens every 2026 errata annotation.
+const ERRATA_YEAR = `<span class="errata-year">2026</span>`;
+// A verdict note's text starts with one of these words + a colon.
+const VERDICT_RE = /^(held|partly|missed):\s*/i;
+
 // A sidenote (numbered) or margin note (⊕), with the Tufte label+input+span so
-// it opens on tap on narrow screens.
+// it opens on tap on narrow screens. Footnote labels beginning with `2026`
+// render as 2026 errata annotations instead (see noteHtml's errata branch).
 function noteHtml(label: string, content: string): string {
-  const isMargin = label.startsWith("m:");
-  if (isMargin) {
+  // ---- plain margin note (unchanged): [^m:key] ----
+  if (label.startsWith("m:")) {
     const id = "mn-" + slugifyLabel(label.slice(2));
     return (
       `<label for="${id}" class="margin-toggle">⊕</label>` +
@@ -74,12 +80,75 @@ function noteHtml(label: string, content: string): string {
       `<span class="marginnote">${content}</span>`
     );
   }
+
+  // ---- 2026 errata family: [^2026-…], [^2026m-…], [^2026!-…], [^2026r-…] ----
+  if (/^2026/.test(label)) {
+    const id = "e26-" + slugifyLabel(label);
+
+    // Restoration marker ([^2026r-…]): a muted, plain margin note with no accent
+    // stamp — link rot and lost embeds are routine, not a correction.
+    if (label.startsWith("2026r")) {
+      return (
+        `<label for="${id}" class="margin-toggle">⊕</label>` +
+        `<input type="checkbox" id="${id}" class="margin-toggle"/>` +
+        `<span class="marginnote">${content}</span>`
+      );
+    }
+
+    // Verdict ([^held:/partly:/missed:]): the verdict word is the toggle label on
+    // mobile ("held ⊕") and sits in accent small-caps after the 2026 stamp.
+    const vm = VERDICT_RE.exec(content);
+    if (vm) {
+      const word = vm[1].toLowerCase();
+      const rest = content.slice(vm[0].length);
+      return (
+        `<label for="${id}" class="margin-toggle verdict-toggle"><span class="verdict-word">${word}</span>⊕</label>` +
+        `<input type="checkbox" id="${id}" class="margin-toggle"/>` +
+        `<span class="marginnote errata verdict" data-verdict="${word}">${ERRATA_YEAR}<span class="verdict-word">${word}</span>${rest}</span>`
+      );
+    }
+
+    // Unlettered errata margin note ([^2026m-…]): ⊕ toggle, 2026 stamp, hairline.
+    if (label.startsWith("2026m")) {
+      return (
+        `<label for="${id}" class="margin-toggle">⊕</label>` +
+        `<input type="checkbox" id="${id}" class="margin-toggle"/>` +
+        `<span class="marginnote errata">${ERRATA_YEAR}${content}</span>`
+      );
+    }
+
+    // Lettered errata sidenote ([^2026-…], or [^2026!-…] always-visible on mobile).
+    const always = label.startsWith("2026!") ? " always" : "";
+    return (
+      `<label for="${id}" class="margin-toggle errata-number"></label>` +
+      `<input type="checkbox" id="${id}" class="margin-toggle"/>` +
+      `<span class="sidenote errata${always}">${ERRATA_YEAR}${content}</span>`
+    );
+  }
+
+  // ---- numbered sidenote (unchanged): [^key] ----
   const id = "sn-" + slugifyLabel(label);
   return (
     `<label for="${id}" class="margin-toggle sidenote-number"></label>` +
     `<input type="checkbox" id="${id}" class="margin-toggle"/>` +
     `<span class="sidenote">${content}</span>`
   );
+}
+
+// Tally a post's verdict notes (held / partly / missed) from the captured
+// footnote definitions, for the scorecard's word-sized dot graphic.
+function verdictCounts(env: Record<string, unknown>): { held: number; partly: number; missed: number } {
+  const defs = (env.sidenoteDefs as Record<string, string> | undefined) ?? {};
+  let held = 0, partly = 0, missed = 0;
+  for (const key in defs) {
+    const m = VERDICT_RE.exec(defs[key]);
+    if (!m) continue;
+    const w = m[1].toLowerCase();
+    if (w === "held") held++;
+    else if (w === "partly") partly++;
+    else missed++;
+  }
+  return { held, partly, missed };
 }
 
 export function createMarkdown(): MarkdownIt {
@@ -109,6 +178,22 @@ export function createMarkdown(): MarkdownIt {
       return tokens[idx].nesting === 1
         ? '<blockquote class="fullwidth">\n<hr/>\n'
         : "<hr/>\n</blockquote>\n";
+    },
+  });
+
+  // ---- :::today — a collapsed "how I'd do this today" block (code only) ----
+  md.use(container, "today", {
+    render(tokens: Token[], idx: number, _opts: unknown, env: Record<string, unknown>) {
+      if (tokens[idx].nesting !== 1) return "</details>\n";
+      const label = env.lang === "es" ? "Cómo lo haría hoy" : "How I'd do this today";
+      return `<details class="errata-today">\n<summary>${ERRATA_YEAR} · ${label}</summary>\n`;
+    },
+  });
+
+  // ---- :::scorecard — heading + verdict dot tally + markdown table ----
+  md.use(container, "scorecard", {
+    render(tokens: Token[], idx: number) {
+      return tokens[idx].nesting === 1 ? '<section class="scorecard">\n' : "</section>\n";
     },
   });
 
@@ -182,6 +267,28 @@ export function createMarkdown(): MarkdownIt {
       if (m && !m[1].includes("<p>")) rendered = m[1];
       env.sidenoteDefs[label] = rendered;
       i = j;
+    }
+  });
+
+  // ---- inject the scorecard dot tally after its heading ----
+  // Runs after the defs are captured (so verdict notes can be counted) and emits
+  // a "word-sized graphic": held ●… partly ◐… missed ○… from the post's verdicts.
+  md.core.ruler.after("capture_footnote_defs", "scorecard_tally", (state) => {
+    const toks = state.tokens;
+    for (let i = 0; i < toks.length; i++) {
+      if (toks[i].type !== "container_scorecard_open") continue;
+      let j = i + 1;
+      while (j < toks.length && toks[j].type !== "heading_close") j++;
+      if (j >= toks.length) continue;
+      const { held, partly, missed } = verdictCounts(state.env as Record<string, unknown>);
+      const tally =
+        `<p class="scorecard-tally">held <span class="dots">${"●".repeat(held)}</span> ` +
+        `partly <span class="dots">${"◐".repeat(partly)}</span> ` +
+        `missed <span class="dots">${"○".repeat(missed)}</span></p>\n`;
+      const tok = new state.Token("html_block", "", 0);
+      tok.content = tally;
+      tok.block = true;
+      toks.splice(j + 1, 0, tok);
     }
   });
 

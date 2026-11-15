@@ -223,7 +223,7 @@ export function indexPage(lang: Lang, posts: Post[], dev = false): string {
     return html`<h2>${year}</h2>
 <ol>
 ${inYear.map(
-      (p) => html`<li><time datetime="${p.year}-${p.month}-${p.day}"><span>${t.months[Number(p.month) - 1]}</span> <span>${p.day}</span></time> <a href="/${p.path}">${p.title}</a></li>
+      (p) => html`<li><time datetime="${p.year}-${p.month}-${p.day}"><span>${t.months[Number(p.month) - 1]}</span> <span>${p.day}</span></time> <span><a href="/${p.path}">${p.title}</a>${p.status ? html`<span class="post-status">${p.status.replace("-", " ")}</span>` : ""}</span></li>
 `,
     )}</ol>
 `;
@@ -258,6 +258,29 @@ ${toc}</section>
   });
 }
 
+// A post's status line (aside.errata-status), rendered from front matter under
+// the date and inside the text column. `historical` posts never get one, and a
+// post with no `status_note` gets nothing, regardless of status.
+const STATUS_LABELS: Record<string, string> = {
+  obsolete: "Obsolete",
+  "partly-wrong": "Partly wrong",
+  scored: "Scored",
+  revisited: "Revisited",
+  superseded: "Superseded",
+};
+
+function statusLine(post: Post): Raw | "" {
+  const status = typeof post.front.status === "string" ? post.front.status : "";
+  const note = typeof post.front.status_note === "string" ? post.front.status_note.trim() : "";
+  if (!note || !status || status === "historical") return "";
+  const label = STATUS_LABELS[status] ?? status.charAt(0).toUpperCase() + status.slice(1);
+  const year =
+    typeof post.front.reviewed === "string" ? (post.front.reviewed.match(/\d{4}/)?.[0] ?? "2026") : "2026";
+  return html`<aside class="errata-status" data-status="${status}">
+<p><span class="errata-label">${label}</span><span class="errata-year">${year}</span>${note}</p>
+</aside>`;
+}
+
 // ---- post ----
 export function postPage(post: Post, renderedBody: string, dev = false): string {
   const t = i18n[post.lang];
@@ -265,6 +288,7 @@ export function postPage(post: Post, renderedBody: string, dev = false): string 
   const body = html`<article lang="${post.lang}">
 <h1>${post.title}</h1>
 <p class="post-meta"><time datetime="${isoDate(post.date)}">${fullDate(post.lang, post.date)}</time></p>
+${statusLine(post)}
 <section>${raw(renderedBody)}</section>
 <footer class="byline">${t.byline}
 <a class="view-source" href="${mdPath}">${t.viewSource}</a>

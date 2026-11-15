@@ -35,6 +35,8 @@ export type Post = {
   date: string;
   description?: string;
   image?: string;
+  /** errata taxonomy label from front matter (historical | obsolete | …) */
+  status?: string;
   draft: boolean;
   aliases: string[];
   front: FrontMatter;
@@ -113,6 +115,7 @@ async function loadPostsForLang(dir: string, lang: Lang): Promise<Post[]> {
       date: normalizeDate(front.date, datePart),
       description: front.description ?? firstParagraph(body),
       image: front.image,
+      status: typeof front.status === "string" ? front.status : undefined,
       draft: front.draft === true,
       aliases: Array.isArray(front.aliases) ? front.aliases : [],
       front,

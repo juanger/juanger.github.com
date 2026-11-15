@@ -44,7 +44,7 @@ export async function build(opts: { outDir?: string; dev?: boolean; includeDraft
 
   // 2. render every post body once; reused for pages and feeds
   const renderedByPath = new Map<string, string>();
-  for (const p of posts) renderedByPath.set(p.path, render(p.body, {}));
+  for (const p of posts) renderedByPath.set(p.path, render(p.body, { lang: p.lang }));
 
   const canonicalPaths: string[] = ["/", "/es", "/about", "/acerca+de"];
 
