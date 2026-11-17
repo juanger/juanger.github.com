@@ -69,8 +69,10 @@ xUnit: day
 series: country
 focus: [Brazil, India, Chile, Colombia]
 highlight: Mexico
-# China's 17 Apr 2020 revision added 1,290 deaths in one day and draws a 7-day box at day 83-89.
-exclude: [China]
+# China's 17 Apr 2020 revision added 1,290 earlier deaths in one day (a 7-day box at day 83-89).
+# "China" leaves them out; the dotted line is the data as reported (scripts/covid-data.ts).
+dotted: [China (as reported)]
+dottedLabel: China, as reported
 yTicks: [10, 100, 1000]
 xTickStep: 20
 yTitle: deaths per day · 7-day average · log scale
@@ -81,7 +83,7 @@ alt: Daily COVID-19 deaths by country on a log scale: Brazil, Mexico, India, Chi
 
 Daily confirmed COVID-19 deaths, aligned by the day each country first reported five. Mexico, Brazil, India, Chile and Colombia seem to be in the same situation, deaths on the rise without a clear peak.
 
-Source: European CDC via Our World in Data, data to 30 May 2020, CC BY.
+Source: European CDC via Our World in Data, data to 30 May 2020, CC BY. On 17 April 2020 China added 1,290 earlier Wuhan deaths to a single day. The dotted line shows the data as reported, and China's solid line leaves those deaths out.
 :::
 
 ## "The economy is collapsing, we have to go back to normal"

@@ -665,13 +665,13 @@ China,79,2020-04-13,1.4
 China,80,2020-04-14,1.4
 China,81,2020-04-15,1.3
 China,82,2020-04-16,1.0
-China,83,2020-04-17,185.1
-China,84,2020-04-18,184.7
-China,85,2020-04-19,184.7
-China,86,2020-04-20,184.4
-China,87,2020-04-21,184.4
-China,88,2020-04-22,184.3
-China,89,2020-04-23,184.3
+China,83,2020-04-17,0.9
+China,84,2020-04-18,0.4
+China,85,2020-04-19,0.4
+China,86,2020-04-20,0.1
+China,87,2020-04-21,0.1
+China,88,2020-04-22,0.0
+China,89,2020-04-23,0.0
 China,90,2020-04-24,0.0
 China,91,2020-04-25,0.0
 China,92,2020-04-26,0.0
@@ -709,6 +709,133 @@ China,123,2020-05-27,0.0
 China,124,2020-05-28,0.0
 China,125,2020-05-29,0.0
 China,126,2020-05-30,0.0
+China (as reported),0,2020-01-25,5.6
+China (as reported),1,2020-01-26,7.6
+China (as reported),2,2020-01-27,11.1
+China (as reported),3,2020-01-28,14.3
+China (as reported),4,2020-01-29,16.4
+China (as reported),5,2020-01-30,21.9
+China (as reported),6,2020-01-31,26.7
+China (as reported),7,2020-02-01,31.1
+China (as reported),8,2020-02-02,35.4
+China (as reported),9,2020-02-03,40.0
+China (as reported),10,2020-02-04,45.7
+China (as reported),11,2020-02-05,51.4
+China (as reported),12,2020-02-06,56.3
+China (as reported),13,2020-02-07,60.6
+China (as reported),14,2020-02-08,66.3
+China (as reported),15,2020-02-09,72.6
+China (as reported),16,2020-02-10,78.3
+China (as reported),17,2020-02-11,84.4
+China (as reported),18,2020-02-12,88.9
+China (as reported),19,2020-02-13,114.9
+China (as reported),20,2020-02-14,106.3
+China (as reported),21,2020-02-15,114.4
+China (as reported),22,2020-02-16,122.0
+China (as reported),23,2020-02-17,123.1
+China (as reported),24,2020-02-18,121.7
+China (as reported),25,2020-02-19,127.7
+China (as reported),26,2020-02-20,107.4
+China (as reported),27,2020-02-21,122.4
+China (as reported),28,2020-02-22,117.6
+China (as reported),29,2020-02-23,111.3
+China (as reported),30,2020-02-24,117.7
+China (as reported),31,2020-02-25,113.7
+China (as reported),32,2020-02-26,101.3
+China (as reported),33,2020-02-27,89.4
+China (as reported),34,2020-02-28,78.9
+China (as reported),35,2020-02-29,70.0
+China (as reported),36,2020-03-01,61.0
+China (as reported),37,2020-03-02,45.6
+China (as reported),38,2020-03-03,40.1
+China (as reported),39,2020-03-04,38.0
+China (as reported),40,2020-03-05,38.3
+China (as reported),41,2020-03-06,36.3
+China (as reported),42,2020-03-07,33.6
+China (as reported),43,2020-03-08,32.4
+China (as reported),44,2020-03-09,29.7
+China (as reported),45,2020-03-10,27.6
+China (as reported),46,2020-03-11,25.4
+China (as reported),47,2020-03-12,22.6
+China (as reported),48,2020-03-13,19.3
+China (as reported),49,2020-03-14,17.4
+China (as reported),50,2020-03-15,14.9
+China (as reported),51,2020-03-16,13.4
+China (as reported),52,2020-03-17,12.3
+China (as reported),53,2020-03-18,11.4
+China (as reported),54,2020-03-19,11.0
+China (as reported),55,2020-03-20,10.6
+China (as reported),56,2020-03-21,9.3
+China (as reported),57,2020-03-22,8.9
+China (as reported),58,2020-03-23,8.3
+China (as reported),59,2020-03-24,8.0
+China (as reported),60,2020-03-25,6.3
+China (as reported),61,2020-03-26,6.0
+China (as reported),62,2020-03-27,6.1
+China (as reported),63,2020-03-28,5.7
+China (as reported),64,2020-03-29,5.6
+China (as reported),65,2020-03-30,4.6
+China (as reported),66,2020-03-31,4.0
+China (as reported),67,2020-04-01,3.6
+China (as reported),68,2020-04-02,3.6
+China (as reported),69,2020-04-03,4.3
+China (as reported),70,2020-04-04,4.4
+China (as reported),71,2020-04-05,4.1
+China (as reported),72,2020-04-06,4.1
+China (as reported),73,2020-04-07,3.7
+China (as reported),74,2020-04-08,3.9
+China (as reported),75,2020-04-09,3.3
+China (as reported),76,2020-04-10,2.0
+China (as reported),77,2020-04-11,1.9
+China (as reported),78,2020-04-12,1.4
+China (as reported),79,2020-04-13,1.4
+China (as reported),80,2020-04-14,1.4
+China (as reported),81,2020-04-15,1.3
+China (as reported),82,2020-04-16,1.0
+China (as reported),83,2020-04-17,185.1
+China (as reported),84,2020-04-18,184.7
+China (as reported),85,2020-04-19,184.7
+China (as reported),86,2020-04-20,184.4
+China (as reported),87,2020-04-21,184.4
+China (as reported),88,2020-04-22,184.3
+China (as reported),89,2020-04-23,184.3
+China (as reported),90,2020-04-24,0.0
+China (as reported),91,2020-04-25,0.0
+China (as reported),92,2020-04-26,0.0
+China (as reported),93,2020-04-27,0.1
+China (as reported),94,2020-04-28,0.1
+China (as reported),95,2020-04-29,0.1
+China (as reported),96,2020-04-30,0.1
+China (as reported),97,2020-05-01,0.1
+China (as reported),98,2020-05-02,0.1
+China (as reported),99,2020-05-03,0.1
+China (as reported),100,2020-05-04,0.0
+China (as reported),101,2020-05-05,0.0
+China (as reported),102,2020-05-06,0.0
+China (as reported),103,2020-05-07,0.0
+China (as reported),104,2020-05-08,0.0
+China (as reported),105,2020-05-09,0.0
+China (as reported),106,2020-05-10,0.0
+China (as reported),107,2020-05-11,0.0
+China (as reported),108,2020-05-12,0.0
+China (as reported),109,2020-05-13,0.0
+China (as reported),110,2020-05-14,0.0
+China (as reported),111,2020-05-15,0.0
+China (as reported),112,2020-05-16,0.0
+China (as reported),113,2020-05-17,0.1
+China (as reported),114,2020-05-18,0.1
+China (as reported),115,2020-05-19,0.1
+China (as reported),116,2020-05-20,0.1
+China (as reported),117,2020-05-21,0.1
+China (as reported),118,2020-05-22,0.1
+China (as reported),119,2020-05-23,0.1
+China (as reported),120,2020-05-24,0.0
+China (as reported),121,2020-05-25,0.0
+China (as reported),122,2020-05-26,0.0
+China (as reported),123,2020-05-27,0.0
+China (as reported),124,2020-05-28,0.0
+China (as reported),125,2020-05-29,0.0
+China (as reported),126,2020-05-30,0.0
 Colombia,0,2020-04-09,5.4
 Colombia,1,2020-04-10,7.1
 Colombia,2,2020-04-11,7.9

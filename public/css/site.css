@@ -540,6 +540,7 @@ svg.viz { display: block; width: 100%; height: auto; overflow: visible; }
 .viz .axis { stroke: var(--ink-soft); stroke-width: 1; shape-rendering: crispEdges; }
 .viz .ref { stroke: var(--ink-soft); stroke-width: 1; }
 .viz .ctx { fill: none; stroke: var(--ink-soft); stroke-width: 0.75; stroke-opacity: 0.55; stroke-linejoin: round; }
+.viz .ctx.dotted { stroke-width: 1.25; stroke-opacity: 0.8; stroke-dasharray: 0.5 3; stroke-linecap: round; }
 .viz .focus { fill: none; stroke: var(--ink); stroke-width: 1.25; stroke-linejoin: round; stroke-linecap: round; }
 .viz .hl { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .viz .wash { fill: var(--wash); stroke: none; }

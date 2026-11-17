@@ -196,9 +196,20 @@ export function renderLine(spec: ChartSpec, table: Table, variant: Variant, titl
   const foc = series.filter((s) => focusSet.has(s.name));
   const hl = series.filter((s) => s.name === hlName);
 
+  const dottedSet = new Set(spec.dotted ?? []);
   for (const s of ctx) {
     const d = path(s.pts);
-    if (d) parts.push(`<path class="ctx" d="${d}"><title>${esc(s.name)}</title></path>`);
+    const cls = dottedSet.has(s.name) ? "ctx dotted" : "ctx";
+    if (d) parts.push(`<path class="${cls}" d="${d}"><title>${esc(s.name)}</title></path>`);
+  }
+  // a dotted series is the odd one out, so it says what it is at its peak
+  for (const s of ctx.filter((s) => dottedSet.has(s.name))) {
+    let pk = s.pts[0];
+    for (const p of s.pts) if (p.v > pk.v) pk = p;
+    const [pxv, pyv] = px(pk);
+    const label = spec.dottedLabel ?? s.name;
+    const lx = Math.min(pxv, plotRight - textWidth(label, labelSize));
+    parts.push(`<text class="note" x="${r1(lx)}" y="${r1(pyv - 6)}">${esc(label)}</text>`);
   }
 
   // end-label placement for labelled series (focus + highlight)

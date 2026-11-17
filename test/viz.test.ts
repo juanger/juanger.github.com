@@ -153,8 +153,16 @@ test("main charts ship a wide and a narrow SVG variant", () => {
 
 test("exclude: drops a series from the lines and the data table", () => {
   const without = renderChart(DEATHS + "exclude: [China]\n", { size: "main", lang: "en", id: "f" });
-  expect(deaths.media).toContain("<title>China");
-  expect(without.media).not.toContain("<title>China");
+  expect(deaths.media).toContain("<title>China</title>");
+  expect(without.media).not.toContain("<title>China</title>");
+});
+
+test("dotted: a context series drawn dotted, labelled once at its peak", () => {
+  const out = renderChart(DEATHS + "dotted: [China (as reported)]\ndottedLabel: China, as reported\n", { size: "main", lang: "en", id: "f" });
+  expect(out.media).toMatch(/<path class="ctx dotted"[^>]*><title>China \(as reported\)<\/title>/);
+  expect(out.media).toMatch(/<path class="ctx"[^>]*><title>China<\/title>/);
+  expect(out.media.match(/>China, as reported<\/text>/g)?.length).toBe(2); // wide + narrow
+  expect(out.table).not.toContain("as reported");
 });
 
 test("xFrom: drops rows before a date, so the warm-up spikes never reach the axis", () => {

@@ -23,6 +23,15 @@ for (const line of (await (await fetch(OWID)).text()).trim().split("\n").slice(1
   if (!byCountry.has(location)) byCountry.set(location, []);
   byCountry.get(location)!.push({ date, deaths: Number(newDeaths) || 0 });
 }
+// One-day revisions of earlier deaths. The country keeps its revision-free line and
+// the data as reported becomes a second series, "<country> (as reported)".
+// China, 17 Apr 2020: Wuhan added 1,290 deaths missed earlier.
+const REVISIONS: Record<string, Record<string, number>> = { China: { "2020-04-17": 1290 } };
+for (const [country, fixes] of Object.entries(REVISIONS)) {
+  const rows = byCountry.get(country)!;
+  byCountry.set(`${country} (as reported)`, rows);
+  byCountry.set(country, rows.map((r) => ({ ...r, deaths: r.deaths - (fixes[r.date] ?? 0) })));
+}
 const deaths = ["country,day,date,deaths"];
 for (const [country, rows] of [...byCountry].sort(([a], [b]) => a.localeCompare(b))) {
   rows.sort((a, b) => a.date.localeCompare(b.date));

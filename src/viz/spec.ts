@@ -12,6 +12,8 @@ export interface ChartSpec {
   series?: string; // grouping column for a multi-series line
   focus?: string[]; // ink focus series
   exclude?: string[]; // series left out entirely
+  dotted?: string[]; // context series drawn dotted, with an italic label at their peak
+  dottedLabel?: string; // that label (defaults to the series name)
   highlight?: string; // the single accent series
   ref?: number; // reference line y value (R = 1)
   refLabel?: string;
@@ -76,6 +78,8 @@ export function parseChartFence(body: string): ChartSpec {
     series: str("series"),
     focus: list("focus"),
     exclude: list("exclude"),
+    dotted: list("dotted"),
+    dottedLabel: str("dottedLabel"),
     highlight: str("highlight"),
     ref: num("ref"),
     refLabel: str("refLabel"),
