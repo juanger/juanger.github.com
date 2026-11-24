@@ -3,7 +3,7 @@ title: El tiempo vuela cuando te diviertes
 date: 2020-05-16 12:00
 comments: true
 status: historical
-reviewed: 2026-10
+reviewed: "2026-10"
 categories: vida
 ---
 

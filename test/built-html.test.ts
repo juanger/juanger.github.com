@@ -52,6 +52,14 @@ test("no built page leaks a literal footnote reference (e.g. in a meta descripti
   expect(offenders).toEqual([]);
 });
 
+test("no built page links to the local-only drafts preview", () => {
+  // /drafts and /__comments exist only in the dev server; the published site
+  // must never point at them.
+  const re = /\/drafts\b|__comments|__DRAFT__/;
+  const offenders = htmlFiles.filter((f) => re.test(f.text)).map((f) => f.rel);
+  expect(offenders).toEqual([]);
+});
+
 test("no built page embeds a gist script (gist.github.com/<id>.js)", () => {
   const re = /gist\.github\.com\/[^"'\s)]*\.js/;
   const offenders = htmlFiles.filter((f) => re.test(f.text)).map((f) => f.rel);

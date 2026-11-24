@@ -4,7 +4,7 @@ title: "New features in RoRGate 3.0 beta"
 date: 2008-07-15
 comments: false
 status: historical
-reviewed: 2026-10
+reviewed: "2026-10"
 categories:
   - RoRGate
 ---

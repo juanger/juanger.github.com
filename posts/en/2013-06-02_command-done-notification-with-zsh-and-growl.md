@@ -4,7 +4,7 @@ title: "'Command done' notification with zsh and growl"
 date: 2013-06-02 13:07
 comments: true
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   Growl was retired in 2020, and macOS has its own Notification Center now. The
   idea still works, and there's a Growl-free version at the end.

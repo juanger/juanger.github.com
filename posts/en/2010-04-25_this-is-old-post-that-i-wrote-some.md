@@ -4,7 +4,7 @@ title: "HFS+ and Unicode madness"
 date: 2010-04-25
 comments: false
 status: fixed
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   True in 2010, not an issue anymore. Macs moved from HFS+ to APFS in 2017,
   which keeps file names the way you typed them, git learned to fix this in

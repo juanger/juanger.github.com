@@ -4,7 +4,7 @@ title: "Blogger Bundle for TextMate"
 date: 2009-01-13
 comments: false
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   This bundle doesn't work anymore. Google turned off the GData API and
   ClientLogin years ago, and Blogger's v3 API needs OAuth 2.0. The repo stays on

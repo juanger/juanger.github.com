@@ -4,7 +4,7 @@ title: "ADC Student Member"
 date: 2008-11-10
 comments: false
 status: historical
-reviewed: 2026-10
+reviewed: "2026-10"
 categories:
   - laptop $
   - ADC

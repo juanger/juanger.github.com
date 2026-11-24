@@ -4,7 +4,7 @@ title: "Accepted into GSoC!"
 date: 2009-04-24
 comments: false
 status: historical
-reviewed: 2026-10
+reviewed: "2026-10"
 categories:
   - MacPorts
   - gsoc

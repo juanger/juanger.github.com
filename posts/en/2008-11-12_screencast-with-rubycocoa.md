@@ -4,7 +4,7 @@ title: "Screencast with RubyCocoa"
 date: 2008-11-12
 comments: false
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   The code below uses QTKit, which Apple deprecated in 2013 in favour of
   AVFoundation. It's here as a 2008 snapshot, and you can record your screen

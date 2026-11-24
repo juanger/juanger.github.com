@@ -2,7 +2,7 @@
 // (per-page <title>, OpenGraph, canonical, hreflang, theme script); the rest build
 // the index, post, standalone page, 404 and redirect-stub bodies.
 
-import { html, raw, render_to_string, type Raw } from "./html.ts";
+import { escape, html, raw, render_to_string, type Raw } from "./html.ts";
 import type { Lang, Post, Page } from "./content.ts";
 
 export const SITE = {
@@ -25,6 +25,7 @@ type Strings = {
   themeToDark: string; // aria-label when the click switches to the dark theme
   themeToLight: string; // aria-label when the click switches to the light theme
   viewSource: string;
+  drafts: string; // the local-only nav link (dev server)
 };
 
 export const i18n: Record<Lang, Strings> = {
@@ -42,6 +43,7 @@ export const i18n: Record<Lang, Strings> = {
     themeToDark: "Switch to dark theme",
     themeToLight: "Switch to light theme",
     viewSource: "View source (.md)",
+    drafts: "Drafts",
   },
   es: {
     subtitle: "Picardías de mi no muy emocionante vida",
@@ -57,6 +59,7 @@ export const i18n: Record<Lang, Strings> = {
     themeToDark: "Cambiar a tema oscuro",
     themeToLight: "Cambiar a tema claro",
     viewSource: "Ver fuente (.md)",
+    drafts: "Borradores",
   },
 };
 
@@ -98,6 +101,9 @@ export function layout(opts: {
   home?: boolean; // the index page itself — enlarges the masthead to read as the title
   body: Raw;
   dev?: boolean;
+  // The local-only "Drafts" nav link. Defaults to `dev`, so a production build
+  // never has it; draft pages (rendered with dev off, no live reload) opt in.
+  draftsLink?: boolean;
 }): string {
   const t = i18n[opts.lang];
   const canonical = SITE.origin + opts.canonicalPath;
@@ -152,6 +158,7 @@ ${opts.mdPath ? html`<link rel="alternate" type="text/markdown" href="${opts.mdP
 <nav class="site-nav">
 ${opts.indexLink ? html`<a href="${homeUrl(opts.lang)}">☰ ${t.index}</a>` : ""}
 ${opts.translation ? html`<a href="${opts.translation.url}">${t.toOther}</a>` : ""}
+${opts.draftsLink ?? opts.dev ? html`<a href="/drafts">✎ ${t.drafts}</a>` : ""}
 ${raw(themeToggle(opts.lang))}
 </nav>
 </header>
@@ -283,13 +290,54 @@ function statusLine(post: Post): Raw | "" {
 </aside>`;
 }
 
+// The metadata line under the title: published · revised · status · confidence.
+// Status shows only when there's no status box below to say it; confidence only
+// when the post names one (estimative words, Gwern-style).
+const META: Record<Lang, { revised: string; confidence: string; status: Record<string, string>; words: Record<string, string> }> = {
+  en: {
+    revised: "revised",
+    confidence: "confidence",
+    status: { historical: "historical" },
+    words: {},
+  },
+  es: {
+    revised: "revisado en",
+    confidence: "confianza",
+    status: { historical: "histórico" },
+    words: { certain: "segura", "highly likely": "muy probable", likely: "probable", possible: "posible", unlikely: "improbable", "highly unlikely": "muy improbable", remote: "remota" },
+  },
+};
+
+function monthYear(lang: Lang, s: string): string {
+  const m = s.match(/^(\d{4})-(\d{2})/);
+  if (!m) return s;
+  const name = i18n[lang].monthsFull[Number(m[2]) - 1] ?? m[2];
+  return lang === "es" ? `${name} de ${m[1]}` : `${name} ${m[1]}`;
+}
+
+function metaLine(post: Post): Raw {
+  const L = META[post.lang];
+  const f = post.front;
+  const bits: string[] = [];
+  // Bun.YAML reads an unquoted `2026-10` as the number 2026 (and a full date as a
+  // Date), so quote it in front matter; a bare year still shows as the year.
+  const ym = (v: unknown): string =>
+    v instanceof Date ? v.toISOString() : typeof v === "string" || typeof v === "number" ? String(v) : "";
+  const revised = ym(f.revised) || ym(f.reviewed);
+  if (revised) bits.push(`${L.revised} ${monthYear(post.lang, revised)}`);
+  const status = typeof f.status === "string" ? f.status : "";
+  if (status && statusLine(post) === "") bits.push(L.status[status] ?? (STATUS_LABELS[status] ?? status).toLowerCase());
+  if (typeof f.confidence === "string") bits.push(`${L.confidence}: ${L.words[f.confidence] ?? f.confidence}`);
+  return raw(bits.map((b) => ` · ${escape(b)}`).join(""));
+}
+
 // ---- post ----
-export function postPage(post: Post, renderedBody: string, dev = false): string {
+export function postPage(post: Post, renderedBody: string, dev = false, draftsLink = dev): string {
   const t = i18n[post.lang];
   const mdPath = `/${post.path}.md`;
   const body = html`<article lang="${post.lang}">
 <h1>${post.title}</h1>
-<p class="post-meta"><time datetime="${isoDate(post.date)}">${fullDate(post.lang, post.date)}</time></p>
+<p class="post-meta"><time datetime="${isoDate(post.date)}">${fullDate(post.lang, post.date)}</time>${metaLine(post)}</p>
 ${statusLine(post)}
 <section>${raw(renderedBody)}</section>
 <footer class="byline">${t.byline}
@@ -310,6 +358,7 @@ ${statusLine(post)}
     indexLink: true,
     body,
     dev,
+    draftsLink,
   });
 }
 

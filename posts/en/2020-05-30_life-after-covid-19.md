@@ -4,7 +4,8 @@ title: "Life after COVID-19"
 date: 2020-05-30 12:00
 comments: true
 status: scored
-reviewed: 2026-10
+reviewed: "2026-10"
+confidence: likely
 status_note: >
   Scored in October 2026. I left the 2020 text alone and marked each guess in
   the margin, and the tally is at the end. More right than wrong, and the miss

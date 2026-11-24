@@ -4,7 +4,7 @@ title: "Lucecita: RubyCocoa example"
 date: 2008-07-25
 comments: false
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   RubyCocoa hasn't been maintained in more than a decade, and these zip links
   died with Google Page Creator. The code is still on GitHub, but the app won't

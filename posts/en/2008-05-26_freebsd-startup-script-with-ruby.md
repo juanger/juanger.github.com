@@ -4,7 +4,7 @@ title: "FreeBSD startup script with ruby"
 date: 2008-05-26
 comments: false
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   Mongrel has been dead for more than a decade, and this script skips FreeBSD's
   own rc.subr framework. The PATH lesson below still holds. Everything else I'd

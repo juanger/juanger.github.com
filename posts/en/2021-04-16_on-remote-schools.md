@@ -3,7 +3,8 @@ title: On remote schools and playing hooky
 date: 2021-04-16 20:00
 comments: true
 status: revisited
-reviewed: 2026-10
+reviewed: "2026-10"
+confidence: likely
 status_note: >
   Revisited in October 2026. The data since then agrees that remote school went
   badly, but it points more to how long schools stayed closed and how poor the

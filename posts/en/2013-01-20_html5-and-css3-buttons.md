@@ -4,7 +4,7 @@ title: "CSS3 styled buttons with compass"
 date: 2012-06-20 11:42
 comments: true
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   Compass was retired years ago, and almost every trick below is now plain CSS.
   The demo still works. A modern version is at the end.

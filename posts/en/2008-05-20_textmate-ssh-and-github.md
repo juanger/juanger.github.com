@@ -4,7 +4,7 @@ title: "TextMate, SSH and github"
 date: 2008-05-20
 comments: false
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   The SSHKeychain link went bad, so it now points to an archived copy. You don't
   need the app anymore: macOS keeps SSH keys in the Keychain by itself, and

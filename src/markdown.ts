@@ -129,11 +129,14 @@ function highlightCode(code: string, lang: string): string {
 const ERRATA_YEAR = `<span class="errata-year">2026</span>`;
 // A verdict note's text starts with one of these words + a colon.
 const VERDICT_RE = /^(held|partly|missed):\s*/i;
+// The source keys stay English; Spanish posts show Juan's Spanish words.
+const VERDICT_ES: Record<string, string> = { held: "acierto", partly: "parcial", missed: "fallo" };
+const verdictLabel = (word: string, lang: unknown): string => (lang === "es" ? VERDICT_ES[word] ?? word : word);
 
 // A sidenote (numbered) or margin note (⊕), with the Tufte label+input+span so
 // it opens on tap on narrow screens. Footnote labels beginning with `2026`
 // render as 2026 errata annotations instead (see noteHtml's errata branch).
-function noteHtml(label: string, content: string): string {
+function noteHtml(label: string, content: string, lang?: unknown): string {
   // ---- plain margin note (unchanged): [^m:key] ----
   if (label.startsWith("m:")) {
     const id = "mn-" + slugifyLabel(label.slice(2));
@@ -164,10 +167,11 @@ function noteHtml(label: string, content: string): string {
     if (vm) {
       const word = vm[1].toLowerCase();
       const rest = content.slice(vm[0].length);
+      const shown = verdictLabel(word, lang);
       return (
-        `<label for="${id}" class="margin-toggle verdict-toggle"><span class="verdict-word">${word}</span>⊕</label>` +
+        `<label for="${id}" class="margin-toggle verdict-toggle"><span class="verdict-word">${shown}</span>⊕</label>` +
         `<input type="checkbox" id="${id}" class="margin-toggle"/>` +
-        `<span class="marginnote errata verdict" data-verdict="${word}">${ERRATA_YEAR}<span class="verdict-word">${word}</span>${rest}</span>`
+        `<span class="marginnote errata verdict" data-verdict="${word}">${ERRATA_YEAR}<span class="verdict-word">${shown}</span>${rest}</span>`
       );
     }
 
@@ -267,6 +271,14 @@ export function createMarkdown(): MarkdownIt {
     },
   });
 
+  // ---- :::document — an embedded document (memo, report) shown as a card ----
+  // Its `##` is the document's own title, not a section of the post.
+  md.use(container, "document", {
+    render(tokens: Token[], idx: number) {
+      return tokens[idx].nesting === 1 ? '<aside class="doc-card" role="document">\n' : "</aside>\n";
+    },
+  });
+
   // ---- ^^new thought^^ inline rule ----
   md.inline.ruler.before("emphasis", "newthought", (state, silent) => {
     const start = state.pos;
@@ -352,10 +364,11 @@ export function createMarkdown(): MarkdownIt {
       while (j < toks.length && toks[j].type !== "heading_close") j++;
       if (j >= toks.length) continue;
       const { held, partly, missed } = verdictCounts(state.env as Record<string, unknown>);
+      const w = (k: string): string => verdictLabel(k, (state.env as Record<string, unknown>).lang);
       const tally =
-        `<p class="scorecard-tally">held <span class="dots">${"●".repeat(held)}</span> ` +
-        `partly <span class="dots">${"◐".repeat(partly)}</span> ` +
-        `missed <span class="dots">${"○".repeat(missed)}</span></p>\n`;
+        `<p class="scorecard-tally">${w("held")} <span class="dots">${"●".repeat(held)}</span> ` +
+        `${w("partly")} <span class="dots">${"◐".repeat(partly)}</span> ` +
+        `${w("missed")} <span class="dots">${"○".repeat(missed)}</span></p>\n`;
       const tok = new state.Token("html_block", "", 0);
       tok.content = tally;
       tok.block = true;
@@ -369,7 +382,7 @@ export function createMarkdown(): MarkdownIt {
     const e = env as any;
     if (typeof meta.label === "string") {
       const content = (e.sidenoteDefs && e.sidenoteDefs[meta.label]) ?? "";
-      return noteHtml(meta.label, content);
+      return noteHtml(meta.label, content, e.lang);
     }
     // inline footnote: ^[ … ] — content held as inline tokens on the list
     const entry = e.footnotes?.list?.[meta.id];

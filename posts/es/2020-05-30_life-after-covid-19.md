@@ -4,7 +4,8 @@ title: "La vida después de la COVID-19"
 date: 2020-05-30 12:00
 comments: true
 status: scored
-reviewed: 2026-10
+reviewed: "2026-10"
+confidence: likely
 status_note: >
   Calificado en octubre de 2026. Dejé el texto de 2020 tal cual y marqué cada
   predicción en el margen, con el conteo al final. Más aciertos que errores, y el
@@ -181,16 +182,16 @@ La vida sigue, y es corta. Espero que salgamos de este problema en un futuro cer
 
 | Lo que dije en mayo de 2020 | Veredicto | Lo que pasó |
 |---|---|---|
-| La COVID-19 llegó para quedarse | held | Endémica, vacunas anuales |
-| Vendrán más enfermedades | held | Emergencias de viruela símica 2022 y 2024, H5N1 en ganado 2024 |
-| Esperar a que la mortalidad mundial sea casi cero | missed | Restricciones fuera en 2021 y 2022, emergencia de la OMS terminó en mayo de 2023 |
-| La confianza será la primera víctima | held | Pew: "mucha" confianza en los científicos 39% a 23% (2020 a 2023) |
-| La gente lo pensará dos veces antes de comprar | partly | Breve pico de ahorro, luego auge del gasto e inflación |
-| El turismo no será el mismo | partly | Dos años a la baja, 99% de 2019 para 2024 |
-| Se necesitan mejores cubrebocas | partly | N95 y KN95 se volvieron comunes, sin diseño nuevo |
-| Olas y una mala mutación | held | Delta, Ómicron |
-| Los fondos respaldarán productos de aislamiento | held | Auge de Peloton y Zoom, luego caída |
-| Los pobres morirán más | held | Recuperación en K, unos 70M en pobreza extrema en 2020 |
+| La COVID-19 llegó para quedarse | acierto | Endémica, vacunas anuales |
+| Vendrán más enfermedades | acierto | Emergencias de viruela símica 2022 y 2024, H5N1 en ganado 2024 |
+| Esperar a que la mortalidad mundial sea casi cero | fallo | Restricciones fuera en 2021 y 2022, emergencia de la OMS terminó en mayo de 2023 |
+| La confianza será la primera víctima | acierto | Pew: "mucha" confianza en los científicos 39% a 23% (2020 a 2023) |
+| La gente lo pensará dos veces antes de comprar | parcial | Breve pico de ahorro, luego auge del gasto e inflación |
+| El turismo no será el mismo | parcial | Dos años a la baja, 99% de 2019 para 2024 |
+| Se necesitan mejores cubrebocas | parcial | N95 y KN95 se volvieron comunes, sin diseño nuevo |
+| Olas y una mala mutación | acierto | Delta, Ómicron |
+| Los fondos respaldarán productos de aislamiento | acierto | Auge de Peloton y Zoom, luego caída |
+| Los pobres morirán más | acierto | Recuperación en K, unos 70M en pobreza extrema en 2020 |
 
 Fuentes: OMS muertes en exceso (mayo 2022), Pew Research (nov 2023), ONU Turismo (ene 2025), Banco Mundial Poverty and Shared Prosperity 2022.
 

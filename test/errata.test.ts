@@ -69,6 +69,28 @@ test("verdict word is parsed, stamped and set as the toggle label", () => {
   expect(out).toContain('class="margin-toggle verdict-toggle"><span class="verdict-word">held</span>⊕');
 });
 
+test("Spanish posts show acierto / parcial / fallo; the data-verdict key stays English", () => {
+  const out = render("x[^2026m-v] y[^2026m-w]\n\n[^2026m-v]: missed: no se cumplió\n\n[^2026m-w]: partly: a medias\n\n:::scorecard\n## T\n\n| a | b |\n|---|---|\n| x | y |\n:::\n", { lang: "es" });
+  expect(out).toContain('data-verdict="missed"');
+  expect(out).toContain('<span class="verdict-word">fallo</span>no se cumplió');
+  expect(out).toContain('<span class="verdict-word">parcial</span>a medias');
+  expect(out).toContain('<p class="scorecard-tally">acierto <span class="dots"></span> parcial <span class="dots">◐</span> fallo <span class="dots">○</span></p>');
+});
+
+test("metadata line: revised, status when there's no status box, and confidence", () => {
+  const h = postPage(post({ status: "historical", reviewed: "2026-10" }), "<p>b</p>");
+  expect(h).toContain("March 8, 2008</time> · revised October 2026 · historical</p>");
+  // a status box below already names the status, so the line leaves it out
+  const s = postPage(post({ status: "scored", status_note: "n", reviewed: "2026-10", confidence: "likely" }), "<p>b</p>");
+  expect(s).toContain("</time> · revised October 2026 · confidence: likely</p>");
+  const es = postPage(post({ reviewed: "2026-10", confidence: "likely" }, { lang: "es" }), "<p>b</p>");
+  expect(es).toContain("</time> · revisado en octubre de 2026 · confianza: probable</p>");
+  // Bun.YAML parses an unquoted 2026-10 as the number 2026: show the year
+  expect(postPage(post({ reviewed: 2026 }), "<p>b</p>")).toContain("· revised 2026</p>");
+  // nothing in front matter: just the date
+  expect(postPage(post({}), "<p>b</p>")).toContain("March 8, 2008</time></p>");
+});
+
 test("status line renders from front matter under the date", () => {
   const html = postPage(post({ status: "obsolete", status_note: "MacRuby stopped around 2012." }), "<p>b</p>");
   expect(html).toContain('<aside class="errata-status" data-status="obsolete">');

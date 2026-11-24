@@ -4,7 +4,7 @@ title: "Server Output in RoRGate"
 date: 2008-07-10
 comments: false
 status: historical
-reviewed: 2026-10
+reviewed: "2026-10"
 categories:
   - RoRGate
   - laptop $

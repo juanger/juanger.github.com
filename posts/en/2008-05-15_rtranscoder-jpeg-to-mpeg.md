@@ -4,7 +4,7 @@ title: "RTranscoder: jpeg to mpeg"
 date: 2008-05-15
 comments: false
 status: obsolete
-reviewed: 2026-10
+reviewed: "2026-10"
 status_note: >
   RubyForge closed in 2014, and ffmpeg won over MEncoder a long time ago. Today
   I'd skip the Ruby wrapper and call ffmpeg directly, see the end of the post.
