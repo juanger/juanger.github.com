@@ -5,6 +5,7 @@
 import { watch, existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { build } from "./build.ts";
+import { handleDraftRoute } from "./drafts.ts";
 
 const OUT = "out";
 const PORT = Number(process.env.PORT ?? 3000);
@@ -157,6 +158,10 @@ if (import.meta.main) {
 
   const server = Bun.serve({
     port: PORT,
+    // Bun's default 10s idle timeout closes kept-alive connections under the
+    // draft page while a comment is being typed; through Carcinos's SSH tunnel
+    // the browser doesn't always notice. 255s is Bun's maximum.
+    idleTimeout: 255,
     async fetch(req) {
       const url = new URL(req.url);
 
@@ -183,6 +188,10 @@ if (import.meta.main) {
           },
         });
       }
+
+      // KB draft previews and their inline comments (src/drafts.ts).
+      const draft = await handleDraftRoute(req, server.requestIP(req)?.address);
+      if (draft) return draft;
 
       const file = resolveFile(url.pathname);
       if (!file) {

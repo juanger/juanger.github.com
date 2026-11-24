@@ -5,6 +5,9 @@
 /out/
 /.next/
 
+# inline review comments on KB drafts (dev server + scripts/comments.ts)
+/.comments/
+
 # old GitHub Pages deploy clone
 _deploy/
 

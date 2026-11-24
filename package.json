@@ -6,6 +6,7 @@
   "scripts": {
     "build": "bun run src/build.ts",
     "dev": "bun run src/dev.ts",
+    "comments": "bun run scripts/comments.ts",
     "test": "bun test"
   },
   "dependencies": {
